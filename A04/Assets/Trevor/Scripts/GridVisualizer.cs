@@ -2,90 +2,51 @@ using UnityEngine;
 
 public class GridVisualizer : MonoBehaviour
 {
+    [Header("References")]
+    // Drag your 9 cell GameObjects here in order (0-8)
+    [SerializeField] private GameObject[] gridCells = new GameObject[9];
+
     [Header("Settings")]
-    [SerializeField] private float gridDistance = 2f;
-    [SerializeField] private float cellSize = 0.3f;
-    [SerializeField] private float cellSpacing = 0.05f;
     [SerializeField] private Material highlightMaterial;
-    [SerializeField] private Material defaultMaterial; 
+    [SerializeField] private Material defaultMaterial;
 
-    private GameObject[,] gridCells = new GameObject[3, 3];
-
-    public void CreateGrid(Vector3 position, Quaternion rotation)
+    // This method is called by the manager when instantiated
+    public void ShowGrid(bool show)
     {
-        DestroyGrid();
-        transform.position = position;
-        transform.rotation = Quaternion.identity; // Parent has no rotation
-
-        float totalWidth = (cellSize * 3) + (cellSpacing * 2);
-        float startX = -totalWidth / 2 + cellSize / 2;
-        float startY = totalWidth / 2 - cellSize / 2;
-
-        for (int y = 0; y < 3; y++)
-        {
-            for (int x = 0; x < 3; x++)
-            {
-                GameObject cell = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                cell.transform.SetParent(transform);
-
-                // Position cells with proper spacing
-                cell.transform.localPosition = new Vector3(
-                    startX + (x * (cellSize + cellSpacing)),
-                    startY - (y * (cellSize + cellSpacing)),
-                    gridDistance
-                );
-
-                // Set all rotations to zero
-                cell.transform.localRotation = Quaternion.identity;
-                cell.transform.localScale = Vector3.one * cellSize;
-                cell.layer = LayerMask.NameToLayer("SpellGrid");
-                cell.GetComponent<Renderer>().material = defaultMaterial;
-
-                gridCells[x, y] = cell;
-            }
-        }
-
-        // Rotate the entire grid at once
-        transform.rotation = rotation;
+        // This is useful if your prefab root starts disabled
+        gameObject.SetActive(show);
     }
 
-    public void DestroyGrid()
-    {
-        foreach (GameObject cell in gridCells)
-        {
-            if (cell != null) Destroy(cell);
-        }
-        gridCells = new GameObject[3, 3];
-    }
-
+    // Applies the highlight or default material to a cell
     public void HighlightCell(GridCell cell, bool highlight)
     {
-        int x = (int)cell % 3;
-        int y = (int)cell / 3;
-        if (x >= 0 && x < 3 && y >= 0 && y < 3 && gridCells[x, y] != null)
+        int cellIndex = (int)cell;
+        if (cellIndex >= 0 && cellIndex < gridCells.Length && gridCells[cellIndex] != null)
         {
-            gridCells[x, y].GetComponent<Renderer>().material =
+            gridCells[cellIndex].GetComponent<Renderer>().material =
                 highlight ? highlightMaterial : defaultMaterial;
         }
     }
 
+    // Checks if the ray hits one of our 9 cells
     public bool TryGetCellFromRay(Ray ray, out GridCell cell)
     {
+        // Make sure you have your cells on the "SpellGrid" layer
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("SpellGrid")))
         {
-            for (int y = 0; y < 3; y++)
+            // Loop through our known cells and see if the raycast hit one
+            for (int i = 0; i < gridCells.Length; i++)
             {
-                for (int x = 0; x < 3; x++)
+                if (gridCells[i] != null && hit.collider.gameObject == gridCells[i])
                 {
-                    if (gridCells[x, y] != null && hit.collider.gameObject == gridCells[x, y])
-                    {
-                        cell = (GridCell)(y * 3 + x);
-                        return true;
-                    }
+                    // If it hit, cast the index 'i' to our GridCell enum
+                    cell = (GridCell)i;
+                    return true;
                 }
             }
         }
-        cell = GridCell.Center;
+
+        cell = GridCell.Center; // Default fallback
         return false;
     }
 }

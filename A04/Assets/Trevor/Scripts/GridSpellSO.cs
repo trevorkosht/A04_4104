@@ -6,6 +6,8 @@ public class GridSpellSO : ScriptableObject
     public string spellName;
     public GridCell[] pattern;
     public GameObject castEffect;
+
+    public Sprite spellIcon;
 }
 
 public enum GridCell
