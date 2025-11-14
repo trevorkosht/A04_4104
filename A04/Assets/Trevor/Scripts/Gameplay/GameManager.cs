@@ -168,16 +168,6 @@ public class GameManager : MonoBehaviour
                 ChangeState(GameState.Pause);
             }
 
-            // --- PLACEHOLDER ---
-            // This is where you would check for win/lose conditions
-            // if (player.health <= 0)
-            // {
-            //    TriggerLose(); 
-            // }
-            // if (player.stickersCollected >= TOTAL_STICKERS)
-            // {
-            //    TriggerWin();
-            // }
         }
         // If we are paused, check for the "unpause" button
         else if (currentState == GameState.Pause)
