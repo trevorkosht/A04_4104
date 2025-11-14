@@ -112,14 +112,24 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
+            if (GameManager.Instance.currentState != GameManager.GameState.Play)
+            {
+                return;
+            }
+
+            JumpAndGravity();
 			GroundedCheck();
 			Move();
 		}
 
 		private void LateUpdate()
 		{
-			CameraRotation();
+            if (GameManager.Instance.currentState != GameManager.GameState.Play)
+            {
+                return;
+            }
+
+            CameraRotation();
 		}
 
 		private void GroundedCheck()

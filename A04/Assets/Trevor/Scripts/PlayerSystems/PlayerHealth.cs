@@ -72,7 +72,9 @@ public class PlayerHealth : MonoBehaviour
         // This is where you would trigger a "Game Over" screen,
         // play a death animation, etc.
         Debug.Log("Player has died!");
+        GameManager.Instance.TriggerLose();
         // For now, we'll just disable the component
         this.enabled = false;
+        
     }
 }
