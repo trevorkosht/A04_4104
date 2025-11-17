@@ -111,19 +111,5 @@ public class FrogEnemy : BaseEnemy
 
         isJumping = false;
     }
-    protected override void DeathState()
-    {
-        //play death animation
-
-        // Check if sticker has been dropped
-        if (BaseEnemy.stickers[0] != 1)
-        {
-            BaseEnemy.stickers[0] = 1;  // Note if sticker has been dropped.
-            //dropsticker
-
-        }
-        this.enabled = false;
-
-    }
 
 }

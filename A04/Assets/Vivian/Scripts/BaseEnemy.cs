@@ -22,35 +22,32 @@ public abstract class BaseEnemy : MonoBehaviour
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
-    public float yOffset = 0.5f;
+    [SerializeField] int maxEntityHealth = 30;
 
     [Header("Sticker")]
-    [SerializeField] GameObject sticker;
+    public static GameObject sticker;
 
-    private CharacterController characterController;
     protected EnemyState currentState;
     protected float lastAttackTime;
     protected Vector3 patrolPoint;
+    private int currentHealth;
 
     public static int[] stickers = new int[3];
-
-
     protected virtual void Start()
     {
         currentState = EnemyState.Idle;
         agent = GetComponent<NavMeshAgent>();
-        //// Y-axis boost to prevent enemy from sinking
-        //agent.enabled = false;
-        //transform.position += Vector3.up * yOffset;
-        //Debug.Log(transform.position);
-        //agent.enabled = true;
-        characterController = GetComponent<CharacterController>();
+        currentHealth = maxEntityHealth;
 
 
     }
 
     protected virtual void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            TakeDamage(10);
+        }
         switch (currentState)
         {
             case EnemyState.Idle:
@@ -71,6 +68,26 @@ public abstract class BaseEnemy : MonoBehaviour
 
         }
     }
+
+    // -------------------------------------
+    //        ENEMY HEALTH DEFAULT LOGIC
+    // -------------------------------------
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+
+        // Ensure health doesn't go below 0
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxEntityHealth);
+
+
+        Debug.Log($"Enemy took {amount} damage, current health: {currentHealth}");
+
+        if (currentHealth <= 0)
+        {
+            SwitchState(EnemyState.Death);
+        }
+    }
+
 
     // -------------------------------------
     //        STATE MACHINE DEFAULT LOGIC
@@ -134,6 +151,20 @@ public abstract class BaseEnemy : MonoBehaviour
         }
     }
 
+    protected virtual void DeathState()
+    {
+        //play death animation
+
+        // Check if sticker has been dropped
+        if (BaseEnemy.stickers[0] != 1)
+        {
+            BaseEnemy.stickers[0] = 1;  // Note if sticker has been dropped.
+            //Instantiate(BaseEnemy.sticker, transform.position, player.rotation);
+
+        }
+        Destroy(gameObject);
+    }
+
     // ----------------------------------------------------
     //               METHODS CHILD CLASSES OVERRIDE
     // ----------------------------------------------------
@@ -151,12 +182,6 @@ public abstract class BaseEnemy : MonoBehaviour
         //Debug.Log("Searching for player");
         return Vector3.Distance(transform.position, player.position) <= detectionRange;
     }
-
-    /// <summary>
-    /// Child scripts can override deathstate so it drops sticker once.
-    /// <summary>
-    protected abstract void DeathState();
-
 
     // ----------------------------------------------------
     //                     UTILITY
