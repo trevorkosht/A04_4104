@@ -22,11 +22,12 @@ public abstract class BaseEnemy : MonoBehaviour
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
+    public float yOffset = 0.5f;
 
     [Header("Sticker")]
     [SerializeField] GameObject sticker;
 
-
+    private CharacterController characterController;
     protected EnemyState currentState;
     protected float lastAttackTime;
     protected Vector3 patrolPoint;
@@ -37,6 +38,15 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void Start()
     {
         currentState = EnemyState.Idle;
+        agent = GetComponent<NavMeshAgent>();
+        //// Y-axis boost to prevent enemy from sinking
+        //agent.enabled = false;
+        //transform.position += Vector3.up * yOffset;
+        //Debug.Log(transform.position);
+        //agent.enabled = true;
+        characterController = GetComponent<CharacterController>();
+
+
     }
 
     protected virtual void Update()
@@ -68,6 +78,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void IdleState()
     {
+        Debug.Log("Idling");
         if (DetectPlayer())
         {
             SwitchState(EnemyState.Chase);
@@ -80,10 +91,13 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         if (!DetectPlayer())
         {
+            //Debug.Log("still idling");
+
             SwitchState(EnemyState.Idle);
             return;
         }
 
+        //Debug.Log("Chasing player");
         agent.SetDestination(player.position);
         // Rotate toward the player
         Vector3 dir = (player.position - transform.position).normalized;
@@ -92,6 +106,7 @@ public abstract class BaseEnemy : MonoBehaviour
         // If in attack range, go to AttackState.
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
+            //Debug.Log("Trigger attack to player");
             SwitchState(EnemyState.Attack);
             agent.ResetPath();
         }
@@ -106,6 +121,7 @@ public abstract class BaseEnemy : MonoBehaviour
             return;
         }
 
+        Debug.Log("Attacking player");
         // Attack when player is in range while rotating toward the player.
         Vector3 dir = (player.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(dir);
@@ -132,6 +148,7 @@ public abstract class BaseEnemy : MonoBehaviour
     /// <summary>
     protected virtual bool DetectPlayer()
     {
+        //Debug.Log("Searching for player");
         return Vector3.Distance(transform.position, player.position) <= detectionRange;
     }
 

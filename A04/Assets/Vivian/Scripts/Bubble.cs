@@ -13,7 +13,8 @@ public class Bubble : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        //Debug.Log("Projectile moving: " + transform.position);
+        transform.position += (transform.forward + (Vector3.up * 0.17f)) * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,6 +31,7 @@ public class Bubble : MonoBehaviour
                 player.TakeDamage(damage);
             }
         }
+        //Destroy(gameObject);    // Destroy on impact.
         
     }
 }
