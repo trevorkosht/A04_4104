@@ -13,7 +13,7 @@ public class FrogEnemy : BaseEnemy
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpInterval = 0.5f;
-    [SerializeField] private float jumpHeight = 1f;
+    [SerializeField] private float jumpHeight = 0.5f;
     [SerializeField] private float jumpDuration = 0.5f; // Total jump time
 
     public void Fire()

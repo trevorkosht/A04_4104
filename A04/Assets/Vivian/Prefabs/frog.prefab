@@ -52,8 +52,8 @@ MonoBehaviour:
   detectionRange: 11
   attackRange: 9
   attackCooldown: 3
-  yOffset: 0.5
-  sticker: {fileID: 0}
+  maxEntityHealth: 30
+  sticker: {fileID: 158775730010530118, guid: 1475291ca8b82ae4f8d8692b890c8a79, type: 3}
   projectilePrefab: {fileID: 2985375984946597874, guid: 7a401be0091ac164aa853b71d2499890, type: 3}
   firePoint: {fileID: 6511403654134681694}
   jumpInterval: 2

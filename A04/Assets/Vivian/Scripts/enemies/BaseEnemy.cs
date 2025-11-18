@@ -23,9 +23,12 @@ public abstract class BaseEnemy : MonoBehaviour
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
     [SerializeField] int maxEntityHealth = 30;
+    //[SerializeField] float playerDistRange = 5f;
 
     [Header("Sticker")]
-    public static GameObject sticker;
+    [SerializeField] GameObject sticker;
+
+    public static int cost;
 
     protected EnemyState currentState;
     protected float lastAttackTime;
@@ -120,6 +123,12 @@ public abstract class BaseEnemy : MonoBehaviour
         Vector3 dir = (player.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(dir);
 
+        if (agent != null) 
+        {
+            agent.SetDestination(player.position);
+        }
+
+
         // If in attack range, go to AttackState.
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
@@ -131,17 +140,17 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void AttackState()
     {
+        Debug.Log("Attacking player");
+        // Attack when player is in range while rotating toward the player.
+        Vector3 dir = (player.position - transform.position).normalized;
+        transform.rotation = Quaternion.LookRotation(dir);
+
         // Double check player is in attack range. If not, go back to chasing.
         if (Vector3.Distance(transform.position, player.position) > attackRange)
         {
             SwitchState(EnemyState.Chase);
             return;
         }
-
-        Debug.Log("Attacking player");
-        // Attack when player is in range while rotating toward the player.
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(dir);
 
         // If not on cooldown, launch attack.
         if (Time.time - lastAttackTime >= attackCooldown)
@@ -156,10 +165,10 @@ public abstract class BaseEnemy : MonoBehaviour
         //play death animation
 
         // Check if sticker has been dropped
-        if (BaseEnemy.stickers[0] != 1)
+        if (stickers[0] != 1)
         {
-            BaseEnemy.stickers[0] = 1;  // Note if sticker has been dropped.
-            //Instantiate(BaseEnemy.sticker, transform.position, player.rotation);
+            stickers[0] = 1;  // Note if sticker has been dropped.
+            Instantiate(sticker, transform.position, player.rotation);
 
         }
         Destroy(gameObject);
