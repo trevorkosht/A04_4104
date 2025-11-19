@@ -7,12 +7,12 @@ public class FrogEnemy : BaseEnemy
 {
     public GameObject projectilePrefab;
     public Transform firePoint;
-    private float jumpTimer = 0f;
+    //private float jumpTimer = 0f;
     private bool isJumping = false;
     private Vector3 jumpStartPosition;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpInterval = 0.5f;
+    //[SerializeField] private float jumpInterval = 0.5f;
     [SerializeField] private float jumpHeight = 0.5f;
     [SerializeField] private float jumpDuration = 0.5f; // Total jump time
 
@@ -37,7 +37,6 @@ public class FrogEnemy : BaseEnemy
         // Rotate toward the player
         Vector3 dir = (player.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(dir);
-        if (agent != null) { agent.SetDestination(player.position); }
 
         // Handle jumping logic
         if (!isJumping)
@@ -53,7 +52,6 @@ public class FrogEnemy : BaseEnemy
         {
             //Debug.Log("Trigger attack to player");
             SwitchState(EnemyState.Attack);
-            if (agent != null) { agent.ResetPath(); }
         }
     }
 
