@@ -9,63 +9,70 @@ public class SpellGridManager : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private WandFeedback wandFeedback; // The script on your wand
 
-    [Header("Settings")]
+    [Header("Grid Settings")]
     [SerializeField] private float gridDistance = 2f;
     [SerializeField] private float gridYOffset = -0.5f;
     [SerializeField] private float minPatternLength = 3;
 
-    [Header("Collision")]
-    [SerializeField] private float spawnBuffer = 0.1f; // Pushes the book off the wall
-    [SerializeField] private LayerMask collisionLayers; // What layers to check for (walls, floor, etc.)
+    [Header("Collision Settings")]
+    [SerializeField] private float spawnBuffer = 0.1f; // Pushes the book slightly off the wall
+    [SerializeField] private Vector3 boxHalfExtents = new Vector3(0.5f, 0.5f, 0.1f); // Size of the cast box (Half-Width, Half-Height, Half-Thickness)
+    [SerializeField] private float minSpawnDistance = 0.5f; // If wall forces book closer than this, don't spawn
+    [SerializeField] private LayerMask collisionLayers; // Walls/Floor layers
 
-    // --- Private Fields ---
+    // --- State Fields ---
     private List<GridCell> currentPath = new List<GridCell>();
     private GridCell lastCell;
     private bool gridActive = false;
 
     private GridVisualizer activeGridInstance;
-    private GridSpellSO loadedSpell = null; // The spell that's ready to fire
+    private GridSpellSO loadedSpell = null;
+
+    // --- Public Properties for Strategies ---
+    // The Strategy scripts need to access these to know where to aim/fire from
+    public Camera PlayerCamera => playerCamera;
+    public GridSpellSO LoadedSpell => loadedSpell;
 
     private void Update()
     {
-        HandleGridInput();
+        HandleInput();
+
+        // --- STRATEGY DELEGATION ---
+        // If a spell is loaded, let the Strategy handle the aiming logic (e.g., moving the AOE circle)
+        if (!gridActive && loadedSpell != null && loadedSpell.castStrategy != null)
+        {
+            loadedSpell.castStrategy.OnAiming(this);
+        }
     }
 
-    private void HandleGridInput()
+    private void HandleInput()
     {
-        // Toggle the grid on/off or cancel a loaded spell
+        // 1. Toggle Grid OR Cancel Spell
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // If we have a spell loaded, pressing 'E' cancels it
             if (loadedSpell != null)
             {
-                loadedSpell = null;
-                if (wandFeedback != null) wandFeedback.HideSpellIcon();
-                Debug.Log("Spell Canceled");
+                CancelLoadedSpell();
             }
-            // Otherwise, toggle the grid
             else
             {
                 ToggleGrid();
             }
         }
 
-        // --- FIRING LOGIC ---
-        // 1. Check for Firing (if grid is NOT active and a spell IS loaded)
+        // 2. Fire Loaded Spell
         if (Input.GetMouseButtonDown(0) && !gridActive && loadedSpell != null)
         {
             FireLoadedSpell();
         }
-        // 2. Check for Drawing (if grid IS active)
+        // 3. Draw Pattern (while Grid is active)
         else if (gridActive && activeGridInstance != null && Input.GetMouseButton(0))
         {
             ProcessDrawing();
         }
-
-        // 3. Check for Finishing a Drawing (Mouse Up)
-        if (Input.GetMouseButtonUp(0) && currentPath.Count > 0)
+        // 4. Finish Drawing (Mouse Up)
+        else if (Input.GetMouseButtonUp(0) && currentPath.Count > 0)
         {
-            // This now "loads" the spell instead of casting
             CheckForSpellMatch();
 
             // Always close the grid after finishing a drawing
@@ -78,12 +85,10 @@ public class SpellGridManager : MonoBehaviour
 
     private void ToggleGrid()
     {
-        // Note: The loadedSpell check was moved to HandleGridInput
         gridActive = !gridActive;
 
         if (gridActive)
         {
-            // Only spawn if one isn't already active
             if (activeGridInstance == null)
             {
                 OpenGrid();
@@ -98,62 +103,63 @@ public class SpellGridManager : MonoBehaviour
     private void OpenGrid()
     {
         Transform camTransform = playerCamera.transform;
-
-        // --- Y-Stable Position Logic ---
         Vector3 camPos = camTransform.position;
 
-        // Get the camera's forward direction but ignore its Y component
+        // --- 1. Determine Direction & Ideal Rotation ---
         Vector3 horizontalForward = camTransform.forward;
         horizontalForward.y = 0;
         horizontalForward.Normalize();
 
-        // Fallback in case player is looking straight up or down
-        if (horizontalForward == Vector3.zero)
-        {
-            horizontalForward = transform.forward; // Assumes this script is on the player
-            horizontalForward.y = 0;
-            horizontalForward.Normalize();
+        // Fallback if looking straight down/up
+        if (horizontalForward == Vector3.zero) horizontalForward = transform.forward;
 
-            if (horizontalForward == Vector3.zero)
-            {
-                horizontalForward = Vector3.forward;
-            }
-        }
+        // Calculate the rotation FIRST. We want it to face the player regardless of walls.
+        Quaternion facePlayerRot = Quaternion.LookRotation(horizontalForward);
 
-        // Calculate the XZ position
-        Vector3 idealSpawnPos = camPos + (horizontalForward * gridDistance);
-        // Set the Y position explicitly based on camera's Y + offset
-        idealSpawnPos.y = camPos.y + gridYOffset;
-
-        // --- Collision Check Logic ---
-        Vector3 rayStartPosition = camPos + (camTransform.forward * 0.1f);
-        Vector3 rayDirection = idealSpawnPos - rayStartPosition;
-        float rayDistance = rayDirection.magnitude;
-        Ray ray = new Ray(rayStartPosition, rayDirection.normalized);
-
+        // --- 2. Prepare BoxCast Data ---
+        Vector3 castOrigin = camPos;
+        Vector3 castDirection = horizontalForward;
         Vector3 finalSpawnPos;
-        Quaternion finalSpawnRot;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, collisionLayers))
+        // Perform BoxCast to check for walls/obstacles
+        // We pass 'facePlayerRot' so the box is rotated correctly while checking
+        bool hitWall = Physics.BoxCast(
+            castOrigin,
+            boxHalfExtents,
+            castDirection,
+            out RaycastHit hit,
+            facePlayerRot,
+            gridDistance,
+            collisionLayers
+        );
+
+        if (hitWall)
         {
-            // --- WE HIT A WALL/FLOOR ---
-            finalSpawnPos = hit.point + (hit.normal * spawnBuffer);
-            // This makes it lie flat on the surface, facing out
-            finalSpawnRot = Quaternion.LookRotation(hit.normal);
+            // --- HIT WALL LOGIC ---
+            // Calculate safe distance: Hit Distance minus buffer
+            float safeDistance = hit.distance - spawnBuffer;
+
+            // SAFETY CHECK: Is the book now inside the player?
+            if (safeDistance < minSpawnDistance)
+            {
+                Debug.Log("Cannot open spellbook: Wall is too close!");
+                gridActive = false;
+                return; // ABORT SPAWN
+            }
+
+            finalSpawnPos = castOrigin + (castDirection * safeDistance);
         }
         else
         {
-            // --- PATH IS CLEAR ---
-            finalSpawnPos = idealSpawnPos;
-
-            // Calculate direction FROM camera TO the book's position (Fixed Backwards Spawn)
-            Vector3 lookDirection = finalSpawnPos - camPos;
-            lookDirection.y = 0; // Keep the book upright
-            finalSpawnRot = Quaternion.LookRotation(lookDirection.normalized);
+            // --- CLEAR PATH LOGIC ---
+            finalSpawnPos = castOrigin + (castDirection * gridDistance);
         }
 
-        // --- Instantiate ---
-        GameObject spawnedGrid = Instantiate(spellGridPrefab, finalSpawnPos, finalSpawnRot);
+        // Apply the Y-Offset (Height adjustment)
+        finalSpawnPos.y = camPos.y + gridYOffset;
+
+        // --- 3. Instantiate ---
+        GameObject spawnedGrid = Instantiate(spellGridPrefab, finalSpawnPos, facePlayerRot);
         activeGridInstance = spawnedGrid.GetComponent<GridVisualizer>();
 
         if (activeGridInstance == null)
@@ -175,7 +181,7 @@ public class SpellGridManager : MonoBehaviour
         if (activeGridInstance != null)
         {
             Destroy(activeGridInstance.gameObject);
-            activeGridInstance = null; // This is the key to allowing a new one to spawn
+            activeGridInstance = null;
         }
 
         ClearHighlights();
@@ -199,25 +205,32 @@ public class SpellGridManager : MonoBehaviour
 
     private void CheckForSpellMatch()
     {
-        // Don't check if we didn't draw enough
         if (currentPath.Count < minPatternLength) return;
 
         string currentPattern = string.Join("-", currentPath);
+
         foreach (GridSpellSO spell in spellDatabase.gridSpells)
         {
             if (currentPattern.Contains(string.Join("-", spell.pattern)))
             {
-                // --- LOAD THE SPELL ---
+                // --- SPELL FOUND ---
                 loadedSpell = spell;
                 Debug.Log("Spell Loaded: " + spell.name);
 
-                // Tell the wand to show the icon
-                if (wandFeedback != null)
+                // 1. Show Icon
+                if (wandFeedback != null) wandFeedback.ShowSpellIcon(loadedSpell.spellIcon);
+
+                // 2. Notify Strategy (This spawns the indicator if needed)
+                if (loadedSpell.castStrategy != null)
                 {
-                    wandFeedback.ShowSpellIcon(loadedSpell.spellIcon);
+                    loadedSpell.castStrategy.OnSpellLoaded(this);
+                }
+                else
+                {
+                    Debug.LogWarning($"Spell {spell.name} has no Cast Strategy assigned!");
                 }
 
-                break; // Found a match, stop checking
+                break; // Stop checking after first match
             }
         }
     }
@@ -228,26 +241,33 @@ public class SpellGridManager : MonoBehaviour
 
         Debug.Log("Fired Spell: " + loadedSpell.name);
 
-        // Instantiate the effect of the loaded spell
-        Instantiate(
-            loadedSpell.castEffect,
-            playerCamera.transform.position + playerCamera.transform.forward * 2f,
-            playerCamera.transform.rotation
-        );
-
-        // --- IMPORTANT: Clear the spell ---
-
-        // Tell the wand to hide the icon
-        if (wandFeedback != null)
+        // 1. Execute Strategy (This instantiates the Fireball or Wind)
+        if (loadedSpell.castStrategy != null)
         {
-            wandFeedback.HideSpellIcon();
+            loadedSpell.castStrategy.Fire(this);
         }
+
+        // 2. Cleanup
+        if (wandFeedback != null) wandFeedback.HideSpellIcon();
         loadedSpell = null;
+    }
+
+    private void CancelLoadedSpell()
+    {
+        // 1. Notify Strategy (To destroy the AOE indicator)
+        if (loadedSpell != null && loadedSpell.castStrategy != null)
+        {
+            loadedSpell.castStrategy.OnCancel(this);
+        }
+
+        // 2. Cleanup
+        loadedSpell = null;
+        if (wandFeedback != null) wandFeedback.HideSpellIcon();
+        Debug.Log("Spell Canceled");
     }
 
     private void ClearHighlights()
     {
-        // Only try to clear if the grid still exists
         if (activeGridInstance != null)
         {
             foreach (GridCell cell in currentPath)

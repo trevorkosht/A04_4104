@@ -16,3 +16,4 @@ MonoBehaviour:
   pattern: 0000000001000000020000000500000008000000070000000600000003000000
   castEffect: {fileID: 1206498299807332555, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
   spellIcon: {fileID: -133630349, guid: 660d1e97d5ba1d24484af05318cc45c4, type: 3}
+  castStrategy: {fileID: 11400000, guid: 07a4c846bf1e8ef4c968012ed9b01de0, type: 2}
