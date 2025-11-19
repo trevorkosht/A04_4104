@@ -2420,6 +2420,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cat
       objectReference: {fileID: 0}
+    - target: {fileID: 1891122530372829838, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2537681359951170428, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2471,7 +2475,7 @@ PrefabInstance:
     - target: {fileID: 8547300748016249696, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: firePoint
       value: 
-      objectReference: {fileID: 1362590460}
+      objectReference: {fileID: 1888400263}
     - target: {fileID: 8547300748016249696, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: attackRange
       value: 8
@@ -2479,7 +2483,7 @@ PrefabInstance:
     - target: {fileID: 8547300748016249696, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 2985375984946597874, guid: 7a401be0091ac164aa853b71d2499890, type: 3}
+      objectReference: {fileID: 7863337422287552789, guid: ff11cef015f7c734f990d2ea77632b88, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3264,11 +3268,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
---- !u!4 &1362590460 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5392219811572705491, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
-  m_PrefabInstance: {fileID: 923730583}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1386009390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4166,6 +4165,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8063073397250431797, guid: f0271df749728104eac22c3d897fd8ce, type: 3}
   m_PrefabInstance: {fileID: 2039868564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1888400263 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2998897055443392213, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
+  m_PrefabInstance: {fileID: 923730583}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1982773672
 GameObject:

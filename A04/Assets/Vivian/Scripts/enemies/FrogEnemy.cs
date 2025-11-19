@@ -26,9 +26,6 @@ public class FrogEnemy : BaseEnemy
         // play animation
         Fire();
         // check collsion with player  
-        if (agent != null) { agent.ResetPath(); }
-
-
     }
 
     // Change to jumping chase
