@@ -3,7 +3,11 @@ guid: 6d927166f06f0d444ac47e1ea2451fb8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - agent: {instanceID: 0}
+  - player: {instanceID: 0}
+  - myStickerData: {instanceID: 0}
+  - genericStickerPrefab: {fileID: 5806895984661434272, guid: 5aa6b6e75f7ed254e944bec3976b1885, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

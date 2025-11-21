@@ -74,7 +74,8 @@ MonoBehaviour:
   attackRange: 2
   attackCooldown: 1.5
   maxEntityHealth: 30
-  sticker: {fileID: 390141103662078367, guid: 18d01dcecc4eed444a2e4e309d6b2690, type: 3}
+  myStickerData: {fileID: 11400000, guid: 4555b4f0793ddb54f844678e8566bbec, type: 2}
+  genericStickerPrefab: {fileID: 5806895984661434272, guid: 5aa6b6e75f7ed254e944bec3976b1885, type: 3}
   chargeSpeed: 10
   chargeDuration: 1.5
   chargeDamage: 25

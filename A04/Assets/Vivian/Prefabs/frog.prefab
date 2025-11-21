@@ -53,10 +53,10 @@ MonoBehaviour:
   attackRange: 9
   attackCooldown: 3
   maxEntityHealth: 30
-  sticker: {fileID: 158775730010530118, guid: 1475291ca8b82ae4f8d8692b890c8a79, type: 3}
+  myStickerData: {fileID: 11400000, guid: 43947204cd09c3b4291d87a191c0dcaa, type: 2}
+  genericStickerPrefab: {fileID: 5806895984661434272, guid: 5aa6b6e75f7ed254e944bec3976b1885, type: 3}
   projectilePrefab: {fileID: 2985375984946597874, guid: 7a401be0091ac164aa853b71d2499890, type: 3}
   firePoint: {fileID: 6511403654134681694}
-  jumpInterval: 2
   jumpHeight: 2
   jumpDuration: 1
 --- !u!195 &4308075931919486669

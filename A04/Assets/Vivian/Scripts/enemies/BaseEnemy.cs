@@ -23,67 +23,49 @@ public abstract class BaseEnemy : MonoBehaviour
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
     [SerializeField] int maxEntityHealth = 30;
-    //[SerializeField] float playerDistRange = 5f;
 
-    [Header("Sticker")]
-    [SerializeField] GameObject sticker;
+    // --- NEW STICKER SYSTEM ---
+    [Header("Sticker System")]
+    [SerializeField] StickerData myStickerData;       // Drag the specific Data (e.g. Goblin)
+    [SerializeField] GameObject genericStickerPrefab; // Drag the ONE generic pickup prefab
 
     public static int cost;
 
     protected EnemyState currentState;
     protected float lastAttackTime;
-    protected Vector3 patrolPoint;
     private int currentHealth;
 
-    public static int[] stickers = new int[3];
     protected virtual void Start()
     {
         currentState = EnemyState.Idle;
         agent = GetComponent<NavMeshAgent>();
         currentHealth = maxEntityHealth;
-
-
     }
 
     protected virtual void Update()
     {
+        // Debug kill key
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(10);
         }
+
         switch (currentState)
         {
-            case EnemyState.Idle:
-                IdleState();
-                break;
-
-            case EnemyState.Chase:
-                ChaseState();
-                break;
-
-            case EnemyState.Attack:
-                AttackState();
-                break;
-
-            case EnemyState.Death:
-                DeathState();
-                break;
-
+            case EnemyState.Idle: IdleState(); break;
+            case EnemyState.Chase: ChaseState(); break;
+            case EnemyState.Attack: AttackState(); break;
+            case EnemyState.Death: DeathState(); break;
         }
     }
 
-    // -------------------------------------
-    //        ENEMY HEALTH DEFAULT LOGIC
-    // -------------------------------------
     public void TakeDamage(int amount)
     {
+        if (currentState == EnemyState.Death) return;
+
         currentHealth -= amount;
-
-        // Ensure health doesn't go below 0
         currentHealth = Mathf.Clamp(currentHealth, 0, maxEntityHealth);
-
-
-        Debug.Log($"Enemy took {amount} damage, current health: {currentHealth}");
+        // Debug.Log($"Enemy took {amount} damage, current health: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -91,48 +73,28 @@ public abstract class BaseEnemy : MonoBehaviour
         }
     }
 
-
-    // -------------------------------------
-    //        STATE MACHINE DEFAULT LOGIC
-    // -------------------------------------
+    // --- STATES ---
 
     protected virtual void IdleState()
     {
-        Debug.Log("Idling");
-        if (DetectPlayer())
-        {
-            SwitchState(EnemyState.Chase);
-            return;
-        }
+        if (DetectPlayer()) SwitchState(EnemyState.Chase);
     }
-
 
     protected virtual void ChaseState()
     {
         if (!DetectPlayer())
         {
-            //Debug.Log("still idling");
-
             SwitchState(EnemyState.Idle);
             return;
         }
 
-        //Debug.Log("Chasing player");
-        agent.SetDestination(player.position);
-        // Rotate toward the player
+        if (agent != null) agent.SetDestination(player.position);
+
         Vector3 dir = (player.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(dir);
 
-        if (agent != null) 
-        {
-            agent.SetDestination(player.position);
-        }
-
-
-        // If in attack range, go to AttackState.
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
-            //Debug.Log("Trigger attack to player");
             SwitchState(EnemyState.Attack);
             agent.ResetPath();
         }
@@ -140,64 +102,65 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void AttackState()
     {
-        Debug.Log("Attacking player");
-        // Attack when player is in range while rotating toward the player.
         Vector3 dir = (player.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(dir);
 
-        // Double check player is in attack range. If not, go back to chasing.
         if (Vector3.Distance(transform.position, player.position) > attackRange)
         {
             SwitchState(EnemyState.Chase);
             return;
         }
 
-        // If not on cooldown, launch attack.
         if (Time.time - lastAttackTime >= attackCooldown)
         {
             lastAttackTime = Time.time;
-            PerformAttack(); // <--- child class defines actual attack
+            PerformAttack();
         }
     }
 
     protected virtual void DeathState()
     {
-        //play death animation
-
-        // Check if sticker has been dropped
-        if (stickers[0] != 1)
+        // 1. Check if we have collected this sticker yet
+        if (CollectionManager.Instance != null && myStickerData != null)
         {
-            stickers[0] = 1;  // Note if sticker has been dropped.
-            Instantiate(sticker, transform.position, player.rotation);
-
+            // Only spawn if the player DOES NOT have the sticker yet
+            if (!CollectionManager.Instance.HasSticker(myStickerData))
+            {
+                SpawnSticker();
+            }
         }
+
+        // 2. Play animation / Destroy object
         Destroy(gameObject);
     }
 
-    // ----------------------------------------------------
-    //               METHODS CHILD CLASSES OVERRIDE
-    // ----------------------------------------------------
+    private void SpawnSticker()
+    {
+        if (genericStickerPrefab != null)
+        {
+            // Spawn the generic ball/item
+            GameObject drop = Instantiate(genericStickerPrefab, transform.position + Vector3.up, Quaternion.identity);
 
-    /// <summary>
-    /// Child scripts override this to define their own attack behavior.
-    /// </summary>
+            // Inject the specific data into it
+            StickerPickup pickupScript = drop.GetComponent<StickerPickup>();
+            if (pickupScript != null)
+            {
+                pickupScript.Initialize(myStickerData);
+            }
+        }
+    }
+
+    // --- ABSTRACTS & UTILS ---
+
     protected abstract void PerformAttack();
 
-    /// <summary>
-    /// Child scripts can override detection if they want special vision logic.
-    /// <summary>
     protected virtual bool DetectPlayer()
     {
-        //Debug.Log("Searching for player");
         return Vector3.Distance(transform.position, player.position) <= detectionRange;
     }
 
-    // ----------------------------------------------------
-    //                     UTILITY
-    // ----------------------------------------------------
     protected void SwitchState(EnemyState newState)
     {
         currentState = newState;
     }
-
 }
