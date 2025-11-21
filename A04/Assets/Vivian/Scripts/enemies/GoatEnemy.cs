@@ -10,7 +10,10 @@ public class GoatEnemy : BaseEnemy
     public float chargeDuration = 1.5f;
     public int chargeDamage = 1;
     public float chargeWindUpTime = 0.8f;
-    public float returnSpeed = 5f;
+
+    [Header("Recoil Settings")]
+    public float recoilDistance = 3f; // User-specified recoil distance
+    public float recoilDuration = 0.5f; // How long recoil takes
 
     [Header("Charge Visual Effects")]
     public GameObject chargeWindUpEffect;
@@ -20,61 +23,37 @@ public class GoatEnemy : BaseEnemy
 
     // Charge state variables
     private Vector3 chargeStartPosition;
-    private Vector3 chargeTargetPosition;
     private bool isCharging = false;
-    private bool isReturning = false;
     private bool hasHitPlayerThisAttack = false;
+    private bool canAttack = true;
 
     protected override void PerformAttack()
     {
+        if (!canAttack || isCharging) return;
+
         StartCoroutine(ChargeAttackRoutine());
     }
 
     private IEnumerator ChargeAttackRoutine()
     {
+        canAttack = false;
         hasHitPlayerThisAttack = false;
 
         // Store initial state
         chargeStartPosition = transform.position;
-        agent.isStopped = true; // Stop NavMesh agent during charge
+        agent.isStopped = true;
 
         // Phase 1: Wind Up
         Debug.Log("Charging up attack!");
 
-        // Face player during wind up
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(directionToPlayer);
-
-        //// Visual and audio effects for wind up
-        //if (chargeWindUpEffect != null)
-        //    Instantiate(chargeWindUpEffect, transform.position, transform.rotation);
-
-        //if (chargeWindUpSound != null)
-        //    AudioSource.PlayClipAtPoint(chargeWindUpSound, transform.position);
-
-        //// Animation trigger for wind up
-        //if (animator != null)
-        //    animator.SetTrigger("ChargeWindUp");
 
         yield return new WaitForSeconds(chargeWindUpTime);
 
         // Phase 2: Charge Forward
         isCharging = true;
         Debug.Log("Charging forward!");
-
-        // Calculate charge target (charge past player a bit)
-        chargeTargetPosition = transform.position + transform.forward * (attackRange * 3f);
-
-        //// Visual effects for charging
-        //if (chargeTrailEffect != null)
-        //    Instantiate(chargeTrailEffect, transform.position, transform.rotation, transform);
-
-        //if (chargeAttackSound != null)
-        //    AudioSource.PlayClipAtPoint(chargeAttackSound, transform.position);
-
-        // Animation trigger for charge
-        //if (animator != null)
-        //    animator.SetBool("IsCharging", true);
 
         float chargeTimer = 0f;
 
@@ -89,40 +68,57 @@ public class GoatEnemy : BaseEnemy
             // Check for player hit during charge
             CheckChargeHit();
 
-            // Optional: Stop early if we hit a wall or reached target
+            // Stop early if we hit max distance
             if (Vector3.Distance(transform.position, chargeStartPosition) >= attackRange * 2.5f)
                 break;
 
             yield return null;
         }
 
-        // Phase 3: Return to Start Position
-        isCharging = false;
-        isReturning = true;
-        Debug.Log("Returning to start position");
-
-        //if (animator != null)
-        //    animator.SetBool("IsCharging", false);
-
-        agent.isStopped = false; // Re-enable NavMesh agent
-        agent.SetDestination(chargeStartPosition);
-
+        // Phase 3: Recoil - ALWAYS move back after charge
+        yield return StartCoroutine(RecoilBack());
 
         // Final cleanup
-        isReturning = false;
+        canAttack = true;
+        isCharging = false;
+        agent.isStopped = false;
 
-        Debug.Log("Charge attack completed!");
+        // IMPORTANT: Reset the attack timer to prevent immediate re-attack
+        lastAttackTime = Time.time;
 
-        // Return to chase state to continue pursuing player
+        canAttack = true;
         SwitchState(EnemyState.Chase);
+    }
+
+    // Simple recoil that moves goat back
+    private IEnumerator RecoilBack()
+    {
+        Debug.Log($"Recoiling back {recoilDistance} units");
+
+        Vector3 recoilStartPosition = transform.position;
+        Vector3 recoilTargetPosition = transform.position + (-transform.forward * recoilDistance);
+
+        float recoilTimer = 0f;
+
+        while (recoilTimer < recoilDuration)
+        {
+            recoilTimer += Time.deltaTime;
+            float progress = recoilTimer / recoilDuration;
+
+            // Smooth movement back
+            transform.position = Vector3.Lerp(recoilStartPosition, recoilTargetPosition, progress);
+
+            yield return null;
+        }
+
+        // Ensure exact position
+        Debug.Log("Recoil completed");
     }
 
     private void CheckChargeHit()
     {
-        // If we already hit the player this charge attack, don't check again
         if (hasHitPlayerThisAttack) return;
 
-        // Check for player in front during charge
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1.5f, transform.forward, 2f);
 
         foreach (RaycastHit hit in hits)
@@ -134,45 +130,23 @@ public class GoatEnemy : BaseEnemy
                 {
                     playerHealth.TakeDamage(chargeDamage);
                     Debug.Log($"Charged into player for {chargeDamage} damage!");
-                    hasHitPlayerThisAttack = true; // Mark that we've hit the player THIS attack
+                    hasHitPlayerThisAttack = true;
+
+                    // Stop charging when hitting player
+                    isCharging = false;
                 }
-                break; // Only hit player once per attack
+                break;
             }
         }
     }
 
-    // Optional: Handle collisions with walls/obstacles
+    // Handle collisions with walls/obstacles
     private void OnCollisionEnter(Collision collision)
     {
         if (isCharging && !collision.collider.CompareTag("Player"))
         {
-            // Stop charge early if hitting a wall
-            if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Obstacle"))
-            {
-                isCharging = false;
-                Debug.Log("Charge interrupted by obstacle");
-            }
-        }
-    }
-
-    // Make sure to clean up if enemy gets destroyed during charge
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
-    }
-
-    // Gizmos for visualization
-    private void OnDrawGizmosSelected()
-    {
-        if (isCharging)
-        {
-            // Draw charge direction
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(transform.position, transform.forward * 5f);
-
-            // Draw charge detection sphere
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, 1.5f);
+            isCharging = false;
+            Debug.Log("Charge interrupted by environment");
         }
     }
 }

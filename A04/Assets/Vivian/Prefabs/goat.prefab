@@ -73,7 +73,7 @@ MonoBehaviour:
   player: {fileID: 0}
   healthSystem: {fileID: 3397144104334697117}
   detectionRange: 10
-  attackRange: 2
+  attackRange: 3
   attackCooldown: 1.5
   myStickerData: {fileID: 11400000, guid: 4555b4f0793ddb54f844678e8566bbec, type: 2}
   genericStickerPrefab: {fileID: 5806895984661434272, guid: 5aa6b6e75f7ed254e944bec3976b1885, type: 3}
@@ -81,7 +81,8 @@ MonoBehaviour:
   chargeDuration: 1.5
   chargeDamage: 25
   chargeWindUpTime: 0.8
-  returnSpeed: 5
+  recoilDistance: 5
+  recoilDuration: 0.5
   chargeWindUpEffect: {fileID: 0}
   chargeTrailEffect: {fileID: 0}
   chargeWindUpSound: {fileID: 0}
@@ -113,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5110599860163159834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.023, y: 1.044, z: -0.015}
+  m_LocalPosition: {x: -0.023, y: 0.875, z: -0.015}
   m_LocalScale: {x: 1.3224, y: 1.6857, z: 1.1775}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -189,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6264607967428437988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.97, z: 0}
+  m_LocalPosition: {x: 0, y: 0.774, z: 0}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

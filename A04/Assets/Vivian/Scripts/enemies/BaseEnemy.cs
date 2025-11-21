@@ -251,6 +251,7 @@ public abstract class BaseEnemy : MonoBehaviour
             return;
         }
 
+        Debug.Log("CHASING PLAYERRRRRRR");
         if (agent != null) agent.SetDestination(player.position);
 
         Vector3 dir = (player.position - transform.position).normalized;
