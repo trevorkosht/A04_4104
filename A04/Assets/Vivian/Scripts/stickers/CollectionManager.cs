@@ -6,35 +6,47 @@ public class CollectionManager : MonoBehaviour
 {
     public static CollectionManager Instance;
 
-    // DRAG ALL YOUR STICKER DATA ASSETS HERE IN THE INSPECTOR
-    public List<StickerData> allStickers;
+    [Header("Data")]
+    public List<StickerData> allStickers; // The full list of possible stickers
 
-    // A set of IDs the player has collected
     private HashSet<string> collectedStickerIds = new HashSet<string>();
 
-    // Event to notify UI when something changes
     public event Action OnStickerAdded;
 
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-
-        // TODO: Load saved data here (e.g., from PlayerPrefs)
     }
 
     public void UnlockSticker(StickerData data)
     {
-        // Only unlock if we don't have it yet
         if (!collectedStickerIds.Contains(data.id))
         {
+            // 1. Add the sticker
             collectedStickerIds.Add(data.id);
             Debug.Log($"Unlocked Sticker: {data.enemyName}");
 
-            // Notify the UI to update
+            // 2. Update UI
             OnStickerAdded?.Invoke();
 
-            // TODO: Save progress here
+            // 3. --- WIN CONDITION CHECK ---
+            CheckForWin();
+        }
+    }
+
+    private void CheckForWin()
+    {
+        // If the number of IDs we have matches the number of items in the list...
+        if (collectedStickerIds.Count >= allStickers.Count)
+        {
+            Debug.Log("All Stickers Collected! Triggering Win.");
+
+            // Tell the Game Manager to end the game
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.TriggerWin();
+            }
         }
     }
 

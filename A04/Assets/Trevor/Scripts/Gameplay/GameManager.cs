@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Required for scene management
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -187,10 +188,22 @@ public class GameManager : MonoBehaviour
     // --- Functions for other scripts to call ---
     public void TriggerWin()
     {
-        if (currentState == GameState.Play) // Only win if you are playing
+        if (currentState == GameState.Play)
         {
-            ChangeState(GameState.Win);
+            // Start the delay coroutine instead of switching state immediately
+            StartCoroutine(WinSequenceRoutine());
         }
+    }
+
+    // Add the namespace: using System.Collections; at the top of the script
+    System.Collections.IEnumerator WinSequenceRoutine()
+    {
+        // Optional: Play a "All Collected!" sound effect here
+
+        // Wait for 2 seconds so the player can see the last sticker
+        yield return new WaitForSeconds(2f);
+
+        ChangeState(GameState.Win);
     }
 
     public void TriggerLose()
