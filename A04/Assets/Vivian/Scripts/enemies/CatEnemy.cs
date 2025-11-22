@@ -8,16 +8,10 @@ public class CatEnemy : BaseEnemy
     public Transform firePoint;
     public void Fire()
     {
-        Debug.Log("Launched Bubble");
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
+        Debug.Log("Launched Beam");
+        float spawnDistance = 3.75f; // Distance from firePoint
+        Vector3 spawnPosition = firePoint.position + (firePoint.forward * spawnDistance);
+        Instantiate(projectilePrefab, spawnPosition, firePoint.rotation);
     }
     protected override void PerformAttack()
     {

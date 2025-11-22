@@ -1,22 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Bubble : MonoBehaviour
+public class Beam : MonoBehaviour
 {
-    public float speed = 20f;
-    public float lifeTime = 5f;
+    public float lifeTime = 1.5f;
     [SerializeField] int damage = 10;   // how much damage to deal to the player
 
     private void Start()
     {
         Destroy(gameObject, lifeTime); // destroy after X seconds
     }
-
-    private void Update()
-    {
-        //Debug.Log("Projectile moving: " + transform.position);
-        transform.position += (transform.forward + (Vector3.up * 0.17f)) * speed * Time.deltaTime;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         // Check if object is player
@@ -29,10 +23,7 @@ public class Bubble : MonoBehaviour
             if (player != null)
             {
                 player.TakeDamage(damage);
-                Destroy(gameObject);    // Destroy on impact.
             }
-
         }
-        
     }
 }
