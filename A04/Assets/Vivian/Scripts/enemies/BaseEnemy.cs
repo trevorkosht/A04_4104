@@ -230,7 +230,6 @@ public abstract class BaseEnemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         healthSystem.TakeDamage(amount);
-        Debug.Log("Enemy damg");
     }
 
     private void OnHealthDepleted()

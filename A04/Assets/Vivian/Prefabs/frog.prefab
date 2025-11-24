@@ -51,7 +51,7 @@ MonoBehaviour:
   agent: {fileID: 4308075931919486669}
   player: {fileID: 0}
   healthSystem: {fileID: 4780390719307116571}
-  detectionRange: 11
+  detectionRange: 100
   attackRange: 9
   attackCooldown: 3
   myStickerData: {fileID: 11400000, guid: 43947204cd09c3b4291d87a191c0dcaa, type: 2}

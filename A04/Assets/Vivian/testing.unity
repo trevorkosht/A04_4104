@@ -1565,12 +1565,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2517804549615497469, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2614035331685235757, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 489107141}
+    - target: {fileID: 2614035331685235757, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
+      propertyPath: detectionRange
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5910386138026956976, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2470,7 +2474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1891122530372829838, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084334503789305895, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2537681359951170428, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: m_RootOrder
@@ -2515,6 +2523,10 @@ PrefabInstance:
     - target: {fileID: 2537681359951170428, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133869381346003706, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
+      propertyPath: m_Name
+      value: body
       objectReference: {fileID: 0}
     - target: {fileID: 8547300748016249696, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: player
