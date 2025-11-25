@@ -3,8 +3,8 @@ using System.Collections; // Added for System.Action
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
-    private int currentHealth;
+    [SerializeField] public int maxHealth = 100;
+    public int currentHealth;
 
     // This is an event that other scripts (like our UI) can listen to
     // It will send out the current and max health values

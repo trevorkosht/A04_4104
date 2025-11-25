@@ -7,8 +7,19 @@ public class HealthUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private PlayerHealth playerHealth; // Drag your Player here
     [SerializeField] private Slider healthSlider;
-    [SerializeField] private TextMeshProUGUI healthText; // e.g., "80 / 100"
+    private void Start()
+    {
+        if (playerHealth != null)
+        {
+            // Assuming your PlayerHealth script has public variables for current/max
+            // If these are private, you might need to add "Getters" to PlayerHealth
+            // Example: playerHealth.GetCurrentHealth()
 
+            // NOTE: Check your PlayerHealth script. If 'currentHealth' is private, 
+            // you might need to make it public or add a public method to get it.
+            UpdateHealthUI(playerHealth.currentHealth, playerHealth.maxHealth);
+        }
+    }
     private void OnEnable()
     {
         // "Subscribe" to the OnHealthChanged event
@@ -40,10 +51,5 @@ public class HealthUI : MonoBehaviour
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
 
-        // Update the text
-        if (healthText != null)
-        {
-            healthText.text = $"{currentHealth} / {maxHealth}";
-        }
     }
 }

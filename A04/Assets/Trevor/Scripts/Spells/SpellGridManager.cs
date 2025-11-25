@@ -239,18 +239,32 @@ public class SpellGridManager : MonoBehaviour
     {
         if (loadedSpell == null) return;
 
+        // --- NEW CHECK ---
+        // Check Mana and Cooldowns before proceeding
+        if (PlayerSpellSystem.Instance != null)
+        {
+            if (!PlayerSpellSystem.Instance.CanCast(loadedSpell))
+            {
+                // Optional: Play a "buzzer" sound or shake UI
+                return;
+            }
+
+            // Deduct mana and start cooldown
+            PlayerSpellSystem.Instance.CastSpell(loadedSpell);
+        }
+        // ----------------
+
         Debug.Log("Fired Spell: " + loadedSpell.name);
 
-        // 1. Execute Strategy (This instantiates the Fireball or Wind)
         if (loadedSpell.castStrategy != null)
         {
             loadedSpell.castStrategy.Fire(this);
         }
 
-        // 2. Cleanup
         if (wandFeedback != null) wandFeedback.HideSpellIcon();
         loadedSpell = null;
     }
+
 
     private void CancelLoadedSpell()
     {
