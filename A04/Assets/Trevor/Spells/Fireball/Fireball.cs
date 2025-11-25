@@ -20,7 +20,7 @@ public class Fireball : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // 1. Check for Enemy
-        BaseEnemy enemy = other.GetComponent<BaseEnemy>();
+        BaseEnemy enemy = other.GetComponentInParent<BaseEnemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(damage);

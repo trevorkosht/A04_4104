@@ -2,52 +2,44 @@ using UnityEngine;
 
 public class LightSpell : MonoBehaviour
 {
-    public float speed = 2f;
-    public int healAmount = 20; // Amount to heal
-    private float lifetime = 3f;
+    public float speed = 10f; // Speed of falling
 
-    [SerializeField] private GameObject collisionEffect;
-
-    void Start()
-    {
-        Destroy(gameObject, lifetime);
-    }
+    // Assign your Healing Circle Prefab here in the Inspector
+    [SerializeField] private GameObject healingZonePrefab;
 
     void Update()
     {
+        // Move the projectile down
         transform.Translate(Vector3.down * speed * Time.deltaTime);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // 1. Check for Player
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-
-            if (playerHealth != null)
-            {
-                playerHealth.Heal(healAmount);
-                SpawnEffect();
-                Destroy(gameObject);
-                return;
-            }
-        }
-
-        // 2. Check for Environment
+        // We only care if we hit the ground (Environment)
         if (other.CompareTag("Environment"))
         {
-            SpawnEffect();
+            SpawnHealingZone();
+            Destroy(gameObject); // Destroy the falling projectile
+        }
+        // Optional: If we hit the player directly, spawn the circle at their feet
+        else if (other.CompareTag("Player"))
+        {
+            SpawnHealingZone();
             Destroy(gameObject);
         }
     }
 
-    void SpawnEffect()
+    void SpawnHealingZone()
     {
-        if (collisionEffect != null)
+        if (healingZonePrefab != null)
         {
-            GameObject spawnedEffect = Instantiate(collisionEffect, transform.position, transform.rotation);
-            Destroy(spawnedEffect, 3f);
+            // Spawn the circle exactly where the projectile hit
+            // Quaternion.identity means "no rotation" (flat on ground)
+            Instantiate(healingZonePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("LightSpell: No Healing Zone Prefab assigned!");
         }
     }
 }
