@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 619e305f5165a9946b7f72464e44ca4a, type: 3}
   m_Sun: {fileID: 2114283754330233425}
-  m_IndirectSpecularColor: {r: 0.17279485, g: 0.26002383, b: 0.36692938, a: 1}
+  m_IndirectSpecularColor: {r: 0.1727952, g: 0.2600245, b: 0.36693013, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2295,11 +2295,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generateOnStart: 1
-  randomizeSeed: 0
-  seed: 25
+  randomizeSeed: 1
+  seed: 0
   sectionContainer: {fileID: 0}
-  maxLevelSize: 20
-  maxAllowedOrder: 20
+  maxLevelSize: 7
+  maxAllowedOrder: 10
   sectionPrefabs:
   - {fileID: -2760358700300841816, guid: 6c9845999140bdd428ce481e9d318079, type: 3}
   - {fileID: 5530413065614019118, guid: 3f9fd4644f131e8489c7e352d978a91c, type: 3}
@@ -2310,7 +2310,6 @@ MonoBehaviour:
   - {fileID: 3763406077107083097, guid: 7bcabb27ffc181443be16f28b62d8d70, type: 3}
   endPrefabs:
   - {fileID: 3042830859844724423, guid: 029fd4800db300c4296912a7deef5fa4, type: 3}
-  - {fileID: 2604166723085905005, guid: 6ec3d283f8ead3649aa384323f8d43ce, type: 3}
   initialSectionTags:
   - spawn
   specialRules:
@@ -2321,8 +2320,11 @@ MonoBehaviour:
     MinAmount: 1
     MaxAmount: 1
   - Tag: room
-    MinAmount: 4
-    MaxAmount: 4
+    MinAmount: 3
+    MaxAmount: 5
+  - Tag: corridor
+    MinAmount: 0
+    MaxAmount: 2
 --- !u!1 &1504916889
 GameObject:
   m_ObjectHideFlags: 0
