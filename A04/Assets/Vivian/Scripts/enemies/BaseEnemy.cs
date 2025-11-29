@@ -190,6 +190,13 @@ public abstract class BaseEnemy : MonoBehaviour
     [SerializeField] StickerData myStickerData;
     [SerializeField] GameObject genericStickerPrefab;
 
+    [Header("Warning System")]
+    [SerializeField] GameObject flash;
+    [SerializeField] GameObject flashBase;
+    public float flashDuration = 1f;   // Time flashing warning. 
+    public float flashSpeed = 0.2f; // Time between flashes.
+
+
     protected EnemyState currentState;
     protected float lastAttackTime;
 
@@ -201,6 +208,11 @@ public abstract class BaseEnemy : MonoBehaviour
         // Get health system
         healthSystem = GetComponentInChildren<EnemyHealth>();
         healthSystem.OnDeath += OnHealthDepleted;
+
+        // Hide flash
+        flash.SetActive(false);
+        flashBase.SetActive(false);
+
     }
 
     protected virtual void OnDestroy()
@@ -265,17 +277,19 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void AttackState()
     {
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(dir);
 
         if (Vector3.Distance(transform.position, player.position) > attackRange)
         {
+            Vector3 dir = (player.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(dir);
             SwitchState(EnemyState.Chase);
             return;
         }
 
         if (Time.time - lastAttackTime >= attackCooldown)
         {
+            Vector3 dir = (player.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(dir);
             lastAttackTime = Time.time;
             PerformAttack();
         }
@@ -305,6 +319,36 @@ public abstract class BaseEnemy : MonoBehaviour
                 pickupScript.Initialize(myStickerData);
             }
         }
+    }
+
+    // Warning inidcator flash.
+    protected virtual void FlashWarning()
+    {
+        StartCoroutine(Flashing());
+    }
+
+    private System.Collections.IEnumerator Flashing()
+    {
+        float timer = 0f;
+
+        // Show indicator.
+        flash.SetActive(true);
+        flashBase.SetActive(true);
+
+        while (timer < flashDuration)
+        {
+            // Toggle visibility
+            flash.SetActive(!flash.activeSelf);
+
+            // Wait before next toggle
+            yield return new WaitForSeconds(flashSpeed);
+
+            timer += flashSpeed;
+        }
+
+        // Hide indicator.
+        flash.SetActive(false);
+        flashBase.SetActive(false);
     }
 
     protected abstract void PerformAttack();

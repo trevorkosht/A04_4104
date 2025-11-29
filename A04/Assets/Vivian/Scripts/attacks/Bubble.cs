@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    public float speed = 20f;
+    public float speed = 10f;
     public float lifeTime = 5f;
     [SerializeField] int damage = 10;   // how much damage to deal to the player
 

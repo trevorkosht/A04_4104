@@ -5,26 +5,26 @@ using UnityEngine.AI;
 
 public class FrogEnemy : BaseEnemy
 {
+    [Header("Frog Settings")]
     public GameObject projectilePrefab;
     public Transform firePoint;
-    //private float jumpTimer = 0f;
     private bool isJumping = false;
     private Vector3 jumpStartPosition;
 
     [Header("Jump Settings")]
-    //[SerializeField] private float jumpInterval = 0.5f;
     [SerializeField] private float jumpHeight = 0.5f;
     [SerializeField] private float jumpDuration = 0.5f; // Total jump time
 
-    public void Fire()
+    private System.Collections.IEnumerator Fire()
     {
         Debug.Log("Launched Bubble");
         Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        yield return null;
     }
     protected override void PerformAttack()
     {
         // play animation
-        Fire();
+        StartCoroutine(Fire());
         // check collsion with player  
     }
 

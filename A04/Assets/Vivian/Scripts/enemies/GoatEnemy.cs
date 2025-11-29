@@ -9,7 +9,7 @@ public class GoatEnemy : BaseEnemy
     public float chargeSpeed = 10f;
     public float chargeDuration = 1.5f;
     public int chargeDamage = 1;
-    public float chargeWindUpTime = 0.8f;
+    public float chargeWindUpTime = 1.5f;
 
     [Header("Recoil Settings")]
     public float recoilDistance = 3f; // User-specified recoil distance
@@ -49,6 +49,9 @@ public class GoatEnemy : BaseEnemy
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(directionToPlayer);
 
+        // Save movement distance before warning player of direction.
+        Vector3 movement = transform.forward * chargeSpeed * Time.deltaTime;
+        FlashWarning();
         yield return new WaitForSeconds(chargeWindUpTime);
 
         // Phase 2: Charge Forward
@@ -61,8 +64,7 @@ public class GoatEnemy : BaseEnemy
         {
             chargeTimer += Time.deltaTime;
 
-            // Move forward during charge
-            Vector3 movement = transform.forward * chargeSpeed * Time.deltaTime;
+            // Move forward to saved movement during charge
             transform.position += movement;
 
             // Check for player hit during charge
@@ -89,6 +91,7 @@ public class GoatEnemy : BaseEnemy
         canAttack = true;
         SwitchState(EnemyState.Chase);
     }
+
 
     // Simple recoil that moves goat back
     private IEnumerator RecoilBack()
