@@ -24,7 +24,6 @@ public class CatEnemy : BaseEnemy
     {
         // play animation
         StartCoroutine(Fire());
-        // check collsion with player  
         if (agent != null) { agent.ResetPath(); }
     }
 

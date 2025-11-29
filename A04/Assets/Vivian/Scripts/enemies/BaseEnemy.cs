@@ -277,17 +277,19 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void AttackState()
     {
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(dir);
 
         if (Vector3.Distance(transform.position, player.position) > attackRange)
         {
+            Vector3 dir = (player.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(dir);
             SwitchState(EnemyState.Chase);
             return;
         }
 
         if (Time.time - lastAttackTime >= attackCooldown)
         {
+            Vector3 dir = (player.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(dir);
             lastAttackTime = Time.time;
             PerformAttack();
         }
