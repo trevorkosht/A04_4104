@@ -8,6 +8,8 @@ public class CatEnemy : BaseEnemy
     [Header("Cat Settings")]
     public GameObject projectilePrefab;
     public Transform firePoint;
+    public static int cost = 30;
+
 
     private System.Collections.IEnumerator Fire()
     {

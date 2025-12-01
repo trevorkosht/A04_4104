@@ -10,6 +10,8 @@ public class FrogEnemy : BaseEnemy
     public Transform firePoint;
     private bool isJumping = false;
     private Vector3 jumpStartPosition;
+    public static int cost = 40;
+
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 0.5f;

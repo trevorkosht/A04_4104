@@ -5,6 +5,8 @@ using static BaseEnemy;
 
 public class GoatEnemy : BaseEnemy
 {
+    public static int cost = 40;
+
     [Header("Charge Attack Settings")]
     public float chargeSpeed = 10f;
     public float chargeDuration = 1.5f;
