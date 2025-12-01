@@ -7,13 +7,13 @@ public class GoatEnemy : BaseEnemy
 {
 
     [Header("Charge Attack Settings")]
-    public float chargeSpeed = 10f;
+    public float chargeSpeed = 5f;
     public float chargeDuration = 1.5f;
     public int chargeDamage = 1;
     public float chargeWindUpTime = 1.5f;
 
     [Header("Recoil Settings")]
-    public float recoilDistance = 3f; // User-specified recoil distance
+    public float recoilDistance = 6f; // User-specified recoil distance
     public float recoilDuration = 0.5f; // How long recoil takes
 
     [Header("Charge Visual Effects")]
@@ -32,6 +32,7 @@ public class GoatEnemy : BaseEnemy
     {
         base.Start();
         cost = 40;
+        flashDuration = chargeWindUpTime;
     }
     protected override void PerformAttack()
     {
@@ -58,7 +59,7 @@ public class GoatEnemy : BaseEnemy
         // Save movement distance before warning player of direction.
         Vector3 movement = transform.forward * chargeSpeed * Time.deltaTime;
         FlashWarning();
-        yield return new WaitForSeconds(chargeWindUpTime);
+        yield return new WaitForSeconds(chargeWindUpTime+0.5f);
 
         // Phase 2: Charge Forward
         isCharging = true;

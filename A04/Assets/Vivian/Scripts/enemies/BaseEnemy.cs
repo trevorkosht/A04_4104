@@ -165,6 +165,7 @@
 
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public abstract class BaseEnemy : MonoBehaviour
 {
@@ -194,7 +195,7 @@ public abstract class BaseEnemy : MonoBehaviour
     [Header("Warning System")]
     [SerializeField] GameObject flash;
     [SerializeField] GameObject flashBase;
-    public float flashDuration = 1f;   // Time flashing warning. 
+    public float flashDuration = .75f;   // Time flashing warning. 
     public float flashSpeed = 0.2f; // Time between flashes.
 
 
@@ -348,6 +349,24 @@ public abstract class BaseEnemy : MonoBehaviour
     private System.Collections.IEnumerator Flashing()
     {
         float timer = 0f;
+
+        // Get NavMeshAgent reference
+        Vector3 originalDirection = agent.transform.forward;
+
+        if (agent != null)
+        {
+            // Store original state
+            Vector3 originalVelocity = agent.velocity;
+
+            // Stop movement but keep agent enabled
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+
+            // Lock rotation by preventing agent from rotating
+            agent.updateRotation = false;
+            agent.transform.forward = originalDirection;
+        }
+
 
         // Show indicator.
         flash.SetActive(true);
