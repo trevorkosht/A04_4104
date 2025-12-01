@@ -162,6 +162,8 @@ GameObject:
   - component: {fileID: 5348058889640768045}
   - component: {fileID: 8745218379658017180}
   - component: {fileID: 4513228061236352604}
+  - component: {fileID: 1611880962247365921}
+  - component: {fileID: 5866419607522771690}
   m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
@@ -286,6 +288,46 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: ebc985822c5dded4fa41aa3916504d7a, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &1611880962247365921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480904548796463436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 12, y: 0.5, z: 0}
+  m_EndPoint: {x: 13, y: 0.5, z: 0}
+  m_Width: 6
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 1
+  m_Area: 0
+--- !u!114 &5866419607522771690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480904548796463436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: -12, y: 0.5, z: -10}
+  m_EndPoint: {x: -13, y: 0.5, z: -10}
+  m_Width: 6
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 1
+  m_Area: 0
 --- !u!1 &673337849995768409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1808,7 @@ GameObject:
   - component: {fileID: 2843570201932709202}
   - component: {fileID: 1826761021398729677}
   - component: {fileID: 6584006198297568676}
+  - component: {fileID: 1698882712373143839}
   m_Layer: 7
   m_Name: Floor (1)
   m_TagString: Untagged
@@ -1890,6 +1933,26 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: a436455ca45465045baa5a29d76e6ad7, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &1698882712373143839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796590073187625739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0.5, z: -9.5}
+  m_EndPoint: {x: 0, y: 0.5, z: -10.5}
+  m_Width: 5
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 1
+  m_Area: 0
 --- !u!1 &6443691275748088265
 GameObject:
   m_ObjectHideFlags: 0

@@ -203,20 +203,20 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void Awake()
     {
-        // Auto-assign player if not already set
         if (player == null)
         {
-            GameObject playerObj = GameObject.Find("Player");
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
             {
                 player = playerObj.transform;
             }
             else
             {
-                Debug.LogError("No GameObject named 'Player' found in the scene!");
+                Debug.LogError("Player not found! Make sure your player GameObject is tagged 'Player'.");
             }
         }
     }
+
 
     protected virtual void Start()
     {

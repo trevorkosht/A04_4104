@@ -401,6 +401,8 @@ GameObject:
   - component: {fileID: 7722854869453653449}
   - component: {fileID: 6407009551290929848}
   - component: {fileID: 8865630946191762491}
+  - component: {fileID: 7230540264582208482}
+  - component: {fileID: 5909389990824461774}
   m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
@@ -525,6 +527,46 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 0e003466245196445be758a31f625df0, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &7230540264582208482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258182361151975025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0.5, z: -9.5}
+  m_EndPoint: {x: 0, y: 0.5, z: -10.5}
+  m_Width: 13
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
+--- !u!114 &5909389990824461774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258182361151975025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0.5, z: 9.5}
+  m_EndPoint: {x: 0, y: 0.5, z: 10.5}
+  m_Width: 13
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1 &2353377783262876514
 GameObject:
   m_ObjectHideFlags: 0
