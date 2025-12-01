@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 6570119430601980746}
   - component: {fileID: 8626861492482509799}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Width: 13
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!114 &8626861492482509799
 MonoBehaviour:
@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Width: 13
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &2103462994472970219
 GameObject:
@@ -855,7 +855,7 @@ GameObject:
   - component: {fileID: 5189106581770453599}
   - component: {fileID: 1816968025764250477}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Width: 13
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!114 &1816968025764250477
 MonoBehaviour:
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_Width: 13
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &4634913082270566403
 GameObject:

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Width: 13
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &1415805583378736204
 GameObject:
@@ -982,7 +982,7 @@ MonoBehaviour:
   m_Width: 13
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &8103070953638949097
 GameObject:

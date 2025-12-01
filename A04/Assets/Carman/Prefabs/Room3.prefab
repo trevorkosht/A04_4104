@@ -303,7 +303,7 @@ MonoBehaviour:
   m_AgentTypeID: 0
   m_StartPoint: {x: 12, y: 0.5, z: 0}
   m_EndPoint: {x: 13, y: 0.5, z: 0}
-  m_Width: 6
+  m_Width: 5
   m_CostModifier: -1
   m_Bidirectional: 1
   m_AutoUpdatePosition: 1
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_AgentTypeID: 0
   m_StartPoint: {x: -12, y: 0.5, z: -10}
   m_EndPoint: {x: -13, y: 0.5, z: -10}
-  m_Width: 6
+  m_Width: 5
   m_CostModifier: -1
   m_Bidirectional: 1
   m_AutoUpdatePosition: 1
@@ -355,8 +355,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673337849995768409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17, y: 3, z: 36.5}
-  m_LocalScale: {x: 1, y: 6, z: 7}
+  m_LocalPosition: {x: 17, y: 3, z: 36.25}
+  m_LocalScale: {x: 1, y: 6, z: 7.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4353386094555422524}
@@ -1100,8 +1100,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3796010161037568332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 3, z: 8.5}
-  m_LocalScale: {x: 1, y: 6, z: 17}
+  m_LocalPosition: {x: -7, y: 3, z: 8.75}
+  m_LocalScale: {x: 1, y: 6, z: 17.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4353386094555422524}
@@ -1205,8 +1205,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3996082595959049747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 3, z: 31.5}
-  m_LocalScale: {x: 1, y: 6, z: 17}
+  m_LocalPosition: {x: -7, y: 3, z: 31.25}
+  m_LocalScale: {x: 1, y: 6, z: 17.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4353386094555422524}
@@ -1670,8 +1670,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912938690709036962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17, y: 3, z: 23.5}
-  m_LocalScale: {x: 1, y: 6, z: 7}
+  m_LocalPosition: {x: 17, y: 3, z: 23.75}
+  m_LocalScale: {x: 1, y: 6, z: 7.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4353386094555422524}
@@ -1809,6 +1809,7 @@ GameObject:
   - component: {fileID: 1826761021398729677}
   - component: {fileID: 6584006198297568676}
   - component: {fileID: 1698882712373143839}
+  - component: {fileID: 3811566849969684787}
   m_Layer: 7
   m_Name: Floor (1)
   m_TagString: Untagged
@@ -1948,6 +1949,26 @@ MonoBehaviour:
   m_AgentTypeID: 0
   m_StartPoint: {x: 0, y: 0.5, z: -9.5}
   m_EndPoint: {x: 0, y: 0.5, z: -10.5}
+  m_Width: 5
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 1
+  m_Area: 0
+--- !u!114 &3811566849969684787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796590073187625739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 7, y: 0.5, z: -0.5}
+  m_EndPoint: {x: 8, y: 0.5, z: -0.5}
   m_Width: 5
   m_CostModifier: -1
   m_Bidirectional: 1
