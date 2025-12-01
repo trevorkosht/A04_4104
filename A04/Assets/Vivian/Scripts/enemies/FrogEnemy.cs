@@ -10,13 +10,16 @@ public class FrogEnemy : BaseEnemy
     public Transform firePoint;
     private bool isJumping = false;
     private Vector3 jumpStartPosition;
-    public static int cost = 40;
-
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 0.5f;
     [SerializeField] private float jumpDuration = 0.5f; // Total jump time
 
+    protected override void Start()
+    {
+        base.Start();
+        cost = 40;
+    }
     private System.Collections.IEnumerator Fire()
     {
         Debug.Log("Launched Bubble");

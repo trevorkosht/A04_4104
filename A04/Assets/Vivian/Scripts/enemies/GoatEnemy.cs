@@ -5,7 +5,6 @@ using static BaseEnemy;
 
 public class GoatEnemy : BaseEnemy
 {
-    public static int cost = 40;
 
     [Header("Charge Attack Settings")]
     public float chargeSpeed = 10f;
@@ -29,6 +28,11 @@ public class GoatEnemy : BaseEnemy
     private bool hasHitPlayerThisAttack = false;
     private bool canAttack = true;
 
+    protected override void Start()
+    {
+        base.Start();
+        cost = 40;
+    }
     protected override void PerformAttack()
     {
         if (!canAttack || isCharging) return;

@@ -185,6 +185,7 @@ public abstract class BaseEnemy : MonoBehaviour
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
+    public int cost;
 
     [Header("Sticker System")]
     [SerializeField] StickerData myStickerData;
@@ -199,6 +200,23 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected EnemyState currentState;
     protected float lastAttackTime;
+
+    protected virtual void Awake()
+    {
+        // Auto-assign player if not already set
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.Find("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogError("No GameObject named 'Player' found in the scene!");
+            }
+        }
+    }
 
     protected virtual void Start()
     {

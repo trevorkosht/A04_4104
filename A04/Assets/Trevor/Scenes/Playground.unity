@@ -2308,6 +2308,8 @@ MonoBehaviour:
   - {fileID: 6300164699608053594, guid: ad62224be84750245b5035724ac42219, type: 3}
   - {fileID: 9221530197787153229, guid: ee53d38978578f8479de695fd112d682, type: 3}
   - {fileID: 3763406077107083097, guid: 7bcabb27ffc181443be16f28b62d8d70, type: 3}
+  - {fileID: 3893080781633776471, guid: 243e37eaf19ccba438da5d4c6b92ec7c, type: 3}
+  - {fileID: 8458577131138490664, guid: cd013ace9e1c57747bd98969fbcc2dbd, type: 3}
   endPrefabs:
   - {fileID: 3042830859844724423, guid: 029fd4800db300c4296912a7deef5fa4, type: 3}
   initialSectionTags:
