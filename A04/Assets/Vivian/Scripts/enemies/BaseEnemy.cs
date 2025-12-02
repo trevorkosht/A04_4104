@@ -333,7 +333,7 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             GameObject drop = Instantiate(genericStickerPrefab, transform.position + Vector3.up, Quaternion.identity);
             StickerPickup pickupScript = drop.GetComponent<StickerPickup>();
-            if (pickupScript != null)
+            if (pickupScript != null && !CollectionManager.Instance.collectedStickerIds.Contains(myStickerData.id))
             {
                 pickupScript.Initialize(myStickerData);
             }

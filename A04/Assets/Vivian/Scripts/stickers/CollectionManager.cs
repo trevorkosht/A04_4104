@@ -9,7 +9,7 @@ public class CollectionManager : MonoBehaviour
     [Header("Data")]
     public List<StickerData> allStickers; // The full list of possible stickers
 
-    private HashSet<string> collectedStickerIds = new HashSet<string>();
+    public HashSet<string> collectedStickerIds = new HashSet<string>();
 
     public event Action OnStickerAdded;
 
