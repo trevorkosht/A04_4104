@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5810785115394522326}
   - component: {fileID: 9221530197787153229}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Tunnel1
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 8340537843712802634}
   - component: {fileID: 6543556204730770450}
   - component: {fileID: 440504181248943891}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 4251056377630757741}
   - component: {fileID: 5214614592487597567}
   - component: {fileID: 6968681878881121567}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 8865630946191762491}
   - component: {fileID: 7230540264582208482}
   - component: {fileID: 5909389990824461774}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Floor
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 473218061131530523}
   - component: {fileID: 191716510773122127}
   - component: {fileID: 1905487986189288770}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ceiling
   m_TagString: Environment
   m_Icon: {fileID: 0}
