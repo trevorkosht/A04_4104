@@ -168,6 +168,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &318621886709766305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2171681657534012736}
+  m_Layer: 0
+  m_Name: Floor/Wall Art
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2171681657534012736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318621886709766305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2172893891236577957}
+  - {fileID: 2768730742564440500}
+  - {fileID: 3675588229697080525}
+  - {fileID: 213619998394760622}
+  - {fileID: 1867555422426761658}
+  - {fileID: 3886503368445530309}
+  - {fileID: 7493499992455119241}
+  - {fileID: 6956980438659267737}
+  - {fileID: 6041812913391663150}
+  - {fileID: 8732542201890157145}
+  - {fileID: 5384601097023097466}
+  - {fileID: 8677431112153765629}
+  - {fileID: 6668180462306320055}
+  - {fileID: 3816491934654567073}
+  - {fileID: 1307784490207417346}
+  - {fileID: 3223777259852950826}
+  - {fileID: 6802800234335832796}
+  - {fileID: 6910269278008101817}
+  - {fileID: 3303977689607668789}
   - {fileID: 27087370410786232}
   - {fileID: 2867142231545780401}
   - {fileID: 8550465109224406933}
@@ -175,6 +222,7 @@ SpriteRenderer:
   - {fileID: 1833262974169014839}
   - {fileID: 8449786440598369659}
   - {fileID: 2675056470740037974}
+  - {fileID: 3230865513527631996}
   - {fileID: 7984389359848068941}
   - {fileID: 5553976641338453809}
   - {fileID: 171976534901001325}
