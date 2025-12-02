@@ -164,6 +164,7 @@
 //}
 
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -192,6 +193,7 @@ public abstract class BaseEnemy : MonoBehaviour
     [Header("Sticker System")]
     [SerializeField] StickerData myStickerData;
     [SerializeField] GameObject genericStickerPrefab;
+    [SerializeField] GameObject noDrop;
 
     [Header("Warning System")]
     [SerializeField] GameObject flash;
@@ -202,6 +204,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected EnemyState currentState;
     protected float lastAttackTime;
+    protected float despawnTime = 1.0f;
 
     protected virtual void Awake()
     {
@@ -358,12 +361,22 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         if (genericStickerPrefab != null)
         {
-            GameObject drop = Instantiate(genericStickerPrefab, transform.position + Vector3.up, Quaternion.identity);
-            StickerPickup pickupScript = drop.GetComponent<StickerPickup>();
-            if (pickupScript != null && !CollectionManager.Instance.collectedStickerIds.Contains(myStickerData.id))
+            System.Random rnd = new System.Random();
+            if (rnd.Next(0, 10) < myStickerData.rarity  && !CollectionManager.Instance.collectedStickerIds.Contains(myStickerData.id))
             {
-                pickupScript.Initialize(myStickerData);
+                GameObject drop = Instantiate(genericStickerPrefab, transform.position + Vector3.up, Quaternion.identity);
+                StickerPickup pickupScript = drop.GetComponent<StickerPickup>();
+
+                if(pickupScript != null)
+                {
+                    pickupScript.Initialize(myStickerData);
+                    return;
+                }
+
             }
+
+            GameObject smoke = Instantiate(noDrop, transform.position + Vector3.up, Quaternion.identity);
+            Destroy(smoke, despawnTime);
         }
     }
 
