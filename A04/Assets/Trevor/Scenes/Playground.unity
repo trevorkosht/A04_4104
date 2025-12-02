@@ -510,6 +510,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
   m_PrefabInstance: {fileID: 60889539378096550}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &564145340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564145329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c061296bb5b55484588cfcbc4d41a914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  collectKey: 102
 --- !u!1 &564868736
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,6 +2376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1354954358}
   - component: {fileID: 1354954359}
+  - component: {fileID: 1354954360}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -2426,6 +2444,27 @@ MonoBehaviour:
   - Tag: corridor
     MinAmount: 0
     MaxAmount: 2
+--- !u!114 &1354954360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354954356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91b02a36404b744b96eb7c7391a5826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickerPrefab: {fileID: 6307270615433740002, guid: ecb3f7d0c52282344a5c163762e6fd9e, type: 3}
+  totalStickersToSpawn: 10
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  wallOffset: 0.02
+  obstacleCheckRadius: 0.4
+  stickerScale: 0.02
+  showDebugLines: 1
 --- !u!1 &1504916889
 GameObject:
   m_ObjectHideFlags: 0
@@ -3686,6 +3725,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c5b37c55a70edb4e9a9f93185ac5b86, type: 2}
   - {fileID: 11400000, guid: 43947204cd09c3b4291d87a191c0dcaa, type: 2}
   - {fileID: 11400000, guid: 4555b4f0793ddb54f844678e8566bbec, type: 2}
+  - {fileID: 11400000, guid: f63e86944b6dfb44ebfd374e4c9d96ce, type: 2}
 --- !u!4 &2101644204
 Transform:
   m_ObjectHideFlags: 0
@@ -3776,6 +3816,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       insertIndex: -1
       addedObject: {fileID: 564145334}
+    - targetCorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 564145340}
   m_SourcePrefab: {fileID: 100100000, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
 --- !u!114 &135756641613574975 stripped
 MonoBehaviour:

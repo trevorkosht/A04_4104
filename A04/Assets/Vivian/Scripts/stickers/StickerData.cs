@@ -1,19 +1,29 @@
 using UnityEngine;
 
+public enum StickerSource
+{
+    EnemyDrop,
+    WorldSpawn,
+    BossReward
+}
+
 [CreateAssetMenu(fileName = "NewSticker", menuName = "Stickers/Sticker Data")]
 public class StickerData : ScriptableObject
 {
     [Header("Identity")]
-    public string id; // Unique ID (e.g., "enemy_001")
-    public string enemyName;
+    public string id;
+    public string enemyName; // Acts as "Display Name"
+
+    [Header("Categorization")]
+    public StickerSource source; // <--- NEW: Tells the spawner what is allowed
 
     [Header("Visuals")]
-    public Sprite unlockedSprite; // The colorful art
-    public Sprite lockedSprite;   // The silhouette or question mark (optional)
+    public Sprite unlockedSprite;
+    public Sprite lockedSprite;
 
     [Header("Stats")]
-    public int rarity;  // Scale 0-9 (10-100%)
+    public int rarity;
 
-    [Header("Lore (Optional)")]
+    [Header("Lore")]
     [TextArea] public string description;
 }
