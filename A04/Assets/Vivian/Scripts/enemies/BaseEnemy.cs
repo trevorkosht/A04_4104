@@ -374,9 +374,9 @@ public abstract class BaseEnemy : MonoBehaviour
                 }
 
             }
- 
-            Instantiate(noDrop, transform.position + Vector3.up, Quaternion.identity);
-            Destroy(noDrop, despawnTime);
+
+            GameObject smoke = Instantiate(noDrop, transform.position + Vector3.up, Quaternion.identity);
+            Destroy(smoke, despawnTime);
         }
     }
 
