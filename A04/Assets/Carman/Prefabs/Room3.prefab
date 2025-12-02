@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4513228061236352604}
   - component: {fileID: 1611880962247365921}
   - component: {fileID: 5866419607522771690}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Floor
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 2534860022911508356}
   - component: {fileID: 5276192651151382692}
   - component: {fileID: 5479203558231161377}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftWall (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 7570870594142217752}
   - component: {fileID: 4999236581766145184}
   - component: {fileID: 8983424733483764825}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (9)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 1896129276081437623}
   - component: {fileID: 7636271182564179146}
   - component: {fileID: 1458918593642700616}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftWall (2)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 2449771746299659436}
   - component: {fileID: 5459242413834335356}
   - component: {fileID: 8162866884604159388}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (2)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 9215828002445469859}
   - component: {fileID: 6199253782244721742}
   - component: {fileID: 5024563964475713010}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ceiling (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 7009478536379657888}
   - component: {fileID: 4068333846456813165}
   - component: {fileID: 6262399619745184077}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1231,7 +1231,7 @@ GameObject:
   - component: {fileID: 2398888669158418356}
   - component: {fileID: 8342148975368901861}
   - component: {fileID: 8335027384529556244}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 4476721606951111142}
   - component: {fileID: 1699916465081204716}
   - component: {fileID: 2656682110406327714}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1441,7 +1441,7 @@ GameObject:
   - component: {fileID: 8309351942751459535}
   - component: {fileID: 8056924466814014201}
   - component: {fileID: 7013084510949257531}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (3)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1592,7 +1592,7 @@ GameObject:
   - component: {fileID: 7961871134029121564}
   - component: {fileID: 3523351336992135280}
   - component: {fileID: 2666640866904203282}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (4)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1696,7 +1696,7 @@ GameObject:
   - component: {fileID: 5413015378105517593}
   - component: {fileID: 6300164699608053594}
   - component: {fileID: 9169975880004311372}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Room3
   m_TagString: Environment
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1803,7 +1803,7 @@ GameObject:
   - component: {fileID: 3413035903652490955}
   - component: {fileID: 6708387600522993471}
   - component: {fileID: 8850805098911290533}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1958,7 +1958,7 @@ GameObject:
   - component: {fileID: 6584006198297568676}
   - component: {fileID: 1698882712373143839}
   - component: {fileID: 3811566849969684787}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Floor (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -2134,7 +2134,7 @@ GameObject:
   - component: {fileID: 7898209633445029291}
   - component: {fileID: 1237684913575659131}
   - component: {fileID: 3551989596853954634}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ceiling
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -2292,7 +2292,7 @@ GameObject:
   - component: {fileID: 2736012702974710544}
   - component: {fileID: 2408330663125822733}
   - component: {fileID: 8172231138734878658}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (5)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -2431,7 +2431,7 @@ GameObject:
   - component: {fileID: 4479028738718254685}
   - component: {fileID: 1110229184134317082}
   - component: {fileID: 8101252754924305803}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (8)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -2627,7 +2627,7 @@ GameObject:
   - component: {fileID: 3154423273357059253}
   - component: {fileID: 1140629787735648109}
   - component: {fileID: 4285003664663799414}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (6)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -2760,7 +2760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4353386094555422524}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2843,7 +2843,7 @@ GameObject:
   - component: {fileID: 4647148895748962717}
   - component: {fileID: 2198989241140138231}
   - component: {fileID: 5235529968714724765}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (7)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -7926,7 +7926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 18909760996641151, guid: c863f656782d099438e2f1ba789301c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.43
+      value: 12.39
       objectReference: {fileID: 0}
     - target: {fileID: 18909760996641151, guid: c863f656782d099438e2f1ba789301c8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18032,7 +18032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 18909760996641151, guid: c863f656782d099438e2f1ba789301c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.39
+      value: 12.364
       objectReference: {fileID: 0}
     - target: {fileID: 18909760996641151, guid: c863f656782d099438e2f1ba789301c8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18040,7 +18040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 18909760996641151, guid: c863f656782d099438e2f1ba789301c8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.99
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 18909760996641151, guid: c863f656782d099438e2f1ba789301c8, type: 3}
       propertyPath: m_LocalRotation.w

@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 2560342618243548839}
   - component: {fileID: 261091014856438423}
   - component: {fileID: 6040173576838430506}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 94038823442776438}
   - component: {fileID: 8374799723442202312}
   - component: {fileID: 6442231489387959174}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ceiling
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 1243728689980012694}
   - component: {fileID: 1853301642245848274}
   - component: {fileID: 1368861770193638856}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Floor
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 26831136359173457}
   - component: {fileID: 8458132584236629737}
   - component: {fileID: 9212980315682184871}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1122,7 +1122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2766498624681598027}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1209,7 +1209,7 @@ GameObject:
   - component: {fileID: 5958912635492809958}
   - component: {fileID: 3903289178689183274}
   - component: {fileID: 5159575733641051695}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall (2)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1482,7 +1482,7 @@ GameObject:
   - component: {fileID: 5782472508510484153}
   - component: {fileID: 880663195867038976}
   - component: {fileID: 74580628047061368}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: BackWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1669,7 +1669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8780687082097236624}
   - component: {fileID: -2760358700300841816}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: TutorialRoom
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1726,7 +1726,7 @@ GameObject:
   - component: {fileID: 2652069869853585039}
   - component: {fileID: 2735923681763139382}
   - component: {fileID: 7683846900583878173}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1831,7 +1831,7 @@ GameObject:
   - component: {fileID: 1828035302154889996}
   - component: {fileID: 5220194101285769837}
   - component: {fileID: 7928579433124153447}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontWall
   m_TagString: Environment
   m_Icon: {fileID: 0}

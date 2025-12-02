@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3793738421241739183}
   - component: {fileID: 3042830859844724423}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 2733968163972911094}
   - component: {fileID: 1100027296653812351}
   - component: {fileID: 2997204927148865146}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Environment
   m_Icon: {fileID: 0}

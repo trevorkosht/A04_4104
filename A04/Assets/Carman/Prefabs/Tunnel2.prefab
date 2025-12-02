@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9130717680448545461}
   - component: {fileID: 505117242077435087}
   - component: {fileID: 5836156070763920514}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Floor (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 3839811771362199587}
   - component: {fileID: 2087645035536155138}
   - component: {fileID: 4830945505966189618}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 5622595765362411773}
   - component: {fileID: 7561017589107039846}
   - component: {fileID: 7852960217461563902}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ceiling
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 8854352394600004781}
   - component: {fileID: 1856200520873549679}
   - component: {fileID: 4879615764634457390}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightWall (2)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -893,7 +893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7162668774809265499}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: View
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -933,7 +933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668191379390176837}
   - component: {fileID: 3763406077107083097}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Tunnel2
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 8118502160219193250}
   - component: {fileID: 7845484137160048319}
   - component: {fileID: 4170581054577625816}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Floor
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1147,7 +1147,7 @@ GameObject:
   - component: {fileID: 5203730799127333054}
   - component: {fileID: 547080039272504121}
   - component: {fileID: 6387393510642616022}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightWall (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1305,7 +1305,7 @@ GameObject:
   - component: {fileID: 2501453723133930822}
   - component: {fileID: 7551812549375145240}
   - component: {fileID: 8533268039210983920}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -1410,7 +1410,7 @@ GameObject:
   - component: {fileID: 4513294463744678937}
   - component: {fileID: 4940991291676580445}
   - component: {fileID: 1589716552640396116}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ceiling (1)
   m_TagString: Environment
   m_Icon: {fileID: 0}
