@@ -2463,7 +2463,7 @@ MonoBehaviour:
     m_Bits: 1
   wallOffset: 0.02
   obstacleCheckRadius: 0.4
-  stickerScale: 0.02
+  stickerScale: 1
   showDebugLines: 1
 --- !u!1 &1504916889
 GameObject:
@@ -3726,6 +3726,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43947204cd09c3b4291d87a191c0dcaa, type: 2}
   - {fileID: 11400000, guid: 4555b4f0793ddb54f844678e8566bbec, type: 2}
   - {fileID: 11400000, guid: f63e86944b6dfb44ebfd374e4c9d96ce, type: 2}
+  - {fileID: 11400000, guid: 993a147dde1675d41abf2e0189564eaa, type: 2}
+  - {fileID: 11400000, guid: 21e0d07d2039cb1498591431a7501631, type: 2}
 --- !u!4 &2101644204
 Transform:
   m_ObjectHideFlags: 0
