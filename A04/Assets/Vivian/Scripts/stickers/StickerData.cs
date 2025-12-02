@@ -11,6 +11,9 @@ public class StickerData : ScriptableObject
     public Sprite unlockedSprite; // The colorful art
     public Sprite lockedSprite;   // The silhouette or question mark (optional)
 
+    [Header("Stats")]
+    public int rarity;  // Scale 0-9 (10-100%)
+
     [Header("Lore (Optional)")]
     [TextArea] public string description;
 }
