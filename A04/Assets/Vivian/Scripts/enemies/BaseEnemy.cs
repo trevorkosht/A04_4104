@@ -163,6 +163,7 @@
 //    }
 //}
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -261,6 +262,32 @@ public abstract class BaseEnemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         healthSystem.TakeDamage(amount);
+    }
+
+    public void ApplyBurn(int damagePerTick, float duration, float tickRate)
+    {
+        StartCoroutine(BurnRoutine(damagePerTick, duration, tickRate));
+    }
+
+    private IEnumerator BurnRoutine(int damage, float duration, float rate)
+    {
+        // Optional: Spawn a visual fire effect on the enemy here
+        // GameObject fireVFX = Instantiate(firePrefab, transform);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            yield return new WaitForSeconds(rate);
+
+            // Deal the DOT damage
+            TakeDamage(damage);
+            Debug.Log($"{name} is burning! (-{damage} HP)");
+
+            elapsedTime += rate;
+        }
+
+        // Optional: Destroy(fireVFX);
     }
 
     private void OnHealthDepleted()

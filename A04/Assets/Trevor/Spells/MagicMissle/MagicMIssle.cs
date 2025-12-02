@@ -1,60 +1,66 @@
 using UnityEngine;
+using System.Collections;
 
-public class MagicMissile : MonoBehaviour
+public class MagicMissile : SpellController
 {
-    [Header("Stats")]
-    public float speed = 15f;
-    public float rotateSpeed = 5f;
-    public int manaRestoredOnHit = 5;
-    public int damage = 10;
+    [Header("Movement")]
+    public float speed = 5f; // Set this low in Inspector for "Slow" feel
+    public float rotateSpeed = 2f; // Lower rotation = wider, smoother turns
+    public float homingDelay = 0.5f; // Time to fly straight before turning
 
-    [Header("References")]
+    [Header("Effects")]
+    public int manaRestored = 5;
     [SerializeField] private GameObject impactEffect;
 
     private Transform target;
-    private float lifetime = 4f;
+    private bool canHome = false; // Controls when homing starts
 
-    void Start()
+    public override void Initialize(GridSpellSO data)
     {
+        base.Initialize(data);
         FindNearestTarget();
-        Destroy(gameObject, lifetime);
+
+        // Start the delay timer
+        StartCoroutine(EnableHomingRoutine());
     }
 
     void Update()
     {
-        MoveForward();
-        if (target != null) HomingBehavior();
+        // Always move forward
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        // Only rotate if delay is over and we have a target
+        if (canHome && target != null)
+        {
+            HomingBehavior();
+        }
     }
 
-    void MoveForward()
+    IEnumerator EnableHomingRoutine()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        yield return new WaitForSeconds(homingDelay);
+        canHome = true;
     }
 
     void HomingBehavior()
     {
-        // Determine which direction to rotate towards
         Vector3 targetDirection = target.position - transform.position;
-
-        // The step size is equal to speed times frame time.
         float singleStep = rotateSpeed * Time.deltaTime;
 
-        // Rotate the forward vector towards the target direction by one step
+        // RotateTowards makes it turn smoothly rather than snapping
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
-
-        // Calculate a rotation a step closer to the target and applies rotation to this object
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
     void FindNearestTarget()
     {
-        // Simple sphere check to find enemies
         Collider[] hits = Physics.OverlapSphere(transform.position, 20f);
         float closestDist = Mathf.Infinity;
 
         foreach (var hit in hits)
         {
-            if (hit.GetComponent<BaseEnemy>()) // Check for your BaseEnemy script
+            // Note: GetComponentInParent is expensive, but okay for single-cast events
+            if (hit.GetComponentInParent<BaseEnemy>())
             {
                 float dist = Vector3.Distance(transform.position, hit.transform.position);
                 if (dist < closestDist)
@@ -68,19 +74,21 @@ public class MagicMissile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // 1. Check Enemy
         BaseEnemy enemy = other.GetComponentInParent<BaseEnemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
-
-            // RESTORE MANA
-            if (PlayerSpellSystem.Instance != null)
-                PlayerSpellSystem.Instance.RestoreMana(manaRestoredOnHit);
+            enemy.TakeDamage(spellData.power);
+            if (PlayerSpellSystem.Instance != null) PlayerSpellSystem.Instance.RestoreMana(manaRestored);
 
             SpawnEffect();
             Destroy(gameObject);
+            return;
         }
-        else if (other.CompareTag("Environment"))
+
+        // 2. Check Environment
+        // This naturally ignores other missiles unless they are tagged "Environment"
+        if (other.CompareTag("Environment"))
         {
             SpawnEffect();
             Destroy(gameObject);

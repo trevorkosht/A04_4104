@@ -872,7 +872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 1891122530372829838, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
-  - {fileID: 2517804549615497469, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
+  - {fileID: 7490244329939007752, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
   - {fileID: 4298010662441348630, guid: aae75e936a39715498256f608aaca776, type: 3}
   minRoomCost: 50
   maxRoomCost: 100

@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class Fireball : SpellController
 {
     public float speed = 10f;
-    public int damage = 10; // Amount of damage to deal
-    private float lifetime = 3f;
     [SerializeField] private GameObject collisionEffect;
-
-    void Start()
-    {
-        Destroy(gameObject, lifetime);
-    }
 
     void Update()
     {
@@ -19,18 +12,23 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // 1. Check for Enemy
         BaseEnemy enemy = other.GetComponentInParent<BaseEnemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            // 1. Deal Initial Impact Damage
+            enemy.TakeDamage(spellData.power);
+
+            // 2. Apply Burn Effect
+            // We pass the DOT stats from the Scriptable Object
+            if (spellData.dotDamage > 0 && spellData.duration > 0)
+            {
+                enemy.ApplyBurn(spellData.dotDamage, spellData.duration, spellData.tickRate);
+            }
+
             SpawnEffect();
             Destroy(gameObject);
-            return; // Stop here so we don't hit environment too
         }
-
-        // 2. Check for Environment (Walls/Floors)
-        if (other.CompareTag("Environment"))
+        else if (other.CompareTag("Environment"))
         {
             SpawnEffect();
             Destroy(gameObject);
@@ -39,9 +37,6 @@ public class Fireball : MonoBehaviour
 
     void SpawnEffect()
     {
-        if (collisionEffect != null)
-        {
-            Instantiate(collisionEffect, transform.position, transform.rotation);
-        }
+        if (collisionEffect) Instantiate(collisionEffect, transform.position, transform.rotation);
     }
 }

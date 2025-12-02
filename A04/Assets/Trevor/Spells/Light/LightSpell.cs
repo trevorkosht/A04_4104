@@ -1,28 +1,21 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public class LightSpell : MonoBehaviour
+// THE FALLING PROJECTILE
+public class LightSpell : SpellController
 {
-    public float speed = 10f; // Speed of falling
-
-    // Assign your Healing Circle Prefab here in the Inspector
+    public float speed = 10f;
     [SerializeField] private GameObject healingZonePrefab;
 
     void Update()
     {
-        // Move the projectile down
         transform.Translate(Vector3.down * speed * Time.deltaTime);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // We only care if we hit the ground (Environment)
-        if (other.CompareTag("Environment"))
-        {
-            SpawnHealingZone();
-            Destroy(gameObject); // Destroy the falling projectile
-        }
-        // Optional: If we hit the player directly, spawn the circle at their feet
-        else if (other.CompareTag("Player"))
+        if (other.CompareTag("Environment") || other.CompareTag("Player"))
         {
             SpawnHealingZone();
             Destroy(gameObject);
@@ -33,13 +26,14 @@ public class LightSpell : MonoBehaviour
     {
         if (healingZonePrefab != null)
         {
-            // Spawn the circle exactly where the projectile hit
-            // Quaternion.identity means "no rotation" (flat on ground)
-            Instantiate(healingZonePrefab, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogError("LightSpell: No Healing Zone Prefab assigned!");
+            GameObject zoneObj = Instantiate(healingZonePrefab, transform.position, Quaternion.identity);
+
+            // PASS THE SO DATA TO THE NEW OBJECT
+            SpellController zoneScript = zoneObj.GetComponent<SpellController>();
+            if (zoneScript != null)
+            {
+                zoneScript.Initialize(spellData);
+            }
         }
     }
 }

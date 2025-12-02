@@ -1,47 +1,36 @@
-using UnityEngine;
+// THE HEALING ZONE ITSELF
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class HealingZone : MonoBehaviour
+public class HealingZone : SpellController
 {
-    [Header("Settings")]
-    public int healAmountPerTick = 10;
-    public float tickInterval = 1.0f; // Heal every 1 second
-    public float duration = 5.0f;     // How long the circle lasts
-
     private List<PlayerHealth> playersInZone = new List<PlayerHealth>();
 
-    void Start()
+    public override void Initialize(GridSpellSO data)
     {
-        // Destroy the circle automatically after 'duration' seconds
-        Destroy(gameObject, duration);
-
-        // Start the healing loop
-        StartCoroutine(HealLogic());
+        base.Initialize(data);
+        float interval = (data.tickRate > 0) ? data.tickRate : 1.0f;
+        StartCoroutine(HealLogic(interval));
     }
 
-    IEnumerator HealLogic()
+    IEnumerator HealLogic(float interval)
     {
         while (true)
         {
-            // Heal everyone currently in the list
-            // We loop backwards to safely remove null players if they disconnect/die
             for (int i = playersInZone.Count - 1; i >= 0; i--)
             {
                 PlayerHealth player = playersInZone[i];
-
                 if (player != null)
                 {
-                    player.Heal(healAmountPerTick);
-                    Debug.Log($"[HealingZone] Healed {player.name} for {healAmountPerTick}");
+                    player.Heal(spellData.power); // Uses "Power" as Heal Amount
                 }
                 else
                 {
                     playersInZone.RemoveAt(i);
                 }
             }
-
-            yield return new WaitForSeconds(tickInterval);
+            yield return new WaitForSeconds(interval);
         }
     }
 
@@ -50,11 +39,7 @@ public class HealingZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerHealth health = other.GetComponent<PlayerHealth>();
-            if (health != null && !playersInZone.Contains(health))
-            {
-                playersInZone.Add(health);
-                Debug.Log($"[HealingZone] Player entered: {other.name}");
-            }
+            if (health != null && !playersInZone.Contains(health)) playersInZone.Add(health);
         }
     }
 
@@ -63,11 +48,7 @@ public class HealingZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerHealth health = other.GetComponent<PlayerHealth>();
-            if (health != null && playersInZone.Contains(health))
-            {
-                playersInZone.Remove(health);
-                Debug.Log($"[HealingZone] Player left: {other.name}");
-            }
+            if (health != null && playersInZone.Contains(health)) playersInZone.Remove(health);
         }
     }
 }
