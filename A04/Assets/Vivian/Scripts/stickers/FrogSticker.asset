@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: frog_sticker
   enemyName: Frog
+  source: 0
   unlockedSprite: {fileID: 3625043607559282579, guid: 63a372a2d556272459a8f325c4ef72b3, type: 3}
   lockedSprite: {fileID: 0}
-  rarity: 6
+  rarity: 7
   description: 

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: sticker_goat
   enemyName: Goat
+  source: 0
   unlockedSprite: {fileID: 7482667652216324306, guid: 02fc149b788826f48ad0b0100839b8d1, type: 3}
   lockedSprite: {fileID: 0}
-  rarity: 3
+  rarity: 9
   description: 

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: sticker_cat
   enemyName: Cat
+  source: 0
   unlockedSprite: {fileID: 2747690628134850419, guid: 685b52c70f5053f4687b938bbc451b68, type: 3}
   lockedSprite: {fileID: 0}
-  rarity: 4
+  rarity: 8
   description: 
