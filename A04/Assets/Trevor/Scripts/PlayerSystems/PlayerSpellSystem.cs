@@ -11,12 +11,15 @@ public class PlayerSpellSystem : MonoBehaviour
     public float maxMana = 100f;
     public float manaRegenRate = 5f;
 
-    // Dictionary to track cooldowns: Spell Name -> Time when it will be ready
+    // Dictionary to track cooldowns
     private Dictionary<GridSpellSO, float> activeCooldowns = new Dictionary<GridSpellSO, float>();
 
-    // Events for UI to listen to
-    public event Action<float, float> OnManaChanged; // Current, Max
+    // Events
+    public event Action<float, float> OnManaChanged;
     public event Action<GridSpellSO> OnCooldownStarted;
+
+    // NEW: Event for when a cast fails due to low mana
+    public event Action OnManaCheckFailed;
 
     void Awake()
     {
@@ -26,7 +29,6 @@ public class PlayerSpellSystem : MonoBehaviour
 
     void Update()
     {
-        // Mana Regen
         if (currentMana < maxMana)
         {
             currentMana += manaRegenRate * Time.deltaTime;
@@ -37,18 +39,25 @@ public class PlayerSpellSystem : MonoBehaviour
 
     public bool CanCast(GridSpellSO spell)
     {
-        if (currentMana < spell.manaCost) return false;
+        // Check Mana
+        if (currentMana < spell.manaCost)
+        {
+            // FIRE THE EVENT HERE
+            OnManaCheckFailed?.Invoke();
+            return false;
+        }
+
+        // Check Cooldown
         if (IsOnCooldown(spell)) return false;
+
         return true;
     }
 
     public void CastSpell(GridSpellSO spell)
     {
-        // Consume Mana
         currentMana -= spell.manaCost;
         OnManaChanged?.Invoke(currentMana, maxMana);
 
-        // Start Cooldown
         float readyTime = Time.time + spell.cooldownTime;
         if (activeCooldowns.ContainsKey(spell)) activeCooldowns[spell] = readyTime;
         else activeCooldowns.Add(spell, readyTime);
@@ -62,7 +71,6 @@ public class PlayerSpellSystem : MonoBehaviour
         return activeCooldowns[spell] > Time.time;
     }
 
-    // Used by UI to update the gray spiral
     public float GetCooldownProgress(GridSpellSO spell)
     {
         if (!activeCooldowns.ContainsKey(spell)) return 0f;
@@ -74,8 +82,6 @@ public class PlayerSpellSystem : MonoBehaviour
         return Mathf.Clamp01(remaining / totalDuration);
     }
 
-    // --- NEW FEATURES FOR SPELLS ---
-
     public void RestoreMana(int amount)
     {
         currentMana += amount;
@@ -85,7 +91,6 @@ public class PlayerSpellSystem : MonoBehaviour
 
     public void ReduceAllCooldowns(float seconds)
     {
-        // We need a temporary list to modify the dictionary keys
         List<GridSpellSO> keys = new List<GridSpellSO>(activeCooldowns.Keys);
         foreach (var key in keys)
         {
