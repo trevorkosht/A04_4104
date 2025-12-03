@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: MagicMissle
   m_EditorClassIdentifier: 
   spellName: MagicMissle
-  spellIcon: {fileID: 1775741643, guid: 660d1e97d5ba1d24484af05318cc45c4, type: 3}
+  spellIcon: {fileID: -907818795, guid: 660d1e97d5ba1d24484af05318cc45c4, type: 3}
   castEffect: {fileID: 7619026965321538285, guid: 51344019e02deb74bb6478fd46113081, type: 3}
   castStrategy: {fileID: 11400000, guid: 4b98096789fb14847a78f0b057f93ba7, type: 2}
   manaCost: 5
   cooldownTime: 4
   power: 10
+  dotDamage: 3
   duration: 3
   tickRate: 1
   quantity: 3
