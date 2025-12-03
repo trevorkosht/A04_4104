@@ -77,6 +77,10 @@ public class GoatEnemy : BaseEnemy
             // Check for player hit during charge
             CheckChargeHit();
 
+            // Stop early if we hit envir
+            if (!isCharging)
+                break;
+
             // Stop early if we hit max distance
             if (Vector3.Distance(transform.position, chargeStartPosition) >= attackRange * 2.5f)
                 break;
@@ -146,17 +150,12 @@ public class GoatEnemy : BaseEnemy
                     isCharging = false;
                 }
                 break;
+            } else if (hit.collider.CompareTag("Environment"))
+            {
+                isCharging = false;
+                break;
             }
         }
     }
 
-    // Handle collisions with walls/obstacles
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (isCharging && !collision.collider.CompareTag("Player"))
-        {
-            isCharging = false;
-            Debug.Log("Charge interrupted by environment");
-        }
-    }
 }
