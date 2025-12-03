@@ -58,7 +58,7 @@ MonoBehaviour:
   cost: 0
   myStickerData: {fileID: 11400000, guid: 7c5b37c55a70edb4e9a9f93185ac5b86, type: 2}
   genericStickerPrefab: {fileID: 5806895984661434272, guid: 5aa6b6e75f7ed254e944bec3976b1885, type: 3}
-  noDrop: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
+  deathVFX: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
   flash: {fileID: 5433663238152981145}
   flashBase: {fileID: 1292395680280836432}
   flashDuration: 1

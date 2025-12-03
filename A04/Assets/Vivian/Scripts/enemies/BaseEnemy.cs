@@ -1,168 +1,3 @@
-//using System;
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using UnityEngine.AI;
-
-//public abstract class BaseEnemy : MonoBehaviour
-//{
-//    public enum EnemyState
-//    {
-//        Idle,
-//        Chase,
-//        Attack,
-//        Death
-//    }
-
-//    [Header("References")]
-//    public NavMeshAgent agent;
-//    public Transform player;
-//    public EnemyHeath healthSystem;
-
-
-//    [Header("Settings")]
-//    public float detectionRange = 10f;
-//    public float attackRange = 2f;
-//    public float attackCooldown = 1.5f;
-
-//    // --- NEW STICKER SYSTEM ---
-//    [Header("Sticker System")]
-//    [SerializeField] StickerData myStickerData;       // Drag the specific Data (e.g. Goblin)
-//    [SerializeField] GameObject genericStickerPrefab; // Drag the ONE generic pickup prefab
-
-//    public static int cost;
-
-//    protected EnemyState currentState;
-//    protected float lastAttackTime;
-//    private int currentHealth;
-
-//    protected virtual void Start()
-//    {
-//        currentState = EnemyState.Idle;
-//        agent = GetComponent<NavMeshAgent>();
-//        healthSystem = GetComponent<EnemyHeath>();
-//        healthSystem.OnDeath += OnHealthDepleted;
-//    }
-
-//    protected virtual void Update()
-//    {
-//        // Debug kill key
-//        if (Input.GetKeyDown(KeyCode.J))
-//        {
-//            TakeDamage(10);
-//        }
-
-//        switch (currentState)
-//        {
-//            case EnemyState.Idle: IdleState(); break;
-//            case EnemyState.Chase: ChaseState(); break;
-//            case EnemyState.Attack: AttackState(); break;
-//            case EnemyState.Death: DeathState(); break;
-//        }
-//    }
-
-//    public void TakeDamage(int amount)
-//    {
-//        healthSystem?.TakeDamage(amount);
-
-//        if (currentHealth <= 0)
-//        {
-//            SwitchState(EnemyState.Death);
-//        }
-//    }
-
-//    // --- STATES ---
-
-//    protected virtual void IdleState()
-//    {
-//        if (DetectPlayer()) SwitchState(EnemyState.Chase);
-//    }
-
-//    protected virtual void ChaseState()
-//    {
-//        if (!DetectPlayer())
-//        {
-//            SwitchState(EnemyState.Idle);
-//            return;
-//        }
-
-//        if (agent != null) agent.SetDestination(player.position);
-
-//        Vector3 dir = (player.position - transform.position).normalized;
-//        transform.rotation = Quaternion.LookRotation(dir);
-
-//        if (Vector3.Distance(transform.position, player.position) <= attackRange)
-//        {
-//            SwitchState(EnemyState.Attack);
-//            agent.ResetPath();
-//        }
-//    }
-
-//    protected virtual void AttackState()
-//    {
-//        Vector3 dir = (player.position - transform.position).normalized;
-//        transform.rotation = Quaternion.LookRotation(dir);
-
-//        if (Vector3.Distance(transform.position, player.position) > attackRange)
-//        {
-//            SwitchState(EnemyState.Chase);
-//            return;
-//        }
-
-//        if (Time.time - lastAttackTime >= attackCooldown)
-//        {
-//            lastAttackTime = Time.time;
-//            PerformAttack();
-//        }
-//    }
-
-//    protected virtual void DeathState()
-//    {
-//        // 1. Check if we have collected this sticker yet
-//        if (CollectionManager.Instance != null && myStickerData != null)
-//        {
-//            // Only spawn if the player DOES NOT have the sticker yet
-//            if (!CollectionManager.Instance.HasSticker(myStickerData))
-//            {
-//                SpawnSticker();
-//            }
-//        }
-
-//        // 2. Play animation / Destroy object
-//        Destroy(gameObject);
-//    }
-
-//    private void SpawnSticker()
-//    {
-//        if (genericStickerPrefab != null)
-//        {
-//            // Spawn the generic ball/item
-//            GameObject drop = Instantiate(genericStickerPrefab, transform.position + Vector3.up, Quaternion.identity);
-
-//            // Inject the specific data into it
-//            StickerPickup pickupScript = drop.GetComponent<StickerPickup>();
-//            if (pickupScript != null)
-//            {
-//                pickupScript.Initialize(myStickerData);
-//            }
-//        }
-//    }
-
-//    // --- ABSTRACTS & UTILS ---
-
-//    protected abstract void PerformAttack();
-
-//    protected virtual bool DetectPlayer()
-//    {
-//        return Vector3.Distance(transform.position, player.position) <= detectionRange;
-//    }
-
-//    protected void SwitchState(EnemyState newState)
-//    {
-//        currentState = newState;
-//    }
-//}
-
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -193,7 +28,9 @@ public abstract class BaseEnemy : MonoBehaviour
     [Header("Sticker System")]
     [SerializeField] StickerData myStickerData;
     [SerializeField] GameObject genericStickerPrefab;
-    [SerializeField] GameObject noDrop;
+
+    [Header("Visual Effects")]
+    [SerializeField] GameObject deathVFX; // Renamed from 'noDrop' for clarity
 
     [Header("Warning System")]
     [SerializeField] GameObject flash;
@@ -346,6 +183,10 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void DeathState()
     {
+        // 1. Always Play Death Effect
+        PlayDeathEffect();
+
+        // 2. Try to spawn Sticker
         if (CollectionManager.Instance != null && myStickerData != null)
         {
             if (!CollectionManager.Instance.HasSticker(myStickerData))
@@ -357,26 +198,35 @@ public abstract class BaseEnemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void PlayDeathEffect()
+    {
+        if (deathVFX != null)
+        {
+            // Spawn effect slightly above ground
+            GameObject effect = Instantiate(deathVFX, transform.position + Vector3.up, Quaternion.identity);
+            Destroy(effect, despawnTime);
+        }
+    }
+
     private void SpawnSticker()
     {
         if (genericStickerPrefab != null)
         {
             System.Random rnd = new System.Random();
-            if (rnd.Next(0, 10) < myStickerData.rarity  && !CollectionManager.Instance.collectedStickerIds.Contains(myStickerData.id))
+
+            // Check rarity and duplicate status
+            if (rnd.Next(0, 10) < myStickerData.rarity && !CollectionManager.Instance.collectedStickerIds.Contains(myStickerData.id))
             {
                 GameObject drop = Instantiate(genericStickerPrefab, transform.position + Vector3.up, Quaternion.identity);
                 StickerPickup pickupScript = drop.GetComponent<StickerPickup>();
 
-                if(pickupScript != null)
+                if (pickupScript != null)
                 {
                     pickupScript.Initialize(myStickerData);
-                    return;
                 }
-
             }
-
-            GameObject smoke = Instantiate(noDrop, transform.position + Vector3.up, Quaternion.identity);
-            Destroy(smoke, despawnTime);
+            // Removed the "else" block that spawned smoke here, 
+            // because PlayDeathEffect() handles visuals now.
         }
     }
 
