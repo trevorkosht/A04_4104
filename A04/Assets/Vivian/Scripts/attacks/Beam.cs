@@ -4,26 +4,42 @@ using UnityEngine;
 
 public class Beam : MonoBehaviour
 {
-    public float lifeTime = 1.5f;
+    [SerializeField] float lifeTime = 1.5f;
     [SerializeField] int damage = 10;   // how much damage to deal to the player
+    [HideInInspector] public Transform fp;
+
+    private float beamRange;
+
 
     private void Start()
     {
+        CheckForPlayer();
         Destroy(gameObject, lifeTime); // destroy after X seconds
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if object is player
-        if (other.CompareTag("Player"))
-        {
-            // Get players health
-            PlayerHealth player = other.GetComponent<PlayerHealth>();
 
-            // If player heath exists, player takes damage.
-            if (player != null)
+    public void Initialize(Transform firePointRef)
+    {
+        fp = firePointRef;
+    }
+    private void CheckForPlayer()
+    {
+        RaycastHit hit;
+
+        // Shoot ray from beam origin forward
+        if (Physics.Raycast(fp.position, fp.forward, out hit, beamRange))
+        {
+            // Check what we hit FIRST
+            if (hit.collider.CompareTag("Player"))
             {
-                player.TakeDamage(damage);
+                // Player is hit first - deal damage
+                PlayerHealth player = hit.collider.GetComponent<PlayerHealth>();
+                if (player != null)
+                {
+                    player.TakeDamage(damage);
+                }
             }
+            //Do nothing if beam hits anything else
         }
     }
+
 }

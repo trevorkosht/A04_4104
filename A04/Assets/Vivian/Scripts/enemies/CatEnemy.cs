@@ -22,6 +22,8 @@ public class CatEnemy : BaseEnemy
         Vector3 spawnPosition = firePoint.position + (firePoint.forward * spawnDistance);
         FlashWarning();
         yield return new WaitForSeconds(1.0f);
+        Beam beamScript = projectilePrefab.GetComponent<Beam>();
+        beamScript.Initialize(firePoint);
         Instantiate(projectilePrefab, spawnPosition, firePoint.rotation);
     }
 

@@ -32,7 +32,10 @@ public class Bubble : MonoBehaviour
                 Destroy(gameObject);    // Destroy on impact.
             }
 
+        } else
+        {
+            Destroy(gameObject);    // Destroy on impact.
         }
-        
+
     }
 }
