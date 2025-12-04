@@ -8,14 +8,14 @@ public class FrogEnemy : BaseEnemy
     [Header("Attack Settings")]
     public GameObject projectilePrefab;
     public Transform firePoint;
-    private bool isJumping = false;
-    private Vector3 jumpStartPosition;
     [SerializeField] GameObject hitVFX;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 0.5f;
     [SerializeField] private float jumpDuration = 0.5f; // Total jump time
 
+    private bool isJumping = false;
+    private Vector3 jumpStartPosition;
     protected override void Start()
     {
         base.Start();
@@ -32,6 +32,7 @@ public class FrogEnemy : BaseEnemy
     {
         GameObject flash = Instantiate(hitVFX, firePoint.position, firePoint.rotation); // Play fire animation
         StartCoroutine(Fire());
+        Destroy(flash,1.0f);
     }
 
     // Change to jumping chase

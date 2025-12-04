@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5573217623606680582}
   - component: {fileID: 3344866432878078416}
-  - component: {fileID: 5880316355864362910}
+  - component: {fileID: 839203818657716494}
+  - component: {fileID: 2369871758199799593}
   m_Layer: 0
   m_Name: goat
   m_TagString: Untagged
@@ -58,7 +59,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5880316355864362910
+--- !u!114 &839203818657716494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,8 +93,30 @@ MonoBehaviour:
   recoilDuration: 0.5
   chargeWindUpEffect: {fileID: 0}
   chargeTrailEffect: {fileID: 0}
+  chargeHitEffect: {fileID: 467751860875805754, guid: 7c6d9bb9c8994364dbe5ba2e32dd4d13, type: 3}
   chargeWindUpSound: {fileID: 0}
   chargeAttackSound: {fileID: 0}
+--- !u!65 &2369871758199799593
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298010662441348630}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.4807129, z: 1}
+  m_Center: {x: 0, y: 0.7762146, z: 0}
 --- !u!1 &5110599860163159834
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +204,6 @@ GameObject:
   - component: {fileID: 8432316013066638983}
   - component: {fileID: 312631839665581609}
   - component: {fileID: 3258295474781239735}
-  - component: {fileID: 3095738165592238372}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -254,27 +276,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3095738165592238372
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6264607967428437988}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8190497998340932656
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class CatEnemy : BaseEnemy
 
     private System.Collections.IEnumerator Fire()
     {
+        if (agent != null) agent.isStopped = true;
         FlashWarning();
         yield return new WaitForSeconds(1.0f);
 
@@ -48,14 +49,21 @@ public class CatEnemy : BaseEnemy
             }
            
         }
-     
+
+        yield return null;
+
+        if (agent != null)
+        {
+            agent.isStopped = false;
+            agent.ResetPath();
+        }
+
     }
 
     protected override void PerformAttack()
     {
         // play animation
         StartCoroutine(Fire());
-        if (agent != null) { agent.ResetPath(); }
     }
 
 }

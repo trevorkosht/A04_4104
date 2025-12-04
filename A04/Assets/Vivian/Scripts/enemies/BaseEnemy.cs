@@ -178,6 +178,7 @@ public abstract class BaseEnemy : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(dir);
             lastAttackTime = Time.time;
             PerformAttack();
+
         }
     }
 

@@ -263,19 +263,19 @@ MonoBehaviour:
   player: {fileID: 0}
   healthSystem: {fileID: 2878784867395753301}
   detectionRange: 24
-  attackRange: 10
+  attackRange: 11
   attackCooldown: 3
   cost: 0
   myStickerData: {fileID: 11400000, guid: 43947204cd09c3b4291d87a191c0dcaa, type: 2}
   genericStickerPrefab: {fileID: 5806895984661434272, guid: 5aa6b6e75f7ed254e944bec3976b1885, type: 3}
   deathVFX: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
-  hitVFX: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   flash: {fileID: 8484398221820894341}
   flashBase: {fileID: 3402785972671311692}
   flashDuration: 1
   flashSpeed: 0.2
   projectilePrefab: {fileID: 2985375984946597874, guid: 7a401be0091ac164aa853b71d2499890, type: 3}
   firePoint: {fileID: 4008398053557534231}
+  hitVFX: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   jumpHeight: 2
   jumpDuration: 1
 --- !u!195 &7498403293707091770
