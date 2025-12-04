@@ -9,6 +9,7 @@ public class Bubble : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, lifeTime); // destroy after X seconds
+
     }
 
     private void Update()
@@ -34,6 +35,7 @@ public class Bubble : MonoBehaviour
 
         } else
         {
+
             Destroy(gameObject);    // Destroy on impact.
         }
 

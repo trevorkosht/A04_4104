@@ -27,6 +27,8 @@ public class GoatEnemy : BaseEnemy
     private bool isCharging = false;
     private bool hasHitPlayerThisAttack = false;
     private bool canAttack = true;
+    private bool collided = false;
+
 
     protected override void Start()
     {
@@ -157,5 +159,29 @@ public class GoatEnemy : BaseEnemy
             }
         }
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.contacts())
+    //        {
+    //            PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
+    //            if (playerHealth != null)
+    //            {
+    //                playerHealth.TakeDamage(chargeDamage);
+    //                Debug.Log($"Charged into player for {chargeDamage} damage!");
+    //                hasHitPlayerThisAttack = true;
+
+    //                // Stop charging when hitting player
+    //                isCharging = false;
+    //            }
+    //            break;
+    //        }
+    //        else if (hit.collider.CompareTag("Environment"))
+    //        {
+    //            isCharging = false;
+    //            break;
+    //        }
+    //    }
+    //}
 
 }

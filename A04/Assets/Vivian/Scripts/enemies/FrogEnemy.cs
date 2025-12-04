@@ -5,11 +5,12 @@ using UnityEngine.AI;
 
 public class FrogEnemy : BaseEnemy
 {
-    [Header("Frog Settings")]
+    [Header("Attack Settings")]
     public GameObject projectilePrefab;
     public Transform firePoint;
     private bool isJumping = false;
     private Vector3 jumpStartPosition;
+    [SerializeField] GameObject hitVFX;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 0.5f;
@@ -22,15 +23,15 @@ public class FrogEnemy : BaseEnemy
     }
     private System.Collections.IEnumerator Fire()
     {
+        // Launch bubble
         Debug.Log("Launched Bubble");
         Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         yield return null;
     }
     protected override void PerformAttack()
     {
-        // play animation
+        GameObject flash = Instantiate(hitVFX, firePoint.position, firePoint.rotation); // Play fire animation
         StartCoroutine(Fire());
-        // check collsion with player  
     }
 
     // Change to jumping chase
