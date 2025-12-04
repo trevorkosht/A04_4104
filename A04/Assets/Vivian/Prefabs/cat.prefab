@@ -63,12 +63,18 @@ MonoBehaviour:
   flashBase: {fileID: 1292395680280836432}
   flashDuration: 1
   flashSpeed: 0.2
+  patrolRange: 10
+  patrolSpeed: 2
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
   firePoint: {fileID: 2998897055443392213}
   lifeTime: 1.5
   damage: 10
   beamRange: 8
   beamWidth: 1.5
   hitVFX: {fileID: 4306488877223958017, guid: ecb38e0319a6ad44cbca52d7b5add7a6, type: 3}
+  attack: {fileID: 0}
 --- !u!195 &1831866764291544443
 NavMeshAgent:
   m_ObjectHideFlags: 0

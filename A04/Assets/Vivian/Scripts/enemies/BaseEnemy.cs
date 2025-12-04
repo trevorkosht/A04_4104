@@ -38,6 +38,14 @@ public abstract class BaseEnemy : MonoBehaviour
     public float flashDuration = .75f;   // Time flashing warning. 
     public float flashSpeed = 0.2f; // Time between flashes.
 
+    [Header("Patrol")]
+    public float patrolRange = 10f;
+    public float patrolSpeed = 2f;
+
+    private Vector3 startPosition;
+    private Vector3 patrolTarget;
+    private bool hasPatrolTarget = false;
+
 
     protected EnemyState currentState;
     protected float lastAttackTime;
@@ -64,6 +72,7 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         currentState = EnemyState.Idle;
         agent = GetComponent<NavMeshAgent>();
+        startPosition = transform.position;
 
         // Get health system
         healthSystem = GetComponentInChildren<EnemyHealth>();
@@ -138,6 +147,53 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void IdleState()
     {
         if (DetectPlayer()) SwitchState(EnemyState.Chase);
+        // Patrol behavior
+        if (!hasPatrolTarget)
+        {
+            // Get random patrol point around start position
+            Vector2 randomCircle = Random.insideUnitCircle * patrolRange;
+            patrolTarget = startPosition + new Vector3(randomCircle.x, 0, randomCircle.y);
+
+            // Try to find valid position on NavMesh
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(patrolTarget, out hit, patrolRange, NavMesh.AllAreas))
+            {
+                Vector3 sampledPosition = hit.position;
+
+                // Check if path is clear (no walls between current position and target)
+                Vector3 direction = sampledPosition - transform.position;
+                float distance = direction.magnitude;
+
+                // Raycast to check for walls using tag
+                bool pathClear = true;
+                RaycastHit[] hits = Physics.RaycastAll(transform.position + Vector3.up * 0.5f, direction.normalized, distance);
+
+                foreach (RaycastHit wallHit in hits)
+                {
+                    if (wallHit.collider.CompareTag("Environment") || wallHit.collider.CompareTag("Untagged"))
+                    {
+                        pathClear = false;
+                        break;
+                    }
+                }
+
+                if (pathClear)
+                {
+                    patrolTarget = sampledPosition;
+                    agent.SetDestination(patrolTarget);
+                    agent.speed = patrolSpeed;
+                    hasPatrolTarget = true;
+                }
+            }
+        }
+        else
+        {
+            // Check if reached patrol target
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                hasPatrolTarget = false;
+            }
+        }
     }
 
     protected virtual void ChaseState()

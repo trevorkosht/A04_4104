@@ -12,6 +12,8 @@ public class CatEnemy : BaseEnemy
     [SerializeField] float beamRange = 8f;
     [SerializeField] float beamWidth = 1.5f;
     [SerializeField] GameObject hitVFX;
+    [SerializeField] GameObject attack;
+
 
     protected override void Start()
     {
@@ -21,7 +23,7 @@ public class CatEnemy : BaseEnemy
 
     private System.Collections.IEnumerator Fire()
     {
-        if (agent != null) agent.isStopped = true;
+        agent.isStopped = true;
         FlashWarning();
         yield return new WaitForSeconds(1.0f);
 
@@ -33,21 +35,47 @@ public class CatEnemy : BaseEnemy
         GameObject flash = Instantiate(hitVFX, rayStart, Quaternion.LookRotation(rayStart));
         Destroy(flash, 2.0f);
 
-        // Check all hits by raycast
-        foreach (RaycastHit hit in hits)
+        //// Check all hits by raycast
+        //foreach (RaycastHit hit in hits)
+        //{
+        //    Debug.Log(hit.collider.name);
+        //    if (hit.collider.CompareTag("Player"))  // Player takes dmg if raycast hits
+        //    {
+        //        PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
+        //        if (playerHealth != null)
+        //        {
+        //            playerHealth.TakeDamage(damage);
+
+        //        }
+        //        break;  // Return after hitting player
+        //    } else if (hit.collider.CompareTag("Environment")) {
+        //        break;  // Return after hitting wall or crate
+        //    }
+
+
+        //}
+
+        // Single raycast to find the FIRST thing hit
+        RaycastHit hit;
+        if (Physics.Raycast(rayStart, rayDirection, out hit, beamRange))
         {
-            Debug.Log(hit.collider.name);
-            if (hit.collider.CompareTag("Player"))  // Player takes dmg if raycast hits
+            Debug.Log("Hit: " + hit.collider.name + " at distance: " + hit.distance);
+
+            // Check if hit object OR any of its parents have the Player tag
+            Transform current = hit.transform;
+            while (current != null)
             {
-                PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
-                if (playerHealth != null)
+                if (current.CompareTag("Player"))
                 {
-                    playerHealth.TakeDamage(damage);
-                   
+                    PlayerHealth playerHealth = current.GetComponent<PlayerHealth>();
+                    if (playerHealth != null)
+                    {
+                        playerHealth.TakeDamage(damage);
+                        break; // Found and damaged player
+                    }
                 }
-                break;  // Return after hitting player
+                current = current.parent;
             }
-           
         }
 
         yield return null;
