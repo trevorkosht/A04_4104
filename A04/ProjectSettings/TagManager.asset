@@ -8,6 +8,7 @@ TagManager:
   - Environment
   - Door
   - Enemy
+  - SpellGrid
   layers:
   - Default
   - TransparentFX
