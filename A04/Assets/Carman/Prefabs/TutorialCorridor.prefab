@@ -1163,7 +1163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8494300936224971043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3053,7 +3053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6847715989063136518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3293,7 +3293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &254488517541990954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3429,7 +3429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2351461080571432758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4332,6 +4332,8 @@ GameObject:
   - component: {fileID: 2819224085686138873}
   - component: {fileID: 7359949014697734636}
   - component: {fileID: 172925580030613164}
+  - component: {fileID: 7600971923020411262}
+  - component: {fileID: 8445317293185953014}
   m_Layer: 0
   m_Name: TutorialBarrier (3)
   m_TagString: Environment
@@ -4491,6 +4493,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.95419216}
   m_Center: {x: 0, y: 0, z: 0.02290392}
+--- !u!114 &7600971923020411262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169659987596092069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa7d762eb32304582e98e3cbd56627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8445317293185953014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169659987596092069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e51093af148fd94d81e31c30ff4d386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLines:
+  - {fileID: 8300000, guid: ca62c7559dd9b124582644981ef18590, type: 3}
+  - {fileID: 8300000, guid: 9951d78e339ea134b8f1c29a02794042, type: 3}
+  objectToWatch: {fileID: 0}
 --- !u!1 &5272990474675355868
 GameObject:
   m_ObjectHideFlags: 0
@@ -4776,9 +4806,11 @@ GameObject:
   - component: {fileID: 3424422661255283771}
   - component: {fileID: 5651901255497680188}
   - component: {fileID: 3454728576694090255}
+  - component: {fileID: 1088088961131402305}
+  - component: {fileID: 5449677563864566904}
   m_Layer: 0
   m_Name: TutorialBarrier (1)
-  m_TagString: Enemy
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4935,6 +4967,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.95419216}
   m_Center: {x: 0, y: 0, z: 0.02290392}
+--- !u!114 &1088088961131402305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718106486274323846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e51093af148fd94d81e31c30ff4d386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLines:
+  - {fileID: 8300000, guid: 000bbe4eea063a44cb3e628fcf88311e, type: 3}
+  - {fileID: 8300000, guid: c9e0cbd48b6ec8f438a7ee549c283bf5, type: 3}
+  objectToWatch: {fileID: 0}
+--- !u!114 &5449677563864566904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718106486274323846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa7d762eb32304582e98e3cbd56627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6244233529696000708
 GameObject:
   m_ObjectHideFlags: 0
@@ -5087,7 +5147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4409157923008768477
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5464,7 +5524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2041410088030465645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5978,6 +6038,8 @@ GameObject:
   - component: {fileID: 3974939549313740115}
   - component: {fileID: 4210159515760877384}
   - component: {fileID: 678778360994148505}
+  - component: {fileID: 8543868883826977454}
+  - component: {fileID: 1215985429802014893}
   m_Layer: 0
   m_Name: TutorialBarrier (2)
   m_TagString: Enemy
@@ -6137,6 +6199,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.95419216}
   m_Center: {x: 0, y: 0, z: 0.02290392}
+--- !u!114 &8543868883826977454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641524305828099950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa7d762eb32304582e98e3cbd56627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1215985429802014893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641524305828099950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e51093af148fd94d81e31c30ff4d386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLines:
+  - {fileID: 8300000, guid: dd60c8a4c03db74468a951d921a6fee0, type: 3}
+  - {fileID: 8300000, guid: 8ae36384f875a924e880812148de9248, type: 3}
+  objectToWatch: {fileID: 0}
 --- !u!1 &7820139913057136609
 GameObject:
   m_ObjectHideFlags: 0
@@ -6183,6 +6273,8 @@ GameObject:
   - component: {fileID: 3428433390590095099}
   - component: {fileID: 6834476052812276543}
   - component: {fileID: 7431075936243749912}
+  - component: {fileID: 4855364405073287123}
+  - component: {fileID: 4461189261808799538}
   m_Layer: 5
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
@@ -6307,6 +6399,32 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4855364405073287123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914985371945124548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa7d762eb32304582e98e3cbd56627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4461189261808799538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914985371945124548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e51093af148fd94d81e31c30ff4d386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLines: []
+  objectToWatch: {fileID: 0}
 --- !u!1 &8125842737622743947
 GameObject:
   m_ObjectHideFlags: 0
@@ -6321,8 +6439,9 @@ GameObject:
   - component: {fileID: 433239380837242619}
   - component: {fileID: 8786510044320126188}
   - component: {fileID: 3633917261672234843}
+  - component: {fileID: 1203140150578238288}
   m_Layer: 0
-  m_Name: TutorialBarrier
+  m_Name: FinalBarrier
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6457,6 +6576,18 @@ MonoBehaviour:
   interactRange: 10
   interactKey: 103
   infoCanvas: {fileID: 2162722076149593168}
+--- !u!114 &1203140150578238288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8125842737622743947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa7d762eb32304582e98e3cbd56627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8564531991745335048
 GameObject:
   m_ObjectHideFlags: 0
@@ -6742,6 +6873,8 @@ GameObject:
   - component: {fileID: 8035592622029773861}
   - component: {fileID: 6352778819614287896}
   - component: {fileID: 4733708159921294042}
+  - component: {fileID: 4704281346944408129}
+  - component: {fileID: 586828073702084830}
   m_Layer: 0
   m_Name: TutorialBarrier (4)
   m_TagString: Environment
@@ -6896,6 +7029,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d200d14796b9fe428ed4f666e4e1572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4704281346944408129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202524239343443680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa7d762eb32304582e98e3cbd56627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &586828073702084830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202524239343443680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e51093af148fd94d81e31c30ff4d386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLines:
+  - {fileID: 8300000, guid: 53c646e2db4a2c741bbdbad579e4c86e, type: 3}
+  objectToWatch: {fileID: 0}
 --- !u!1001 &35724627889580972
 PrefabInstance:
   m_ObjectHideFlags: 0

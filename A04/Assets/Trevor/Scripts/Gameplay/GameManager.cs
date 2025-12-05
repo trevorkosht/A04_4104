@@ -108,6 +108,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Entering PLAY state...");
         Time.timeScale = 1f;
 
+        // Only play music if it's not already playing
+        if (!SoundManager.Instance.IsMusicPlaying())
+        {
+            SoundManager.Instance.PlayMusic();
+        }
+
         // --- ADD THESE LINES ---
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

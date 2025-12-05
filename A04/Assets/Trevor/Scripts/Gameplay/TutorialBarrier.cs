@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TutorialBarrier : MonoBehaviour
 {
+    // public UnityEvent onDestroyed; // Add this line
     public enum RequiredSpell
     {
         Fireball,
@@ -71,6 +73,8 @@ public class TutorialBarrier : MonoBehaviour
 
         // 3. Cleanup
         // Destroy the wall
+        // onDestroyed?.Invoke();
+
         Destroy(gameObject);
 
         // Optional: Destroy the spell projectile too so it looks like it exploded on impact
