@@ -26,8 +26,8 @@ public class CatEnemy : BaseEnemy
         agent.isStopped = true;
         agent.updateRotation = false; // lock rotation
 
-        Vector3 feetPos = transform.position + transform.forward * ((flashData.length / 2) + 1f);
-        feetPos.y = 0.01f;
+        Vector3 feetPos = transform.position + transform.forward * ((flashData.length / 2));
+        feetPos.y = 0.02f;
         FlashWarning(feetPos, transform.rotation);
         yield return new WaitForSeconds(1.0f);
 
