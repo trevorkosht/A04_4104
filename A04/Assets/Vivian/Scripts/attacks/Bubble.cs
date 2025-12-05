@@ -21,8 +21,11 @@ public class Bubble : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if object is player
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Environment"))
         {
+            Destroy(gameObject);    // Destroy on impact.
+            return;
+        } else if (other.CompareTag("Player")){
             // Get players health
             PlayerHealth player = other.GetComponent<PlayerHealth>();
 
@@ -32,11 +35,6 @@ public class Bubble : MonoBehaviour
                 player.TakeDamage(damage);
                 Destroy(gameObject);    // Destroy on impact.
             }
-
-        } else
-        {
-
-            Destroy(gameObject);    // Destroy on impact.
         }
 
     }

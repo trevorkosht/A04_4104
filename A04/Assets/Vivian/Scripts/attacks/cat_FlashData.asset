@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: cat_FlashData
   m_EditorClassIdentifier: 
   width: 0.1
-  length: 0.8
+  length: 1
