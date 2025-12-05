@@ -24,36 +24,19 @@ public class CatEnemy : BaseEnemy
     private System.Collections.IEnumerator Fire()
     {
         agent.isStopped = true;
-        FlashWarning();
+        agent.updateRotation = false; // lock rotation
+
+        Vector3 feetPos = transform.position + transform.forward * ((flashData.length / 2) + 1f);
+        feetPos.y = 0.01f;
+        FlashWarning(feetPos, transform.rotation);
         yield return new WaitForSeconds(1.0f);
 
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, beamWidth, transform.forward, beamRange);
         Vector3 rayStart = firePoint.position;
         Vector3 rayDirection = firePoint.forward;
 
         // Play fire animation
         GameObject flash = Instantiate(hitVFX, rayStart, Quaternion.LookRotation(rayStart));
         Destroy(flash, 2.0f);
-
-        //// Check all hits by raycast
-        //foreach (RaycastHit hit in hits)
-        //{
-        //    Debug.Log(hit.collider.name);
-        //    if (hit.collider.CompareTag("Player"))  // Player takes dmg if raycast hits
-        //    {
-        //        PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
-        //        if (playerHealth != null)
-        //        {
-        //            playerHealth.TakeDamage(damage);
-
-        //        }
-        //        break;  // Return after hitting player
-        //    } else if (hit.collider.CompareTag("Environment")) {
-        //        break;  // Return after hitting wall or crate
-        //    }
-
-
-        //}
 
         // Single raycast to find the FIRST thing hit
         RaycastHit hit;
@@ -80,11 +63,9 @@ public class CatEnemy : BaseEnemy
 
         yield return null;
 
-        if (agent != null)
-        {
-            agent.isStopped = false;
-            agent.ResetPath();
-        }
+        agent.updateRotation = true; // unlock rotation
+        agent.isStopped = false;
+        agent.ResetPath();
 
     }
 

@@ -231,7 +231,6 @@ public class GoatEnemy : BaseEnemy
     {
         base.Start();
         cost = 40;
-        flashDuration = chargeWindUpTime;
     }
     protected override void PerformAttack()
     {
@@ -251,6 +250,7 @@ public class GoatEnemy : BaseEnemy
         // Store initial state
         chargeStartPosition = transform.position;
         agent.isStopped = true;
+        agent.updateRotation = false; // Lock rotation by preventing agent from rotating
 
         // Phase 2: Wind Up
         //Debug.Log("Charging up attack!");
@@ -262,7 +262,9 @@ public class GoatEnemy : BaseEnemy
         Vector3 movement = transform.forward * chargeSpeed * Time.deltaTime;
         float maxChargeDistance = attackRange * 2.5f;
 
-        FlashWarning();
+        Vector3 feetPos = transform.position + transform.forward * ((flashData.length / 2) + 1f);
+        feetPos.y = 0.01f;
+        FlashWarning(feetPos, transform.rotation);
         yield return new WaitForSeconds(chargeWindUpTime + 0.5f);
 
         // Store the position before charging forward
@@ -323,6 +325,7 @@ public class GoatEnemy : BaseEnemy
         // Final cleanup
         isCharging = false;
         agent.isStopped = false;
+        agent.updateRotation = true; // unlock rotation
 
         // IMPORTANT: Reset the attack timer to prevent immediate re-attack
         lastAttackTime = Time.time;

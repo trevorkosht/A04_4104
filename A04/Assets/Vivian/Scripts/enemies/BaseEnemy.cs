@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public abstract class BaseEnemy : MonoBehaviour
@@ -32,11 +33,10 @@ public abstract class BaseEnemy : MonoBehaviour
     [Header("Visual Effects")]
     [SerializeField] GameObject deathVFX; // Renamed from 'noDrop' for clarity
 
-    [Header("Warning System")]
-    [SerializeField] GameObject flash;
-    [SerializeField] GameObject flashBase;
-    public float flashDuration = .75f;   // Time flashing warning. 
-    public float flashSpeed = 0.2f; // Time between flashes.
+    [Header("Flash Settings")]
+    [SerializeField] public FlashIndicatorData flashData;
+    [SerializeField] private GameObject flashIndicatorPrefab;
+
 
     [Header("Patrol")]
     public float patrolRange = 10f;
@@ -78,9 +78,9 @@ public abstract class BaseEnemy : MonoBehaviour
         healthSystem = GetComponentInChildren<EnemyHealth>();
         healthSystem.OnDeath += OnHealthDepleted;
 
-        // Hide flash
-        flash.SetActive(false);
-        flashBase.SetActive(false);
+        //// Hide flash
+        //flash.SetActive(false);
+        //flashBase.SetActive(false);
 
     }
 
@@ -288,51 +288,18 @@ public abstract class BaseEnemy : MonoBehaviour
     }
 
     // Warning inidcator flash.
-    protected virtual void FlashWarning()
+    protected virtual void FlashWarning(Vector3 position, Quaternion rotation)
     {
-        StartCoroutine(Flashing());
-    }
+        if (flashIndicatorPrefab == null || flashData == null) return;
 
-    private System.Collections.IEnumerator Flashing()
-    {
-        float timer = 0f;
+        GameObject indicatorObj = Instantiate(flashIndicatorPrefab, position, rotation);
+        FlashIndicator indicator = indicatorObj.GetComponent<FlashIndicator>();
 
-        // Get NavMeshAgent reference
-        Vector3 originalDirection = agent.transform.forward;
-
-        if (agent != null)
+        if (indicator != null)
         {
-            // Store original state
-            Vector3 originalVelocity = agent.velocity;
-
-            // Stop movement but keep agent enabled
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-
-            // Lock rotation by preventing agent from rotating
-            agent.updateRotation = false;
-            agent.transform.forward = originalDirection;
+            indicator.Initialize(flashData);
+            indicator.StartFlashing(position);
         }
-
-
-        // Show indicator.
-        flash.SetActive(true);
-        flashBase.SetActive(true);
-
-        while (timer < flashDuration)
-        {
-            // Toggle visibility
-            flash.SetActive(!flash.activeSelf);
-
-            // Wait before next toggle
-            yield return new WaitForSeconds(flashSpeed);
-
-            timer += flashSpeed;
-        }
-
-        // Hide indicator.
-        flash.SetActive(false);
-        flashBase.SetActive(false);
     }
 
     protected abstract void PerformAttack();

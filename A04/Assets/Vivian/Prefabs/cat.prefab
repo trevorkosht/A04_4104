@@ -59,15 +59,10 @@ MonoBehaviour:
   myStickerData: {fileID: 11400000, guid: 7c5b37c55a70edb4e9a9f93185ac5b86, type: 2}
   genericStickerPrefab: {fileID: 5806895984661434272, guid: 5aa6b6e75f7ed254e944bec3976b1885, type: 3}
   deathVFX: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
-  flash: {fileID: 5433663238152981145}
-  flashBase: {fileID: 1292395680280836432}
-  flashDuration: 1
-  flashSpeed: 0.2
+  flashData: {fileID: 11400000, guid: 8a26bf4f67580f44c9a5505c1f8f4f24, type: 2}
+  flashIndicatorPrefab: {fileID: 7624660520836306660, guid: 9421f3ed8159ec94daee5fad829bb735, type: 3}
   patrolRange: 10
-  patrolSpeed: 2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  patrolSpeed: 2.5
   firePoint: {fileID: 2998897055443392213}
   lifeTime: 1.5
   damage: 10
@@ -124,7 +119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858862493648527526}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.90200007, z: 0}
   m_LocalScale: {x: 1.3942, y: 1.7869501, z: 1.3191}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -200,7 +195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6133869381346003706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.885, z: 0}
+  m_LocalPosition: {x: 0, y: 0.777, z: 0}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -305,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7576733153921851196}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.009, y: 1.208, z: 0.583}
+  m_LocalPosition: {x: -0.009, y: 1.1, z: 0.583}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -395,6 +390,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: warningIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 2843873924654917296, guid: bc2fc169af19640f196de0340678ddb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5382642577669996086, guid: bc2fc169af19640f196de0340678ddb8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -456,18 +455,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc2fc169af19640f196de0340678ddb8, type: 3}
---- !u!1 &1292395680280836432 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5152823971838492437, guid: bc2fc169af19640f196de0340678ddb8, type: 3}
-  m_PrefabInstance: {fileID: 6227635096270112325}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4013999038499060914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7050833560324897527, guid: bc2fc169af19640f196de0340678ddb8, type: 3}
-  m_PrefabInstance: {fileID: 6227635096270112325}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5433663238152981145 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2091146814389128412, guid: bc2fc169af19640f196de0340678ddb8, type: 3}
   m_PrefabInstance: {fileID: 6227635096270112325}
   m_PrefabAsset: {fileID: 0}
