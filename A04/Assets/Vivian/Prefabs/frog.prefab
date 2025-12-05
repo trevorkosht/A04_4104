@@ -262,7 +262,7 @@ MonoBehaviour:
   agent: {fileID: 7498403293707091770}
   player: {fileID: 0}
   healthSystem: {fileID: 2878784867395753301}
-  detectionRange: 35
+  detectionRange: 30
   attackRange: 10
   attackCooldown: 1
   cost: 0

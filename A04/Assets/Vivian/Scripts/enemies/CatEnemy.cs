@@ -38,6 +38,9 @@ public class CatEnemy : BaseEnemy
         GameObject flash = Instantiate(hitVFX, rayStart, Quaternion.LookRotation(rayStart));
         Destroy(flash, 2.0f);
 
+        GameObject shoot = Instantiate(attack, rayStart, Quaternion.LookRotation(rayStart));
+        Destroy(shoot, 1.0f);
+
         // Single raycast to find the FIRST thing hit
         RaycastHit hit;
         if (Physics.Raycast(rayStart, rayDirection, out hit, beamRange))
