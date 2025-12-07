@@ -7,13 +7,13 @@ using UnityEngine.AI;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 30;
+    [SerializeField] public int maxHealth = 30;
 
     public event Action<int, int> OnHealthChanged; // currentHealth, maxHealth
     public event Action<int> OnDamageTaken; // damageAmount
     public event Action OnDeath;
 
-    private int currentHealth;
+    public int currentHealth;
     private bool isDead = false;
     private float trembleIntensity = 0.05f;
     private float trembleDuration = 0.5f;
@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
     public bool IsDead => isDead;
+
 
     private void Start()
     {

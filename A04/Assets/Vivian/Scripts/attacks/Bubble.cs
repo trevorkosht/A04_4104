@@ -20,21 +20,16 @@ public class Bubble : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if object is player
-        if (other.CompareTag("Environment"))
-        {
-            Destroy(gameObject);    // Destroy on impact.
-            return;
-        } else if (other.CompareTag("Player")){
-            // Get players health
-            PlayerHealth player = other.GetComponent<PlayerHealth>();
 
-            // If player heath exists, player takes damage.
-            if (player != null)
-            {
-                player.TakeDamage(damage);
-                Destroy(gameObject);    // Destroy on impact.
-            }
+        PlayerHealth player = other.GetComponent<PlayerHealth>();
+        if (player != null)
+        {
+            player.TakeDamage(damage);
+            Destroy(gameObject);    // Destroy on impact.
+        }
+        else if (other.CompareTag("Environment"))
+        {
+            Destroy(gameObject);
         }
 
     }
