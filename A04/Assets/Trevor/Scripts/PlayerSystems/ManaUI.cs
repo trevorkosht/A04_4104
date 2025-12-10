@@ -1,46 +1,44 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections; // Required for Coroutines
+using System.Collections;
 
 public class ManaUI : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Slider manaSlider;
-    [SerializeField] private Image fillImage; // The "Fill" image inside the slider
+    [SerializeField] private Image fillImage;
 
-    [Header("Flicker Settings")]
-    [SerializeField] private float flickerDuration = 2.0f; // How long it lasts
-    [SerializeField] private float flickerSpeed = 10.0f;   // How fast it blinks
-    [SerializeField] private float minAlpha = 0.2f;        // How transparent it gets (0 is invisible)
+    [Header("Failure Flicker Settings")]
+    [SerializeField] private float flickerDuration = 2.0f;
+    [SerializeField] private float flickerSpeed = 10.0f;
+    [SerializeField] private float minAlpha = 0.2f;
 
-    private Coroutine flickerCoroutine;
+    [Header("Cast Flash Settings")]
+    [SerializeField] private Color castFlashColor = new Color(1f, 1f, 1f, 1f); // White flash
+    [SerializeField] private float castFlashDuration = 0.2f; // Very fast
+
+    private Coroutine activeCoroutine; // Track the currently running effect
     private Color originalColor;
 
     void Start()
     {
-        // Try to auto-find the fill image if not assigned
         if (fillImage == null && manaSlider != null)
-        {
             fillImage = manaSlider.fillRect.GetComponent<Image>();
-        }
 
         if (fillImage != null)
-        {
             originalColor = fillImage.color;
-        }
 
         if (PlayerSpellSystem.Instance != null)
         {
             PlayerSpellSystem.Instance.OnManaChanged += UpdateManaDisplay;
 
-            // SUBSCRIBE to the failure event
-            PlayerSpellSystem.Instance.OnManaCheckFailed += TriggerManaFlicker;
+            // 1. Listen for FAILURE (Low Mana)
+            PlayerSpellSystem.Instance.OnManaCheckFailed += TriggerFailureFlicker;
+
+            // 2. Listen for SUCCESS (Spell Cast)
+            PlayerSpellSystem.Instance.OnCooldownStarted += OnSpellCast;
 
             UpdateManaDisplay(PlayerSpellSystem.Instance.currentMana, PlayerSpellSystem.Instance.maxMana);
-        }
-        else
-        {
-            Debug.LogWarning("ManaUI: PlayerSpellSystem not found!");
         }
     }
 
@@ -49,7 +47,8 @@ public class ManaUI : MonoBehaviour
         if (PlayerSpellSystem.Instance != null)
         {
             PlayerSpellSystem.Instance.OnManaChanged -= UpdateManaDisplay;
-            PlayerSpellSystem.Instance.OnManaCheckFailed -= TriggerManaFlicker;
+            PlayerSpellSystem.Instance.OnManaCheckFailed -= TriggerFailureFlicker;
+            PlayerSpellSystem.Instance.OnCooldownStarted -= OnSpellCast; // Unsubscribe!
         }
     }
 
@@ -62,41 +61,77 @@ public class ManaUI : MonoBehaviour
         }
     }
 
-    private void TriggerManaFlicker()
+    // --- Event Handlers ---
+
+    private void OnSpellCast(GridSpellSO spell)
+    {
+        // When a spell is cast, trigger the "Success" flash
+        TriggerCastFlash();
+    }
+
+    private void TriggerCastFlash()
     {
         if (fillImage == null) return;
 
-        // If we are already flickering, stop and restart so the timer resets
-        if (flickerCoroutine != null) StopCoroutine(flickerCoroutine);
+        // Stop any existing flicker/flash so they don't fight
+        if (activeCoroutine != null) StopCoroutine(activeCoroutine);
 
-        flickerCoroutine = StartCoroutine(FlickerRoutine());
+        activeCoroutine = StartCoroutine(CastFlashRoutine());
     }
 
-    private IEnumerator FlickerRoutine()
+    private void TriggerFailureFlicker()
+    {
+        if (fillImage == null) return;
+
+        if (activeCoroutine != null) StopCoroutine(activeCoroutine);
+
+        activeCoroutine = StartCoroutine(FailureFlickerRoutine());
+    }
+
+    // --- Coroutines ---
+
+    private IEnumerator CastFlashRoutine()
+    {
+        float timer = 0f;
+
+        // Flash to the target color (White) immediately
+        fillImage.color = castFlashColor;
+
+        // Quickly fade back to original color
+        while (timer < castFlashDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / castFlashDuration;
+
+            // Lerp back to original
+            fillImage.color = Color.Lerp(castFlashColor, originalColor, t);
+
+            yield return null;
+        }
+
+        fillImage.color = originalColor;
+        activeCoroutine = null;
+    }
+
+    private IEnumerator FailureFlickerRoutine()
     {
         float timer = 0f;
 
         while (timer < flickerDuration)
         {
             timer += Time.deltaTime;
-
-            // Calculate a smooth wave using Sine
-            // (Sin goes from -1 to 1. We map it to 0 to 1).
             float wave = (Mathf.Sin(timer * flickerSpeed) + 1f) / 2f;
-
-            // Interpolate between Min Alpha and Full Alpha
             float newAlpha = Mathf.Lerp(minAlpha, 1f, wave);
 
-            // Apply the alpha
+            // Modify Alpha only, keep original RGB
             Color c = originalColor;
             c.a = newAlpha;
             fillImage.color = c;
 
-            yield return null; // Wait for next frame
+            yield return null;
         }
 
-        // Reset to normal at the end
         fillImage.color = originalColor;
-        flickerCoroutine = null;
+        activeCoroutine = null;
     }
 }
