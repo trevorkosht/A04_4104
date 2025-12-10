@@ -2762,6 +2762,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconSpriteRenderer: {fileID: 564868738}
+--- !u!114 &1328789488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328789477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb087ac1c632ce049b2a05abcea2d398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wandAnimation: {fileID: 1328789481}
+  spellSystem: {fileID: 135756641613574983}
+  cameraTransform: {fileID: 564145337}
+  comboChain:
+  - {fileID: 11400000, guid: 58ed38dc6865c59499b66a38bddbaf08, type: 2}
+  - {fileID: 11400000, guid: b4bd6b5fef4f8a94cbd4b4df9bfabeb0, type: 2}
+  - {fileID: 11400000, guid: ec3da2c19d7e18d4985c06b084cf608e, type: 2}
+  comboResetTime: 1
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &1354954356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4249,6 +4272,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616ad872e1cfbb240ae8926339c35515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &135756641613574983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6661175924900837413, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 5393215579111688471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5115c0bd58a055d4096cda0c65f00de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2114283753834967212
 GameObject:
   m_ObjectHideFlags: 0
@@ -4565,6 +4599,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5045882639122063674, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1328789485}
+    - targetCorrespondingSourceObject: {fileID: 5045882639122063674, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1328789488}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!1001 &7288094137546172433
 PrefabInstance:

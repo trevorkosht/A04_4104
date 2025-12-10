@@ -1,8 +1,8 @@
 using UnityEngine;
+using System.Collections;
 
 public class WandAnimation : MonoBehaviour
 {
-
     [Header("Bobbing Settings")]
     public float idleBobbingSpeed = 1f;
     public float idleBobbingAmount = 0.05f;
@@ -14,50 +14,90 @@ public class WandAnimation : MonoBehaviour
     public float tiltReturnSpeed = 5f;
 
     private Vector3 initialPosition;
+    private Quaternion initialRotation; // Store this to reset after swings
     private bool isMoving;
-    private Vector3 smoothedPosition;
     private float bobTimer;
     private float currentTilt;
+
+    // NEW: State tracking
+    public bool IsSwinging { get; private set; }
 
     private void Start()
     {
         initialPosition = transform.localPosition;
+        initialRotation = transform.localRotation;
     }
 
     private void Update()
     {
+        // 1. If we are swinging, skip the idle/movement procedural animations
+        if (IsSwinging) return;
+
         // Check for player movement
         isMoving = Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f;
 
         UpdateBobbing();
-
         UpdateTilt();
     }
 
-
     private void UpdateBobbing()
     {
-        // Select bobbing parameters based on movement
         float speed = isMoving ? movingBobbingSpeed : idleBobbingSpeed;
         float amount = isMoving ? movingBobbingAmount : idleBobbingAmount;
 
-        // Calculate bobbing offset
         bobTimer += Time.deltaTime * speed;
         float verticalBob = Mathf.Sin(bobTimer) * amount;
 
-        // Apply all position changes
-        transform.localPosition = initialPosition + smoothedPosition + new Vector3(0, verticalBob, 0);
+        // Apply position
+        transform.localPosition = initialPosition + new Vector3(0, verticalBob, 0);
     }
 
     private void UpdateTilt()
     {
-        // Calculate tilt based on horizontal movement
         float targetTilt = -Input.GetAxis("Horizontal") * tiltAngle;
-
-        // Smooth the tilt
         currentTilt = Mathf.Lerp(currentTilt, targetTilt, tiltReturnSpeed * Time.deltaTime);
+        transform.localRotation = initialRotation * Quaternion.Euler(0, 0, currentTilt);
+    }
 
-        // Apply rotation
-        transform.localRotation = Quaternion.Euler(0, 0, currentTilt);
+    // NEW: Public API to trigger a procedural swing
+    public IEnumerator PlaySwingRoutine(WandSwingSO swingData)
+    {
+        IsSwinging = true;
+        float timer = 0f;
+
+        Quaternion startRot = initialRotation * Quaternion.Euler(swingData.startRotation);
+        Quaternion endRot = initialRotation * Quaternion.Euler(swingData.endRotation);
+
+        while (timer < swingData.duration)
+        {
+            timer += Time.deltaTime;
+            float progress = timer / swingData.duration;
+            float curveValue = swingData.swingCurve.Evaluate(progress);
+
+            // Interpolate Rotation
+            transform.localRotation = Quaternion.Slerp(startRot, endRot, curveValue);
+
+            // Optional: Add a slight forward "punch" or position offset
+            Vector3 currentPunch = Vector3.Lerp(Vector3.zero, swingData.punchOffset, Mathf.Sin(progress * Mathf.PI));
+            transform.localPosition = initialPosition + currentPunch;
+
+            yield return null;
+        }
+
+        // Return to idle smoothly
+        float resetDuration = 0.15f;
+        float resetTimer = 0f;
+        Quaternion finalRot = transform.localRotation;
+
+        while (resetTimer < resetDuration)
+        {
+            resetTimer += Time.deltaTime;
+            float t = resetTimer / resetDuration;
+            transform.localRotation = Quaternion.Slerp(finalRot, initialRotation, t);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, initialPosition, t);
+            yield return null;
+        }
+
+        IsSwinging = false;
     }
 }
