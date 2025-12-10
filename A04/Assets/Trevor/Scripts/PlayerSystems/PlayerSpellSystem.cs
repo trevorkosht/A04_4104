@@ -97,4 +97,9 @@ public class PlayerSpellSystem : MonoBehaviour
             activeCooldowns[key] -= seconds;
         }
     }
+    public List<GridSpellSO> GetActiveCooldowns()
+    {
+        // Returns a list of all spells currently in the dictionary
+        return new List<GridSpellSO>(activeCooldowns.Keys);
+    }
 }
