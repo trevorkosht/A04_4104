@@ -16,6 +16,8 @@ MonoBehaviour:
   spellIcon: {fileID: -907818795, guid: 660d1e97d5ba1d24484af05318cc45c4, type: 3}
   castEffect: {fileID: 6461432932678244898, guid: d76800d327c9bef40b537c4bae13be52, type: 3}
   castStrategy: {fileID: 11400000, guid: 4b98096789fb14847a78f0b057f93ba7, type: 2}
+  castSound: {fileID: 8300000, guid: 974dd2e31b3ed1d46abce205766f4ed4, type: 3}
+  impactSound: {fileID: 8300000, guid: 32bd3baeb51bfc344a33cdd312269261, type: 3}
   manaCost: 5
   cooldownTime: 4
   power: 10

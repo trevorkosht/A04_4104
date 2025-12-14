@@ -10,6 +10,10 @@ public class GridSpellSO : ScriptableObject
     public GameObject castEffect; // The Prefab
     public SpellCastStrategy castStrategy;
 
+    [Header("Audio")]
+    public AudioClip castSound;
+    public AudioClip impactSound;// NEW: The specific sound for this spell
+
     [Header("Resources")]
     public int manaCost = 10;
     public float cooldownTime = 5f;

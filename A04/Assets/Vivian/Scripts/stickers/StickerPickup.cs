@@ -1,9 +1,11 @@
 using UnityEngine;
+using System;
 
 public class StickerPickup : MonoBehaviour
 {
     private StickerData _data;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    public event Action OnStickerCollected;
 
     // Called by the Enemy immediately after spawning this object
     public void Initialize(StickerData data)
@@ -30,6 +32,7 @@ public class StickerPickup : MonoBehaviour
         if (_data != null && CollectionManager.Instance != null)
         {
             CollectionManager.Instance.UnlockSticker(_data);
+            OnStickerCollected?.Invoke();
         }
 
         // Optional: Play sound here

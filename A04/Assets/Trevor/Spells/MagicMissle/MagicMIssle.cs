@@ -4,32 +4,29 @@ using System.Collections;
 public class MagicMissile : SpellController
 {
     [Header("Movement")]
-    public float speed = 5f; // Set this low in Inspector for "Slow" feel
-    public float rotateSpeed = 2f; // Lower rotation = wider, smoother turns
-    public float homingDelay = 0.5f; // Time to fly straight before turning
+    public float speed = 5f;
+    public float rotateSpeed = 2f;
+    public float homingDelay = 0.5f;
 
     [Header("Effects")]
     public int manaRestored = 5;
     [SerializeField] private GameObject impactEffect;
 
     private Transform target;
-    private bool canHome = false; // Controls when homing starts
+    private bool canHome = false;
 
     public override void Initialize(GridSpellSO data)
     {
         base.Initialize(data);
         FindNearestTarget();
 
-        // Start the delay timer
         StartCoroutine(EnableHomingRoutine());
     }
 
     void Update()
     {
-        // Always move forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        // Only rotate if delay is over and we have a target
         if (canHome && target != null)
         {
             HomingBehavior();
@@ -47,7 +44,6 @@ public class MagicMissile : SpellController
         Vector3 targetDirection = target.position - transform.position;
         float singleStep = rotateSpeed * Time.deltaTime;
 
-        // RotateTowards makes it turn smoothly rather than snapping
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
@@ -59,7 +55,6 @@ public class MagicMissile : SpellController
 
         foreach (var hit in hits)
         {
-            // Note: GetComponentInParent is expensive, but okay for single-cast events
             if (hit.GetComponentInParent<BaseEnemy>())
             {
                 float dist = Vector3.Distance(transform.position, hit.transform.position);
@@ -81,15 +76,22 @@ public class MagicMissile : SpellController
             enemy.TakeDamage(spellData.power);
             if (PlayerSpellSystem.Instance != null) PlayerSpellSystem.Instance.RestoreMana(manaRestored);
 
+            // --- AUDIO TRIGGER ---
+            PlayImpactSound(transform.position);
+            // ---------------------
+
             SpawnEffect();
             Destroy(gameObject);
             return;
         }
 
         // 2. Check Environment
-        // This naturally ignores other missiles unless they are tagged "Environment"
         if (other.CompareTag("Environment"))
         {
+            // --- AUDIO TRIGGER ---
+            PlayImpactSound(transform.position);
+            // ---------------------
+
             SpawnEffect();
             Destroy(gameObject);
         }

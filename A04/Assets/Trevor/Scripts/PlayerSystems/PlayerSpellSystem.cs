@@ -11,15 +11,18 @@ public class PlayerSpellSystem : MonoBehaviour
     public float maxMana = 100f;
     public float manaRegenRate = 5f;
 
-    // Dictionary to track cooldowns
     private Dictionary<GridSpellSO, float> activeCooldowns = new Dictionary<GridSpellSO, float>();
 
     // Events
     public event Action<float, float> OnManaChanged;
     public event Action<GridSpellSO> OnCooldownStarted;
 
-    // NEW: Event for when a cast fails due to low mana
+    // FAIL EVENTS
     public event Action OnManaCheckFailed;
+    public event Action OnCooldownCheckFailed; // NEW EVENT
+
+    public event Action<GridSpellSO> OnSpellCast;
+    public event Action OnManaRestored;
 
     void Awake()
     {
@@ -39,16 +42,19 @@ public class PlayerSpellSystem : MonoBehaviour
 
     public bool CanCast(GridSpellSO spell)
     {
-        // Check Mana
+        // 1. Check Mana
         if (currentMana < spell.manaCost)
         {
-            // FIRE THE EVENT HERE
             OnManaCheckFailed?.Invoke();
             return false;
         }
 
-        // Check Cooldown
-        if (IsOnCooldown(spell)) return false;
+        // 2. Check Cooldown
+        if (IsOnCooldown(spell))
+        {
+            OnCooldownCheckFailed?.Invoke(); // NEW TRIGGER
+            return false;
+        }
 
         return true;
     }
@@ -63,6 +69,7 @@ public class PlayerSpellSystem : MonoBehaviour
         else activeCooldowns.Add(spell, readyTime);
 
         OnCooldownStarted?.Invoke(spell);
+        OnSpellCast?.Invoke(spell);
     }
 
     public bool IsOnCooldown(GridSpellSO spell)
@@ -87,6 +94,7 @@ public class PlayerSpellSystem : MonoBehaviour
         currentMana += amount;
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
         OnManaChanged?.Invoke(currentMana, maxMana);
+        OnManaRestored?.Invoke();
     }
 
     public void ReduceAllCooldowns(float seconds)
@@ -97,9 +105,9 @@ public class PlayerSpellSystem : MonoBehaviour
             activeCooldowns[key] -= seconds;
         }
     }
+
     public List<GridSpellSO> GetActiveCooldowns()
     {
-        // Returns a list of all spells currently in the dictionary
         return new List<GridSpellSO>(activeCooldowns.Keys);
     }
 }

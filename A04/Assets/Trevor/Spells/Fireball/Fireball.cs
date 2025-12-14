@@ -19,17 +19,24 @@ public class Fireball : SpellController
             enemy.TakeDamage(spellData.power);
 
             // 2. Apply Burn Effect
-            // We pass the DOT stats from the Scriptable Object
             if (spellData.dotDamage > 0 && spellData.duration > 0)
             {
                 enemy.ApplyBurn(spellData.dotDamage, spellData.duration, spellData.tickRate);
             }
+
+            // --- AUDIO TRIGGER ---
+            PlayImpactSound(transform.position);
+            // ---------------------
 
             SpawnEffect();
             Destroy(gameObject);
         }
         else if (other.CompareTag("Environment"))
         {
+            // --- AUDIO TRIGGER ---
+            PlayImpactSound(transform.position);
+            // ---------------------
+
             SpawnEffect();
             Destroy(gameObject);
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,14 @@ public class SpellGridManager : MonoBehaviour
     [SerializeField] private Vector3 boxHalfExtents = new Vector3(0.5f, 0.5f, 0.1f);
     [SerializeField] private float minSpawnDistance = 0.5f;
     [SerializeField] private LayerMask collisionLayers;
+
+    // --- NEW EVENTS ---
+    public event Action OnGridOpened;
+    public event Action OnGridOpenFailed;
+    public event Action OnCellHighlighted;
+    public event Action OnSpellLoadSuccess;
+    public event Action OnSpellLoadFailed;
+    // ------------------
 
     private List<GridCell> currentPath = new List<GridCell>();
     private GridCell lastCell;
@@ -75,7 +84,10 @@ public class SpellGridManager : MonoBehaviour
 
         if (hitWall && (hit.distance - spawnBuffer) < minSpawnDistance)
         {
-            Debug.Log("Wall too close"); gridActive = false; return;
+            Debug.Log("Wall too close");
+            gridActive = false;
+            OnGridOpenFailed?.Invoke(); // NEW
+            return;
         }
 
         Vector3 finalSpawnPos = hitWall
@@ -88,6 +100,8 @@ public class SpellGridManager : MonoBehaviour
         activeGridInstance = spawnedGrid.GetComponent<GridVisualizer>();
         if (activeGridInstance) activeGridInstance.ShowGrid(true);
         currentPath.Clear();
+
+        OnGridOpened?.Invoke(); // NEW
     }
 
     private void CloseGrid()
@@ -107,6 +121,8 @@ public class SpellGridManager : MonoBehaviour
                 currentPath.Add(currentCell);
                 activeGridInstance.HighlightCell(currentCell, true);
                 lastCell = currentCell;
+
+                OnCellHighlighted?.Invoke(); // NEW
             }
         }
     }
@@ -116,6 +132,8 @@ public class SpellGridManager : MonoBehaviour
         if (currentPath.Count < minPatternLength) return;
         string currentPattern = string.Join("-", currentPath);
 
+        bool matchFound = false; // NEW Local var to track success
+
         foreach (GridSpellSO spell in spellDatabase.gridSpells)
         {
             if (currentPattern.Contains(string.Join("-", spell.pattern)))
@@ -124,8 +142,16 @@ public class SpellGridManager : MonoBehaviour
                 Debug.Log("Spell Loaded: " + spell.name);
                 if (wandFeedback != null) wandFeedback.ShowSpellIcon(loadedSpell.spellIcon);
                 if (loadedSpell.castStrategy != null) loadedSpell.castStrategy.OnSpellLoaded(this);
+
+                matchFound = true;
+                OnSpellLoadSuccess?.Invoke(); // NEW
                 break;
             }
+        }
+
+        if (!matchFound)
+        {
+            OnSpellLoadFailed?.Invoke(); // NEW
         }
     }
 

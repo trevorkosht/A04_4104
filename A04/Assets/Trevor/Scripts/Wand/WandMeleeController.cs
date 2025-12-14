@@ -1,4 +1,5 @@
 using UnityEngine;
+using System; // Required for Action
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,19 +15,20 @@ public class WandMeleeController : MonoBehaviour
     [SerializeField] private float comboResetTime = 1.0f;
     [SerializeField] private LayerMask hitLayers;
 
+    // NEW EVENT
+    public event Action<int> OnMeleeSwing;
+
     private int currentComboIndex = 0;
     private float lastAttackTime = 0f;
     private bool isAttacking = false;
 
     private void Update()
     {
-        // CHANGED: Input.GetMouseButtonDown(1) is Right Click (RMB)
         if (Input.GetMouseButtonDown(1) && !isAttacking)
         {
             PerformAttack();
         }
 
-        // Reset combo if player waits too long
         if (Time.time - lastAttackTime > comboResetTime && currentComboIndex > 0 && !isAttacking)
         {
             currentComboIndex = 0;
@@ -38,6 +40,10 @@ public class WandMeleeController : MonoBehaviour
         if (comboChain.Count == 0) return;
 
         WandSwingSO swing = comboChain[currentComboIndex];
+
+        // Trigger Audio Event
+        OnMeleeSwing?.Invoke(currentComboIndex);
+
         StartCoroutine(AttackRoutine(swing));
 
         currentComboIndex++;
@@ -53,23 +59,20 @@ public class WandMeleeController : MonoBehaviour
         StartCoroutine(wandAnimation.PlaySwingRoutine(swing));
 
         float timer = 0f;
-        bool hasHit = false; // This flag prevents the "Multi-Hit" bug
+        bool hasHit = false;
 
         while (timer < swing.duration)
         {
             timer += Time.deltaTime;
             float normalizedTime = timer / swing.duration;
 
-            // Check if we are inside the "Active Hit Window"
             if (normalizedTime >= swing.hitWindowStart && normalizedTime <= swing.hitWindowEnd)
             {
-                // ONLY check if we haven't hit anything yet this swing
                 if (!hasHit)
                 {
-                    // CheckForHit now returns TRUE if it hits something
                     if (CheckForHit(swing))
                     {
-                        hasHit = true; // Stop checking for the rest of this swing
+                        hasHit = true;
                     }
                 }
             }

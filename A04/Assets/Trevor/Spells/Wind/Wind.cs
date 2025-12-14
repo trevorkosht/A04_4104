@@ -14,6 +14,7 @@ public class Wind : SpellController
         // Use tickRate from SO, default to 0.5s if not set
         float interval = (data.tickRate > 0) ? data.tickRate : 0.5f;
         StartCoroutine(DealDamageOverTime(interval));
+        PlayImpactSound(transform.position);
     }
 
     void Update()
@@ -24,6 +25,7 @@ public class Wind : SpellController
             currentScaleTime += Time.deltaTime;
             float scaleProgress = currentScaleTime / spellData.duration;
             transform.localScale = Vector3.one * Mathf.Lerp(1f, maxScale, scaleProgress);
+            
         }
     }
 

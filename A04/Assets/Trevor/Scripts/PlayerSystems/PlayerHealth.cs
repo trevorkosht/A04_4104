@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections; // Added for System.Action
+using System.Collections;
+using System;// Added for System.Action
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PlayerHealth : MonoBehaviour
     // This is an event that other scripts (like our UI) can listen to
     // It will send out the current and max health values
     public event System.Action<int, int> OnHealthChanged;
+    // EVENTS for Audio and UI
+    public event Action OnHurt;
+    public event Action OnDie;
+    public event Action OnHeal;
 
     private void Start()
     {
@@ -40,6 +45,7 @@ public class PlayerHealth : MonoBehaviour
         if (OnHealthChanged != null)
         {
             OnHealthChanged(currentHealth, maxHealth);
+            OnHurt?.Invoke();
         }
 
         Debug.Log($"Player took {amount} damage, current health: {currentHealth}");
@@ -62,6 +68,7 @@ public class PlayerHealth : MonoBehaviour
         if (OnHealthChanged != null)
         {
             OnHealthChanged(currentHealth, maxHealth);
+            OnHeal?.Invoke();
         }
 
         Debug.Log($"Player healed {amount}, current health: {currentHealth}");
@@ -72,6 +79,7 @@ public class PlayerHealth : MonoBehaviour
         // This is where you would trigger a "Game Over" screen,
         // play a death animation, etc.
         Debug.Log("Player has died!");
+        OnDie?.Invoke();
         GameManager.Instance.TriggerLose();
         // For now, we'll just disable the component
         this.enabled = false;
