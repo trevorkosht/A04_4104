@@ -24,11 +24,9 @@ public class SpellAudioManager : MonoBehaviour
     private void Awake()
     {
         if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
-        // Ensure this is 2D for UI sounds (optional code force)
-        sfxSource.spatialBlend = 0f;
+        sfxSource.spatialBlend = 0f; // Ensure 2D for UI sounds
     }
 
-    // CHANGED: Moved from OnEnable to Start to ensure Singletons exist
     private void Start()
     {
         // 1. Subscribe to Grid Manager
@@ -40,22 +38,13 @@ public class SpellAudioManager : MonoBehaviour
             gridManager.OnSpellLoadSuccess += PlayLoadSuccess;
             gridManager.OnSpellLoadFailed += PlayLoadFail;
         }
-        else
-        {
-            Debug.LogError("SpellAudioManager: GridManager reference is MISSING in Inspector!");
-        }
 
-        // 2. Subscribe to Player System (Singleton)
+        // 2. Subscribe to Player System
         if (PlayerSpellSystem.Instance != null)
         {
-            Debug.Log("SpellAudioManager: Successfully connected to PlayerSpellSystem.");
             PlayerSpellSystem.Instance.OnSpellCast += PlaySpellCastSound;
             PlayerSpellSystem.Instance.OnManaCheckFailed += PlayManaFail;
             PlayerSpellSystem.Instance.OnCooldownCheckFailed += PlayCooldownFail;
-        }
-        else
-        {
-            Debug.LogError("SpellAudioManager: PlayerSpellSystem.Instance is NULL! Check Script Execution Order.");
         }
 
         // 3. Subscribe to Static Events
@@ -64,7 +53,6 @@ public class SpellAudioManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Unsubscribe to prevent memory leaks
         if (gridManager != null)
         {
             gridManager.OnGridOpened -= PlayBookSummon;
@@ -85,13 +73,34 @@ public class SpellAudioManager : MonoBehaviour
     }
 
     // --- Audio Handlers ---
-    private void PlayBookSummon() => PlayClip(bookSummonClip, "BookSummon");
+
+    private void PlayBookSummon()
+    {
+        // CHANGED: We use .clip and .Play() instead of PlayOneShot.
+        // This makes the sound "Interruptible".
+        if (bookSummonClip != null)
+        {
+            sfxSource.clip = bookSummonClip;
+            sfxSource.pitch = 1.0f;
+            sfxSource.Play();
+        }
+    }
+
+    private void PlayGridHighlight()
+    {
+        // CHANGED: If the player starts drawing, we STOP the book summon sound immediately.
+        // This prevents the "buggy" overlapping noise.
+        if (sfxSource.isPlaying && sfxSource.clip == bookSummonClip)
+        {
+            sfxSource.Stop();
+        }
+
+        PlayClip(gridHighlightClip, "GridHighlight", true);
+    }
+
     private void PlayBookSummonFail() => PlayClip(bookSummonFailClip, "BookFail");
-    private void PlayGridHighlight() => PlayClip(gridHighlightClip, "GridHighlight", true);
     private void PlayLoadSuccess() => PlayClip(spellLoadSuccessClip, "LoadSuccess");
     private void PlayLoadFail() => PlayClip(spellLoadFailClip, "LoadFail");
-
-    // FAIL HANDLERS
     private void PlayManaFail() => PlayClip(manaFailClip, "ManaFail");
     private void PlayCooldownFail() => PlayClip(cooldownFailClip, "CooldownFail");
 
@@ -107,21 +116,10 @@ public class SpellAudioManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(clip, position);
     }
 
-    // --- Debugging PlayClip ---
+    // --- Helper ---
     private void PlayClip(AudioClip clip, string debugName, bool usePitchVariance = false)
     {
-        // DEBUG: Check if clip is missing
-        if (clip == null)
-        {
-            Debug.LogWarning($"SpellAudioManager: Requested to play '{debugName}' but the AudioClip is NULL in the Inspector!");
-            return;
-        }
-
-        // DEBUG: Check if volume is zero
-        if (sfxSource.volume <= 0)
-        {
-            Debug.LogWarning("SpellAudioManager: AudioSource Volume is 0!");
-        }
+        if (clip == null) return;
 
         if (randomizePitch && usePitchVariance)
         {
@@ -132,7 +130,7 @@ public class SpellAudioManager : MonoBehaviour
             sfxSource.pitch = 1.0f;
         }
 
+        // PlayOneShot allows this new sound to play even if we just stopped the main clip
         sfxSource.PlayOneShot(clip);
-        // Debug.Log($"Played Sound: {debugName}"); // Uncomment if you want to see every sound in console
     }
 }
