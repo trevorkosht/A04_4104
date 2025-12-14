@@ -8,6 +8,8 @@ public class EnemyHealthUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private EnemyHealth health;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private Canvas canvas;
+
 
     private void Start()
     {
@@ -44,7 +46,7 @@ public class EnemyHealthUI : MonoBehaviour
         GameObject damageText = new GameObject("DamageText");
 
         // Make it a child of the current UI object
-        damageText.transform.SetParent(transform);
+        damageText.transform.SetParent(canvas.transform);
 
         // Add a Text component
         Text textComponent = damageText.AddComponent<Text>();

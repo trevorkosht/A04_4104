@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
 
     public int currentHealth;
     private bool isDead = false;
-    private float trembleIntensity = 0.05f;
+    private float trembleIntensity = 0.1f;
     private float trembleDuration = 0.5f;
     private bool isTrembling = false;
     private Vector3 originalPosition;

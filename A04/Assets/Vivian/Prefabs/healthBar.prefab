@@ -434,3 +434,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 0}
   healthSlider: {fileID: 3570786328325418733}
+  canvas: {fileID: 7703852269403060842}

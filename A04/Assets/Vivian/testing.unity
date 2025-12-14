@@ -616,6 +616,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4932636313071886936, guid: aae75e936a39715498256f608aaca776, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5573217623606680582, guid: aae75e936a39715498256f608aaca776, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2423,6 +2427,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2537681359951170428, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938325710957614318, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6133869381346003706, guid: c2960d89c5fe1f74e804f9e2865935de, type: 3}
