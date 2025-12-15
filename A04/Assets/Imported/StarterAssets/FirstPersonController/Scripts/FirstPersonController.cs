@@ -207,6 +207,7 @@ namespace StarterAssets
                 {
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                     OnJump?.Invoke();
+                    _input.jump = false;
                 }
 
                 if (_jumpTimeoutDelta >= 0.0f) _jumpTimeoutDelta -= Time.deltaTime;
