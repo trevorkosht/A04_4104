@@ -719,7 +719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2129698646763858699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1300,7 +1300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8494300936224971043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1840,7 +1840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5817917789347389952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2059,7 +2059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7229762593495203241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4297,7 +4297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &213913940498173237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6204,7 +6204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hit C to break the wall once you understand to begin your escape.
+  m_text: Hit C to break the wall.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6808,7 +6808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2667377362372063623
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8622,8 +8622,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactRange: 10
   interactKey: 103
-  sounds:
-  - {fileID: 8300000, guid: cf1d8f383c113034ba4b37a8fa994c11, type: 3}
+  voiceLines:
+  - clip: {fileID: 8300000, guid: 1426bac45fa645e42897cee0f48839f8, type: 3}
+    subtitle: The first spell is Magic Missile.
+  - clip: {fileID: 8300000, guid: 8ec2e6c242de8fb4da1cd5a690fb2e15, type: 3}
+    subtitle: Press "E" and draw a vertical line from top to bottom in the first
+      column. Note that the order you draw matters.
+  - clip: {fileID: 8300000, guid: a1db48babfd0b68488f0747b475dc4a2, type: 3}
+    subtitle: It auto aims at a target and will restore mana on hit. Left click to
+      fire at the wall.
+  - clip: {fileID: 8300000, guid: 7eda86eb42742644581507d19150ad6c, type: 3}
+    subtitle: You can also press "E" again to cancel your spell.
 --- !u!4 &9045786040122837670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8626024489083486841, guid: b4e3f8b6ce745f943bb5fa3a3e29de9d, type: 3}
@@ -10188,8 +10197,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactRange: 3
   interactKey: 103
-  sounds:
-  - {fileID: 8300000, guid: 53c646e2db4a2c741bbdbad579e4c86e, type: 3}
+  voiceLines:
+  - clip: {fileID: 8300000, guid: d2ecd1b6c2109ab4588694504bd43b9e, type: 3}
+    subtitle: All of your spell patterns can be seen under your stickers in your
+      spellbook.
+  - clip: {fileID: 8300000, guid: 8d7becbc3930756458a21a9789a47d0a, type: 3}
+    subtitle: If you're ever stuck in a pinch, right click to whack enemies with
+      your wand.
+  - clip: {fileID: 8300000, guid: 73fb304c0af12534abecfd42ac44dec6, type: 3}
+    subtitle: Once you are ready to face the creatures that reside in the dungeon,
+      press "C".
+  - clip: {fileID: 8300000, guid: 0cad53bf67ff65f44a7ddfb48b2a5a13, type: 3}
+    subtitle: That's it. Good luck sticker hunting!
 --- !u!1001 &2822938600407297664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11296,8 +11315,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactRange: 3
   interactKey: 103
-  sounds:
-  - {fileID: 8300000, guid: 8ae36384f875a924e880812148de9248, type: 3}
+  voiceLines:
+  - clip: {fileID: 8300000, guid: 66befd2f6a19a6a479d50c6c9bd7d7aa, type: 3}
+    subtitle: The next spell is Wind.
+  - clip: {fileID: 8300000, guid: e751124feffd0fd4087ac1d35771d891, type: 3}
+    subtitle: Press "E" and draw a horizontal line from left to right in the middle
+      row. Note that order matters.
+  - clip: {fileID: 8300000, guid: 657cd88479e26b54f9206445d8b22e64, type: 3}
+    subtitle: It is an AOE damage over time. Cast it on the floor of the wall to
+      destroy it.
 --- !u!1001 &3812925383370583593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12791,9 +12817,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactRange: 3
   interactKey: 103
-  sounds:
-  - {fileID: 8300000, guid: ca62c7559dd9b124582644981ef18590, type: 3}
-  - {fileID: 8300000, guid: 9951d78e339ea134b8f1c29a02794042, type: 3}
+  voiceLines:
+  - clip: {fileID: 8300000, guid: ca62c7559dd9b124582644981ef18590, type: 3}
+    subtitle: Ouch! That last wall hurt.
+  - clip: {fileID: 8300000, guid: 816b17702f0da6849b218e5da3f539c3, type: 3}
+    subtitle: 'I''ll teach you your final spell: Heal.'
+  - clip: {fileID: 8300000, guid: bef77afe6d102fb4d8da48999eca4468, type: 3}
+    subtitle: 'Start in the top left corner and move right to draw a circle clockwise
+      until you return to the top left corner. '
+  - clip: {fileID: 8300000, guid: 11ee1b4e883f00f489488e47f62ea8b7, type: 3}
+    subtitle: Cast it on the ground and walk into the circle to heal yourself and
+      destroy the wall.
 --- !u!1001 &4910415508152416124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16459,9 +16493,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactRange: 3
   interactKey: 103
-  sounds:
-  - {fileID: 8300000, guid: 000bbe4eea063a44cb3e628fcf88311e, type: 3}
-  - {fileID: 8300000, guid: c9e0cbd48b6ec8f438a7ee549c283bf5, type: 3}
+  voiceLines:
+  - clip: {fileID: 8300000, guid: 000bbe4eea063a44cb3e628fcf88311e, type: 3}
+    subtitle: Great work!
+  - clip: {fileID: 8300000, guid: 44096c44af08b5b49890b42ea0dc387c, type: 3}
+    subtitle: The next spell is Fireball.
+  - clip: {fileID: 8300000, guid: 1b7819d99a8247146a020bc3fd4f2782, type: 3}
+    subtitle: Press "E" to draw a vertical line from top to bottom on the last column.
+  - clip: {fileID: 8300000, guid: e85b6e60b008f304e8d32185e75295bf, type: 3}
+    subtitle: Fireball does a ton of damage to enemies. Aim and left click to destroy
+      the wall.
 --- !u!4 &940733026714632841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8626024489083486841, guid: b4e3f8b6ce745f943bb5fa3a3e29de9d, type: 3}

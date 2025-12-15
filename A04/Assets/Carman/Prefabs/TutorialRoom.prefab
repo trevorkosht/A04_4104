@@ -5515,10 +5515,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactRange: 10
   interactKey: 103
-  sounds:
-  - {fileID: 8300000, guid: 545908493f0e033438cf0d21956ef144, type: 3}
-  - {fileID: 8300000, guid: be638c27aae21e14cb7412c0e23a33f8, type: 3}
-  - {fileID: 8300000, guid: 238e0a031158f804f82be6020e9cf158, type: 3}
+  voiceLines:
+  - clip: {fileID: 8300000, guid: 545908493f0e033438cf0d21956ef144, type: 3}
+    subtitle: I've finally captured you. Good luck trying to escape.
+  - clip: {fileID: 8300000, guid: e59173427b2af5e4792d232199ade5c7, type: 3}
+    subtitle: Let's get started. Press "E" to access your spellbook.
+  - clip: {fileID: 8300000, guid: ed567af3270055d4a8c0481767adc611, type: 3}
+    subtitle: On the left are the stickers you must obtain to leave this dungeon.
+  - clip: {fileID: 8300000, guid: c81120661c7de2648b950cee9b3ba525, type: 3}
+    subtitle: On the right is where you will be casting your spells.
+  - clip: {fileID: 8300000, guid: 1fb47a434abca1545afded6ec00cdac9, type: 3}
+    subtitle: Each spell has its own pattern that you must draw with your mouse to
+      load into your wand.
+  - clip: {fileID: 8300000, guid: 48ca389f7bfc7e249b72cff8a5b4f31f, type: 3}
+    subtitle: 'When drawn correctly, the icon of the spell will show on your wand
+      and you can aim and then fire with the left mouse button. '
+  - clip: {fileID: 8300000, guid: 523d85068728e3440a665f9e80a0a093, type: 3}
+    subtitle: Press "E" to close the book.
+  - clip: {fileID: 8300000, guid: 972712202b7d50746bdf730ab4a83ab9, type: 3}
+    subtitle: 'Pay attention to your health and mana bars in the bottom left of your
+      screen. '
+  - clip: {fileID: 8300000, guid: 86091d9a353ded24a8d064fba78064e0, type: 3}
+    subtitle: Spells cost mana and go into cooldown upon cast.
 --- !u!4 &6673664395957764544 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8626024489083486841, guid: b4e3f8b6ce745f943bb5fa3a3e29de9d, type: 3}

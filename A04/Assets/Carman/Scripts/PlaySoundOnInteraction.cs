@@ -10,7 +10,7 @@ public class PlaySoundOnInteraction : MonoBehaviour
     private Transform playerTransform;
 
     [Header("Voice Lines")]
-    public AudioClip[] sounds;
+    public VoiceLine[] voiceLines;
 
     private bool hasPlayed = false;
     private Coroutine voiceCoroutine;
@@ -45,39 +45,34 @@ public class PlaySoundOnInteraction : MonoBehaviour
             {
                 if (hasPlayed) return;
 
-                if (sounds == null || sounds.Length == 0) return;
+                if (voiceLines == null || voiceLines.Length == 0) return;
 
                 hasPlayed = true;
 
                 SoundManager.Instance.PauseMusic();
-                voiceCoroutine = StartCoroutine(PlayClipsInSequence(sounds));
+                voiceCoroutine = StartCoroutine(PlayClipsInSequence(voiceLines));
             }
         }
     }
 
-    private IEnumerator PlayClipsInSequence(AudioClip[] clips)
+    private IEnumerator PlayClipsInSequence(VoiceLine[] lines)
     {
-        foreach (AudioClip clip in clips)
+        foreach (VoiceLine line in lines)
         {
-            if (clip != null)
+            if (line.clip != null)
             {
-                SoundManager.Instance.PlayVoiceLine(clip);
-                yield return new WaitForSeconds(clip.length);
+                SoundManager.Instance.PlayVoiceLine(line.clip);
+
+                SubtitleManager.Instance.ShowSubtitle(
+                    line.subtitle,
+                    line.clip.length
+                );
+
+                yield return new WaitForSeconds(line.clip.length);
             }
         }
 
-        SoundManager.Instance.ResumeMusic();
-        Destroy(gameObject);
-    }
-
-    public void SkipVoiceLines()
-    {
-        if (voiceCoroutine != null)
-        {
-            StopCoroutine(voiceCoroutine);
-            voiceCoroutine = null;
-        }
-
+        SubtitleManager.Instance.ClearSubtitle();
         SoundManager.Instance.ResumeMusic();
         Destroy(gameObject);
     }

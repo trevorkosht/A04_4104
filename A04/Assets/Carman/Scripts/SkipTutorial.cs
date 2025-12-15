@@ -41,6 +41,7 @@ public class SkipTutorial : MonoBehaviour
                 foreach (GameObject tutorial in GameObject.FindGameObjectsWithTag("Tutorial"))
                 {
                     Destroy(tutorial);
+                    Destroy(this.gameObject);
                 }
             }
         }
