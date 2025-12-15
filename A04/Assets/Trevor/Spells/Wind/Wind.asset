@@ -15,6 +15,7 @@ MonoBehaviour:
   spellName: Wind
   spellIcon: {fileID: 21300000, guid: b5c2353ef5ccca840b53c8561d963829, type: 3}
   castEffect: {fileID: 4772634663576830964, guid: e1385af346f4e624eb313ec1ea4fcd7e, type: 3}
+  targetIndicator: {fileID: 7568505782868795063, guid: fc9179e31f338a34580c281aec328cc9, type: 3}
   castStrategy: {fileID: 11400000, guid: 13c97ab0b902cb64b9166f9a2654cf14, type: 2}
   castSound: {fileID: 8300000, guid: b7bbb520bbb6a66409011a70eef43aa0, type: 3}
   impactSound: {fileID: 8300000, guid: bc7e449bb34252a45b5d4c0f99c7b2ea, type: 3}

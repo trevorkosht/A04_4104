@@ -15,6 +15,7 @@ MonoBehaviour:
   spellName: Light
   spellIcon: {fileID: 21300000, guid: 155439d0c18320949a8892a19953acad, type: 3}
   castEffect: {fileID: 1590415177872986601, guid: acdb90624a404aa438447006f1026065, type: 3}
+  targetIndicator: {fileID: 8883919025765829949, guid: 3a85ce5ea8efb714b81e4fb07c66a9b6, type: 3}
   castStrategy: {fileID: 11400000, guid: 13c97ab0b902cb64b9166f9a2654cf14, type: 2}
   castSound: {fileID: 8300000, guid: f03687e3a81b4994fb5e92a17c1c6138, type: 3}
   impactSound: {fileID: 8300000, guid: b2a635ef61f8f55459d957f0d5044bae, type: 3}
