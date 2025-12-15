@@ -25,8 +25,8 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
+  m_SkyboxMaterial: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.29936957, g: 0.29936957, b: 0.29936957, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3a9db472822d3a64fb8ce0ff8446c7a5, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 298f115cf55deea4fbfb5cc125de3cfe, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -177,6 +177,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.92
       objectReference: {fileID: 0}
+    - target: {fileID: 4294385174035225201, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.051
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294385174035225201, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.396
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294385174035225201, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.338
+      objectReference: {fileID: 0}
     - target: {fileID: 5876275149909693414, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
       propertyPath: m_Name
       value: Room1
@@ -240,6 +252,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6485498624299188485, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
     - {fileID: 6955335183798671999, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 9041509547857380163, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 5808624522465264913, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
     m_RemovedGameObjects:
     - {fileID: 94494337119840849, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
     - {fileID: 5925535388419302546, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
@@ -250,6 +264,13 @@ PrefabInstance:
     - {fileID: 7489986549188184703, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
     - {fileID: 2330202721654833218, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
     - {fileID: 1105147938815805031, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 9108164449548308394, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 1163371316669567781, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 7982528857095867628, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 984056417320329479, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 8120898641795891142, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 3377968271118937964, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
+    - {fileID: 2857010902764513815, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8575781223795494696, guid: 5a3f869f7a897134f80d6852d29a315a, type: 3}
       insertIndex: -1
