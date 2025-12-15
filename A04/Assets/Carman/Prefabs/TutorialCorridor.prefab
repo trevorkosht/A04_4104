@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 82951916707874197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.3081, y: 2.3081, z: 2.3081}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9095673499584774315}
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -90, y: -372}
+  m_AnchoredPosition: {x: -232, y: -372}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7523104380716887079
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click C to break through this wall and continue the tutorial
+  m_text: Click    C    to break through this wall and continue the tutorial
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9349e35ece5c208449161ac88936c918, type: 2}
   m_sharedMaterial: {fileID: 8082042945999160275, guid: 9349e35ece5c208449161ac88936c918, type: 2}
@@ -2582,7 +2582,7 @@ RectTransform:
   m_GameObject: {fileID: 2864741639297413369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.4142, y: 2.4142, z: 2.4142}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9095673499584774315}
@@ -2590,7 +2590,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -90, y: -135.99997}
+  m_AnchoredPosition: {x: -276, y: -135.99997}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6831568071030012335
@@ -3443,7 +3443,7 @@ RectTransform:
   m_GameObject: {fileID: 3802104242297581330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.192165, y: 4.192165, z: 4.192165}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8862655437895312269}
@@ -3451,7 +3451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -97.7, y: -8}
+  m_AnchoredPosition: {x: -331, y: -8.0001}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2683840973810769711
@@ -3482,8 +3482,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Explore the dungeon to find stickers that have been left behind. Thats
-    the key to your escape. '
+  m_text: "Explore the dungeon to find stickers that have been left behind. \nThats
+    the key to your escape. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9349e35ece5c208449161ac88936c918, type: 2}
   m_sharedMaterial: {fileID: 8082042945999160275, guid: 9349e35ece5c208449161ac88936c918, type: 2}
@@ -3510,7 +3510,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.4
+  m_fontSize: 25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6165,7 +6165,7 @@ RectTransform:
   m_GameObject: {fileID: 6812639728824980805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.6175, y: 2.6175, z: 2.6175}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8862655437895312269}
@@ -6173,7 +6173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -81, y: -274}
+  m_AnchoredPosition: {x: -245, y: -274}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2315401500661101977
@@ -6204,7 +6204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hit C to break the wall.
+  m_text: Hit   C   to break the wall.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9349e35ece5c208449161ac88936c918, type: 2}
   m_sharedMaterial: {fileID: 8082042945999160275, guid: 9349e35ece5c208449161ac88936c918, type: 2}

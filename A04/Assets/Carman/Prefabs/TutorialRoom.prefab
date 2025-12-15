@@ -899,8 +899,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4411404779495893374}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 162.8}
-  m_LocalScale: {x: 0.11412885, y: 0.11412885, z: 0.11412885}
+  m_LocalPosition: {x: 0, y: 0, z: 206.3}
+  m_LocalScale: {x: 0.4242008, y: 0.4242008, z: 0.4242008}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2423771465084215028}
@@ -908,7 +908,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 121.9, y: 73.2}
+  m_AnchoredPosition: {x: 121.9, y: 64.5}
   m_SizeDelta: {x: 195, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1723775620230202513
@@ -939,8 +939,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use WASD to move. Look around with the mouse. Space to jump, and left shift
-    to sprint
+  m_text: "Use WASD to move. Look around with the mouse. \nSpace to jump, and left
+    shift to sprint"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9349e35ece5c208449161ac88936c918, type: 2}
   m_sharedMaterial: {fileID: 8082042945999160275, guid: 9349e35ece5c208449161ac88936c918, type: 2}
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.1
+  m_fontSize: 25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -94.86091, y: 0, z: -364.81696, w: 0}
+  m_margin: {x: -94.86091, y: 0, z: -408.7134, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1583,8 +1583,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6290838633723104580}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 162.8}
-  m_LocalScale: {x: 0.11412885, y: 0.11412885, z: 0.11412885}
+  m_LocalPosition: {x: 0, y: 0, z: 178}
+  m_LocalScale: {x: 0.25232747, y: 0.25232747, z: 0.25232747}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2423771465084215028}
@@ -1719,7 +1719,7 @@ RectTransform:
   m_GameObject: {fileID: 6558340322075148204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 3.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1414, y: 1.1414, z: 1.1414}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5503878459735440767}
@@ -1758,7 +1758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press Z to
+  m_text: 'Press Z   to
 
     skip tutorial'
   m_isRightToLeft: 0
@@ -1823,7 +1823,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -50.88188, y: 0, z: -234.08217, w: 0}
+  m_margin: {x: -70.72917, y: 0, z: -234.08217, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2420,7 +2420,7 @@ RectTransform:
   m_GameObject: {fileID: 8305892881065923010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 6.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1369764, y: 1.1369764, z: 1.1369764}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 960621258878597681}
@@ -2428,7 +2428,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -93, y: -209.6}
+  m_AnchoredPosition: {x: -100.4, y: -209.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &577541121739614484
