@@ -4116,6 +4116,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2924431846657788713, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: swing1Clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e6c13b457de20314ab920b56c0d6fcad, type: 3}
+    - target: {fileID: 2924431846657788713, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: swing2Clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f692a370b5b8f014caf09256ed7eeb50, type: 3}
+    - target: {fileID: 2924431846657788713, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: swing3Clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e6c13b457de20314ab920b56c0d6fcad, type: 3}
+    - target: {fileID: 2924431846657788713, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: stickerPickupClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 11a0a4e8ebe3005468cba75f6eea4e01, type: 3}
+    - target: {fileID: 2924431846657788713, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: stickerUnlockClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 79f63a08d349fce4ea425062365f4756, type: 3}
     - target: {fileID: 4036233220940917122, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
       propertyPath: m_Name
       value: Player

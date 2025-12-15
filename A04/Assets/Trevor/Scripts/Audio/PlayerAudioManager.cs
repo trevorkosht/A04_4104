@@ -1,5 +1,5 @@
-using UnityEngine;
 using StarterAssets;
+using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class PlayerAudioManager : MonoBehaviour
@@ -7,8 +7,9 @@ public class PlayerAudioManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private FirstPersonController playerController;
     [SerializeField] private WandMeleeController meleeController;
-    [SerializeField] private PlayerStickerInteraction stickerInteraction;
     [SerializeField] private PlayerHealth playerHealth;
+    // We need THIS reference back to listen for the "Duplicate" event
+    [SerializeField] private PlayerStickerInteraction stickerInteraction;
 
     [Header("Audio Source")]
     [SerializeField] private AudioSource sfxSource;
@@ -28,7 +29,12 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private AudioClip dieClip;
 
     [Header("Interaction Sounds")]
-    [SerializeField] private AudioClip collectClip;
+    [Tooltip("Played when a NEW sticker is unlocked (Fanfare)")]
+    [SerializeField] private AudioClip stickerUnlockClip;
+
+    [Tooltip("Played when picking up a DUPLICATE sticker (Simple Pop)")]
+    [SerializeField] private AudioClip stickerPickupClip; // NEW SLOT
+
     [SerializeField] private AudioClip pauseClip;
     [SerializeField] private AudioClip unpauseClip;
     [SerializeField] private AudioClip manaRestoreClip;
@@ -38,14 +44,12 @@ public class PlayerAudioManager : MonoBehaviour
     {
         if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
         if (footstepSource == null) footstepSource = gameObject.AddComponent<AudioSource>();
-
-        // IMPORTANT: Ensure the SFX source can play even if we used AudioListener.pause (optional safety)
-        sfxSource.ignoreListenerPause = true;
+        sfxSource.spatialBlend = 0f;
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        // 1. Subscribe to Player Controller Events
+        // 1. Player Controller
         if (playerController != null)
         {
             playerController.OnFootstep += PlayFootstep;
@@ -54,10 +58,10 @@ public class PlayerAudioManager : MonoBehaviour
             playerController.OnLand += PlayLand;
         }
 
-        // 2. Subscribe to Melee Events
+        // 2. Melee
         if (meleeController != null) meleeController.OnMeleeSwing += PlayMeleeSwing;
 
-        // 3. Subscribe to Health Events
+        // 3. Health
         if (playerHealth != null)
         {
             playerHealth.OnHurt += PlayHurt;
@@ -65,19 +69,32 @@ public class PlayerAudioManager : MonoBehaviour
             playerHealth.OnHeal += PlayHeal;
         }
 
-        // 4. Subscribe to Sticker Events
-        if (stickerInteraction != null) stickerInteraction.OnStickerCollected += PlayCollect;
+        // 4. COLLECTION MANAGER (Handles NEW Unlocks)
+        if (CollectionManager.Instance != null)
+        {
+            CollectionManager.Instance.OnStickerAdded += PlayStickerUnlock;
+        }
 
-        // 5. Subscribe to Game State Changes (Pause/Unpause)
+        // 5. STICKER INTERACTION (Handles DUPLICATE Pickups)
+        if (stickerInteraction != null)
+        {
+            stickerInteraction.OnStickerReCollected += PlayStickerPickup;
+        }
+
+        // 6. Game Manager
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnStateChanged += HandleGameStateChange;
         }
 
-        if (PlayerSpellSystem.Instance != null) PlayerSpellSystem.Instance.OnManaRestored += PlayManaRestore;
+        // 7. Mana
+        if (PlayerSpellSystem.Instance != null)
+        {
+            PlayerSpellSystem.Instance.OnManaRestored += PlayManaRestore;
+        }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (playerController != null)
         {
@@ -96,37 +113,22 @@ public class PlayerAudioManager : MonoBehaviour
             playerHealth.OnHeal -= PlayHeal;
         }
 
-        if (stickerInteraction != null) stickerInteraction.OnStickerCollected -= PlayCollect;
+        if (CollectionManager.Instance != null) CollectionManager.Instance.OnStickerAdded -= PlayStickerUnlock;
+
+        if (stickerInteraction != null) stickerInteraction.OnStickerReCollected -= PlayStickerPickup;
 
         if (GameManager.Instance != null) GameManager.Instance.OnStateChanged -= HandleGameStateChange;
 
         if (PlayerSpellSystem.Instance != null) PlayerSpellSystem.Instance.OnManaRestored -= PlayManaRestore;
     }
 
-    // --- Event Handlers ---
-
-    private void HandleGameStateChange(GameManager.GameState newState)
-    {
-        // 
-        // We catch the event here and play the sound immediately.
-        if (newState == GameManager.GameState.Pause)
-        {
-            // CHANGED: Use PlayOneShot instead of PlayClipAtPoint
-            PlayOneShot(pauseClip);
-        }
-        else if (newState == GameManager.GameState.Play)
-        {
-            PlayOneShot(unpauseClip);
-        }
-    }
+    // --- Audio Handlers ---
 
     private void PlayFootstep(bool isSprinting)
     {
         AudioClip[] clipsToUse = isSprinting ? sprintStepClips : walkStepClips;
         if (clipsToUse.Length == 0) return;
-
         AudioClip clip = clipsToUse[Random.Range(0, clipsToUse.Length)];
-
         footstepSource.clip = clip;
         footstepSource.pitch = Random.Range(0.9f, 1.1f);
         if (!footstepSource.isPlaying) footstepSource.Play();
@@ -155,11 +157,22 @@ public class PlayerAudioManager : MonoBehaviour
 
     private void PlayHurt() => PlayOneShot(hurtClip, true);
     private void PlayDie() => PlayOneShot(dieClip);
-    private void PlayCollect() => PlayOneShot(collectClip);
+
+    // NEW: Play the "Fanfare" for a new sticker
+    private void PlayStickerUnlock() => PlayOneShot(stickerUnlockClip);
+
+    // NEW: Play the "Pop" for a duplicate sticker
+    private void PlayStickerPickup() => PlayOneShot(stickerPickupClip);
+
     private void PlayManaRestore() => PlayOneShot(manaRestoreClip);
     private void PlayHeal() => PlayOneShot(healClip);
 
-    // --- Helper ---
+    private void HandleGameStateChange(GameManager.GameState newState)
+    {
+        if (newState == GameManager.GameState.Pause) PlayOneShot(pauseClip);
+        else if (newState == GameManager.GameState.Play) PlayOneShot(unpauseClip);
+    }
+
     private void PlayOneShot(AudioClip clip, bool randomizePitch = false)
     {
         if (clip == null) return;

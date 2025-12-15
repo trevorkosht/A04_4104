@@ -8,8 +8,8 @@ public class PlayerStickerInteraction : MonoBehaviour
     public LayerMask interactionLayer;
     public KeyCode collectKey = KeyCode.F;
 
-    // NEW EVENT
-    public event Action OnStickerCollected;
+    // EVENT for picking up a duplicate/already known sticker
+    public event Action OnStickerReCollected;
 
     private WorldSticker currentTarget;
     private Camera playerCam;
@@ -60,9 +60,24 @@ public class PlayerStickerInteraction : MonoBehaviour
         {
             if (currentTarget != null)
             {
-                currentTarget.Collect();
-                OnStickerCollected?.Invoke(); // NEW
+                // 1. Check if we ALREADY have this sticker
+                bool isDuplicate = false;
+                if (CollectionManager.Instance != null && currentTarget.data != null)
+                {
+                    isDuplicate = CollectionManager.Instance.HasSticker(currentTarget.data);
+                }
 
+                // 2. Play Audio Logic
+                if (isDuplicate)
+                {
+                    // We already have it, so the CollectionManager won't fire.
+                    // We fire our own "Generic Pickup" event here.
+                    OnStickerReCollected?.Invoke();
+                }
+                // Else: It is new. CollectionManager.UnlockSticker will fire "OnStickerAdded".
+
+                // 3. Destroy/Collect the object
+                currentTarget.Collect();
                 currentTarget = null;
             }
         }
