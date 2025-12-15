@@ -9,7 +9,7 @@ TagManager:
   - Door
   - Enemy
   - SpellGrid
-  - Destructible
+  - Tutorial
   layers:
   - Default
   - TransparentFX
