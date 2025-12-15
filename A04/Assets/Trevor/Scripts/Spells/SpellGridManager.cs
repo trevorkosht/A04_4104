@@ -21,13 +21,11 @@ public class SpellGridManager : MonoBehaviour
     [SerializeField] private float minSpawnDistance = 0.5f;
     [SerializeField] private LayerMask collisionLayers;
 
-    // --- NEW EVENTS ---
     public event Action OnGridOpened;
     public event Action OnGridOpenFailed;
     public event Action OnCellHighlighted;
     public event Action OnSpellLoadSuccess;
     public event Action OnSpellLoadFailed;
-    // ------------------
 
     private List<GridCell> currentPath = new List<GridCell>();
     private GridCell lastCell;
@@ -86,7 +84,7 @@ public class SpellGridManager : MonoBehaviour
         {
             Debug.Log("Wall too close");
             gridActive = false;
-            OnGridOpenFailed?.Invoke(); // NEW
+            OnGridOpenFailed?.Invoke();
             return;
         }
 
@@ -101,7 +99,7 @@ public class SpellGridManager : MonoBehaviour
         if (activeGridInstance) activeGridInstance.ShowGrid(true);
         currentPath.Clear();
 
-        OnGridOpened?.Invoke(); // NEW
+        OnGridOpened?.Invoke();
     }
 
     private void CloseGrid()
@@ -122,7 +120,7 @@ public class SpellGridManager : MonoBehaviour
                 activeGridInstance.HighlightCell(currentCell, true);
                 lastCell = currentCell;
 
-                OnCellHighlighted?.Invoke(); // NEW
+                OnCellHighlighted?.Invoke();
             }
         }
     }
@@ -132,27 +130,38 @@ public class SpellGridManager : MonoBehaviour
         if (currentPath.Count < minPatternLength) return;
         string currentPattern = string.Join("-", currentPath);
 
-        bool matchFound = false; // NEW Local var to track success
-
         foreach (GridSpellSO spell in spellDatabase.gridSpells)
         {
             if (currentPattern.Contains(string.Join("-", spell.pattern)))
             {
+                // --- NEW LOGIC START ---
+                // Before loading, check if the spell is on cooldown
+                if (PlayerSpellSystem.Instance != null && PlayerSpellSystem.Instance.IsOnCooldown(spell))
+                {
+                    Debug.Log($"Spell {spell.spellName} recognized, but is on Cooldown. Load Aborted.");
+
+                    // Trigger the specific "Cooldown Buzz" sound
+                    PlayerSpellSystem.Instance.TriggerCooldownFail();
+
+                    // Return immediately. 
+                    // We treat this as a "Handled Failure" - we found a match, but rejected it.
+                    // We do NOT fire OnSpellLoadFailed (generic fail) to avoid double sounds.
+                    return;
+                }
+                // --- NEW LOGIC END ---
+
                 loadedSpell = spell;
                 Debug.Log("Spell Loaded: " + spell.name);
                 if (wandFeedback != null) wandFeedback.ShowSpellIcon(loadedSpell.spellIcon);
                 if (loadedSpell.castStrategy != null) loadedSpell.castStrategy.OnSpellLoaded(this);
 
-                matchFound = true;
-                OnSpellLoadSuccess?.Invoke(); // NEW
-                break;
+                OnSpellLoadSuccess?.Invoke();
+                return; // Match found and loaded, exit function
             }
         }
 
-        if (!matchFound)
-        {
-            OnSpellLoadFailed?.Invoke(); // NEW
-        }
+        // If loop finishes without returning, no match was found (or accepted)
+        OnSpellLoadFailed?.Invoke();
     }
 
     private void FireLoadedSpell()

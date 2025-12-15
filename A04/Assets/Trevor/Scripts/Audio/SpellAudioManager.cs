@@ -24,7 +24,7 @@ public class SpellAudioManager : MonoBehaviour
     private void Awake()
     {
         if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
-        sfxSource.spatialBlend = 0f; // Ensure 2D for UI sounds
+        sfxSource.spatialBlend = 0f;
     }
 
     private void Start()
@@ -76,8 +76,6 @@ public class SpellAudioManager : MonoBehaviour
 
     private void PlayBookSummon()
     {
-        // CHANGED: We use .clip and .Play() instead of PlayOneShot.
-        // This makes the sound "Interruptible".
         if (bookSummonClip != null)
         {
             sfxSource.clip = bookSummonClip;
@@ -88,8 +86,6 @@ public class SpellAudioManager : MonoBehaviour
 
     private void PlayGridHighlight()
     {
-        // CHANGED: If the player starts drawing, we STOP the book summon sound immediately.
-        // This prevents the "buggy" overlapping noise.
         if (sfxSource.isPlaying && sfxSource.clip == bookSummonClip)
         {
             sfxSource.Stop();
@@ -102,7 +98,9 @@ public class SpellAudioManager : MonoBehaviour
     private void PlayLoadSuccess() => PlayClip(spellLoadSuccessClip, "LoadSuccess");
     private void PlayLoadFail() => PlayClip(spellLoadFailClip, "LoadFail");
     private void PlayManaFail() => PlayClip(manaFailClip, "ManaFail");
-    private void PlayCooldownFail() => PlayClip(cooldownFailClip, "CooldownFail");
+
+    // CHANGED: We now pass '2.0f' as the volume scale (Double Volume)
+    private void PlayCooldownFail() => PlayClip(cooldownFailClip, "CooldownFail", false, 2.0f);
 
     private void PlaySpellCastSound(GridSpellSO spell)
     {
@@ -117,7 +115,8 @@ public class SpellAudioManager : MonoBehaviour
     }
 
     // --- Helper ---
-    private void PlayClip(AudioClip clip, string debugName, bool usePitchVariance = false)
+    // CHANGED: Added 'volumeScale' parameter with a default of 1.0f
+    private void PlayClip(AudioClip clip, string debugName, bool usePitchVariance = false, float volumeScale = 1.0f)
     {
         if (clip == null) return;
 
@@ -130,7 +129,7 @@ public class SpellAudioManager : MonoBehaviour
             sfxSource.pitch = 1.0f;
         }
 
-        // PlayOneShot allows this new sound to play even if we just stopped the main clip
-        sfxSource.PlayOneShot(clip);
+        // PlayOneShot allows a volume multiplier as the second argument
+        sfxSource.PlayOneShot(clip, volumeScale);
     }
 }

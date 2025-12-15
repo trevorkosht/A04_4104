@@ -19,7 +19,7 @@ public class PlayerSpellSystem : MonoBehaviour
 
     // FAIL EVENTS
     public event Action OnManaCheckFailed;
-    public event Action OnCooldownCheckFailed; // NEW EVENT
+    public event Action OnCooldownCheckFailed;
 
     public event Action<GridSpellSO> OnSpellCast;
     public event Action OnManaRestored;
@@ -52,7 +52,7 @@ public class PlayerSpellSystem : MonoBehaviour
         // 2. Check Cooldown
         if (IsOnCooldown(spell))
         {
-            OnCooldownCheckFailed?.Invoke(); // NEW TRIGGER
+            OnCooldownCheckFailed?.Invoke();
             return false;
         }
 
@@ -109,5 +109,12 @@ public class PlayerSpellSystem : MonoBehaviour
     public List<GridSpellSO> GetActiveCooldowns()
     {
         return new List<GridSpellSO>(activeCooldowns.Keys);
+    }
+
+    // --- NEW HELPER METHOD ---
+    // Allows the SpellGridManager to trigger the "Cooldown Buzz" sound manually
+    public void TriggerCooldownFail()
+    {
+        OnCooldownCheckFailed?.Invoke();
     }
 }
