@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc52396991013844c8de33a60160ca13, type: 3}
   m_Name: Ground_Strat
   m_EditorClassIdentifier: 
-  indicatorPrefab: {fileID: 0}
-  indicatorRotation: {x: 90, y: 0, z: 0}
+  defaultIndicatorPrefab: {fileID: 7053415337988556053, guid: 1574f235b6fbe4548a3f02e02748c312, type: 3}
+  defaultRotation: {x: 90, y: 0, z: 0}
   hoverHeight: 0.05
   groundLayer:
     serializedVersion: 2

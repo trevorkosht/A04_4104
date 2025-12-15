@@ -16,14 +16,14 @@ public class SwitchSceneOnInteraction : MonoBehaviour
     void Start()
     {
         // DEBUG 1: Initialization
-        Debug.Log($"[SwitchScene] Initialized on object: {gameObject.name}. Waiting for Player...");
+        //Debug.Log($"[SwitchScene] Initialized on object: {gameObject.name}. Waiting for Player...");
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             playerTransform = player.transform;
             // DEBUG 2: Player Found
-            Debug.Log($"[SwitchScene] SUCCESS: Player found! Name: {player.name}");
+            //Debug.Log($"[SwitchScene] SUCCESS: Player found! Name: {player.name}");
         }
         else
         {
@@ -41,7 +41,7 @@ public class SwitchSceneOnInteraction : MonoBehaviour
         // --- NEW DEBUG ---
         // This prints the exact coordinate the script is looking at.
         // If you move and these numbers don't change, it found the wrong object!
-        Debug.Log($"Tracking Object: {playerTransform.name} | Position: {playerTransform.position} | Dist: {distance}");
+        //Debug.Log($"Tracking Object: {playerTransform.name} | Position: {playerTransform.position} | Dist: {distance}");
 
         if (distance <= interactRange)
         {
