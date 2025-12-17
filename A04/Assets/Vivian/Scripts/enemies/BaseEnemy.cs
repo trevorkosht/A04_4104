@@ -95,10 +95,12 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void Update()
     {
         // Debug kill key
+        /*
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(10);
         }
+        */
 
         switch (currentState)
         {

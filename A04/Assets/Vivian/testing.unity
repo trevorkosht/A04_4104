@@ -1505,6 +1505,10 @@ PrefabInstance:
       propertyPath: detectionRange
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 3436300473301289535, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5910386138026956976, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1551,7 +1555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7490244329939007752, guid: 5245dab06a3ca444b80b76f50ffb80f5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2823,6 +2827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconSpriteRenderer: {fileID: 42495969}
+  iconScale: {x: 0.2, y: 0.2, z: 0.2}
 --- !u!4 &1218095234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5570182162627312512, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
