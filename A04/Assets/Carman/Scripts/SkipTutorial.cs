@@ -42,6 +42,7 @@ public class SkipTutorial : MonoBehaviour
                 {
                     Destroy(tutorial);
                     Destroy(this.gameObject);
+                    SoundManager.Instance.ResumeMusic();
                 }
             }
         }
