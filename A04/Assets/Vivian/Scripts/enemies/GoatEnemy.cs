@@ -219,8 +219,8 @@ public class GoatEnemy : BaseEnemy
     [Header("Charge Visual Effects")]
     public GameObject chargeWindUpEffect;
     public GameObject chargeTrailEffect;
-    public AudioClip chargeWindUpSound;
-    public AudioClip chargeAttackSound;
+    public AudioSource chargeWindUpSound;
+    public AudioSource chargeAttackSound;
 
     // Charge state variables
     private Vector3 chargeStartPosition;
@@ -242,6 +242,7 @@ public class GoatEnemy : BaseEnemy
     {
         canAttack = false;
         hasHitPlayerThisAttack = false;
+        chargeWindUpSound.Play();
 
         // Phase 1: Initial Recoil Back
         //Debug.Log("Initial recoil back!");
@@ -364,6 +365,8 @@ public class GoatEnemy : BaseEnemy
     }
     private void CheckChargeHit()
     {
+        chargeAttackSound.Play();
+
         if (hasHitPlayerThisAttack) return;
 
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1.5f, transform.forward, 0.1f);
