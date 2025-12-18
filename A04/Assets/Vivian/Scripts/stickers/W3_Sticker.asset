@@ -15,7 +15,7 @@ MonoBehaviour:
   id: world_memory
   enemyName: World
   source: 1
-  unlockedSprite: {fileID: 21300000, guid: f19cc686d67f410449786f1cdb612d29, type: 3}
+  unlockedSprite: {fileID: 21300000, guid: a365b75ca32e68e4fabba9e38cf417a8, type: 3}
   lockedSprite: {fileID: 0}
   rarity: 6
   description: 
