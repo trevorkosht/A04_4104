@@ -30,7 +30,6 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMusic()
     {
-        musicSource.volume = 0.5f;
         musicSource.Play();
     }
 

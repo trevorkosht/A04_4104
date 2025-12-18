@@ -1595,7 +1595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1036180087}
   sfxSource: {fileID: 1036180088}
-  volume: 1
+  volume: 0.25
 --- !u!4 &1036180086
 Transform:
   m_ObjectHideFlags: 0
@@ -1623,7 +1623,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f12512786f93fc449ba17e82dd4a709c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.23
+  m_Volume: 0.025
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4259,6 +4259,18 @@ PrefabInstance:
     - target: {fileID: 4219298153945899182, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634492625835028532, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: m_Volume
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276421555841882624, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: m_Pitch
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276421555841882624, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8371195765509332079, guid: 8f43ba0e2f7757042a3b4d6bf3b2e679, type: 3}
       propertyPath: iconScale.x

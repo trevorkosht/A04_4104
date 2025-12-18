@@ -78,9 +78,8 @@ public class SpellAudioManager : MonoBehaviour
     {
         if (bookSummonClip != null)
         {
-            sfxSource.clip = bookSummonClip;
             sfxSource.pitch = 1.0f;
-            sfxSource.Play();
+            sfxSource.PlayOneShot(bookSummonClip, 0.5f);
         }
     }
 
@@ -115,8 +114,8 @@ public class SpellAudioManager : MonoBehaviour
     }
 
     // --- Helper ---
-    // CHANGED: Added 'volumeScale' parameter with a default of 1.0f
-    private void PlayClip(AudioClip clip, string debugName, bool usePitchVariance = false, float volumeScale = 1.0f)
+    // CHANGED: Added 'volumeScale' parameter with a default of 0.1f
+    private void PlayClip(AudioClip clip, string debugName, bool usePitchVariance = false, float volumeScale = 0.1f)
     {
         if (clip == null) return;
 
