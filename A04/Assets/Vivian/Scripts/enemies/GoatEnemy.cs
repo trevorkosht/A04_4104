@@ -395,7 +395,7 @@ public class GoatEnemy : BaseEnemy
     {
         if (isCharging && !collision.collider.CompareTag("Player"))
         {
-            isCharging = false;
+            CheckChargeHit();
             Debug.Log("Charge interrupted by environment");
         }
     }
