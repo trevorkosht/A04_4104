@@ -9,6 +9,7 @@ public class FrogEnemy : BaseEnemy
     public GameObject projectilePrefab;
     public Transform firePoint;
     [SerializeField] GameObject hitVFX;
+    [SerializeField] AudioSource fireSound;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 0.5f;
@@ -24,13 +25,15 @@ public class FrogEnemy : BaseEnemy
     private System.Collections.IEnumerator Fire()
     {
         // Launch bubble
-        Debug.Log("Launched Bubble");
+        // Debug.Log("Launched Bubble");
+        fireSound.Play();
         Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         yield return null;
     }
     protected override void PerformAttack()
     {
         GameObject flash = Instantiate(hitVFX, firePoint.position, firePoint.rotation); // Play fire animation
+
         StartCoroutine(Fire());
         Destroy(flash,1.0f);
     }

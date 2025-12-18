@@ -41,7 +41,7 @@ public abstract class BaseEnemy : MonoBehaviour
     [Header("Patrol")]
     public float patrolRange = 10f;
     public float patrolSpeed = 2f;
-
+    [SerializeField] AudioSource patrolNoise;
     private Vector3 startPosition;
     private Vector3 patrolTarget;
     private bool hasPatrolTarget = false;
@@ -50,6 +50,9 @@ public abstract class BaseEnemy : MonoBehaviour
     protected EnemyState currentState;
     protected float lastAttackTime;
     protected float despawnTime = 1.0f;
+    private float soundTime = 10.0f;
+    private float soundTimer = 0f;
+
 
     protected virtual void Awake()
     {
@@ -101,7 +104,7 @@ public abstract class BaseEnemy : MonoBehaviour
             TakeDamage(10);
         }
         */
-
+        soundTimer += Time.deltaTime;
         switch (currentState)
         {
             case EnemyState.Idle: IdleState(); break;
@@ -149,6 +152,13 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void IdleState()
     {
         if (DetectPlayer()) SwitchState(EnemyState.Chase);
+
+        if (soundTimer >= soundTime)
+        {
+            patrolNoise.Play();
+            soundTimer = 0f; // Reset timer
+        }
+
         // Patrol behavior
         if (!hasPatrolTarget)
         {
@@ -185,6 +195,7 @@ public abstract class BaseEnemy : MonoBehaviour
                     agent.SetDestination(patrolTarget);
                     agent.speed = patrolSpeed;
                     hasPatrolTarget = true;
+                    patrolNoise.Play();
                 }
             }
         }

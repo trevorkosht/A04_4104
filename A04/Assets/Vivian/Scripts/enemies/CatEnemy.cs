@@ -13,6 +13,7 @@ public class CatEnemy : BaseEnemy
     [SerializeField] float beamWidth = 1.5f;
     [SerializeField] GameObject hitVFX;
     [SerializeField] GameObject attack;
+    [SerializeField] AudioSource scratch;
 
 
     protected override void Start()
@@ -30,6 +31,7 @@ public class CatEnemy : BaseEnemy
         feetPos.y = 0.02f;
         FlashWarning(feetPos, transform.rotation);
         yield return new WaitForSeconds(1.0f);
+        scratch.Play();
 
         Vector3 rayStart = firePoint.position;
         Vector3 rayDirection = firePoint.forward;

@@ -6,8 +6,11 @@ using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
+
     [Header("Health Settings")]
     [SerializeField] public int maxHealth = 30;
+    [SerializeField] AudioSource dmgNoise;
+
 
     public event Action<int, int> OnHealthChanged; // currentHealth, maxHealth
     public event Action<int> OnDamageTaken; // damageAmount
@@ -36,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
 
+        dmgNoise.Play();
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         // Start tremble effect
