@@ -256,15 +256,15 @@ public class GoatEnemy : BaseEnemy
         // Phase 2: Wind Up
         //Debug.Log("Charging up attack!");
 
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(directionToPlayer);
+        //Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        //transform.rotation = Quaternion.LookRotation(directionToPlayer);
 
         // Calculate movement for the entire charge
         Vector3 movement = transform.forward * chargeSpeed * Time.deltaTime;
         float maxChargeDistance = attackRange * 2.5f;
 
         Vector3 feetPos = transform.position + transform.forward * ((flashData.length / 2) + 1f);
-        feetPos.y = 0.02f;
+        feetPos.y = 0.04f;
         FlashWarning(feetPos, transform.rotation);
         yield return new WaitForSeconds(chargeWindUpTime + 0.5f);
 
@@ -381,7 +381,6 @@ public class GoatEnemy : BaseEnemy
                     playerHealth.TakeDamage(chargeDamage);
                     Debug.Log($"Charged into player for {chargeDamage} damage!");
                     hasHitPlayerThisAttack = true;
-
                     // Stop charging when hitting player
                     isCharging = false;
                 }
@@ -393,10 +392,12 @@ public class GoatEnemy : BaseEnemy
     // Handle collisions with walls/obstacles
     private void OnCollisionEnter(Collision collision)
     {
-        if (isCharging && !collision.collider.CompareTag("Player"))
-        {
-            CheckChargeHit();
-            Debug.Log("Charge interrupted by environment");
-        }
+        //if (isCharging && !collision.collider.CompareTag("Player"))
+        //{
+        //    CheckChargeHit();
+        //    Debug.Log("Charge interrupted by environment");
+        //}
+        CheckChargeHit();
+
     }
 }

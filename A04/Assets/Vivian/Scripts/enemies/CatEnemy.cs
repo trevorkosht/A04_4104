@@ -28,7 +28,7 @@ public class CatEnemy : BaseEnemy
         agent.updateRotation = false; // lock rotation
 
         Vector3 feetPos = transform.position + transform.forward * ((flashData.length / 2)+1);
-        feetPos.y = 0.02f;
+        feetPos.y = 0.04f;
         FlashWarning(feetPos, transform.rotation);
         yield return new WaitForSeconds(1.0f);
         scratch.Play();

@@ -50,7 +50,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected EnemyState currentState;
     protected float lastAttackTime;
     protected float despawnTime = 1.0f;
-    private float soundTime = 10.0f;
+    private float soundTime = 27.0f;
     private float soundTimer = 0f;
 
 
