@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Trevor/Scenes/MainMenu.unity
-    guid: 2fb696a18dc144340a51710829813134
-  - enabled: 1
     path: Assets/Trevor/Scenes/Playground.unity
     guid: 707acc8dffb72b144bb1ffbe1c965f3d
+  - enabled: 1
+    path: Assets/Trevor/Scenes/MainMenu.unity
+    guid: 2fb696a18dc144340a51710829813134
   m_configObjects: {}
