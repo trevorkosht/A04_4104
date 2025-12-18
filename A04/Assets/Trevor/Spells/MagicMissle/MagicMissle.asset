@@ -15,9 +15,11 @@ MonoBehaviour:
   spellName: MagicMissle
   spellIcon: {fileID: 21300000, guid: e35cca0c578e291429b2e6e1b9c82f80, type: 3}
   castEffect: {fileID: 6461432932678244898, guid: d76800d327c9bef40b537c4bae13be52, type: 3}
+  targetIndicator: {fileID: 0}
+  indicatorRotation: {x: 90, y: 0, z: 0}
   castStrategy: {fileID: 11400000, guid: 4b98096789fb14847a78f0b057f93ba7, type: 2}
   castSound: {fileID: 8300000, guid: 974dd2e31b3ed1d46abce205766f4ed4, type: 3}
-  impactSound: {fileID: 8300000, guid: 32bd3baeb51bfc344a33cdd312269261, type: 3}
+  impactSound: {fileID: 8300000, guid: 50bd78d60b75c6b438e6228dbf1904ba, type: 3}
   manaCost: 5
   cooldownTime: 4
   power: 10
